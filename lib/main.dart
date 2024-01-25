@@ -23,41 +23,47 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  int count = 0;
   int prevCount = -1;
+  final number = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          transitionBuilder: (child, animation) {
-            final position = Tween<Offset>(
-              begin: prevCount < count
-                  ? animation.isCompleted
-                      ? const Offset(0, 1)
-                      : const Offset(0, -1)
-                  : animation.isCompleted
-                      ? const Offset(0, -1)
-                      : const Offset(0, 1),
-              end: Offset.zero,
-            ).animate(animation);
-            return FadeTransition(
-              opacity: animation,
-              child: SlideTransition(
-                position: position,
-                child: child,
+        child: ValueListenableBuilder(
+          valueListenable: number,
+          builder: (context, value, _) {
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                final position = Tween<Offset>(
+                  begin: prevCount < value
+                      ? animation.isCompleted
+                          ? const Offset(0, 1)
+                          : const Offset(0, -1)
+                      : animation.isCompleted
+                          ? const Offset(0, -1)
+                          : const Offset(0, 1),
+                  end: Offset.zero,
+                ).animate(animation);
+                return FadeTransition(
+                  opacity: animation,
+                  child: SlideTransition(
+                    position: position,
+                    child: child,
+                  ),
+                );
+              },
+              child: Text(
+                value.toString(),
+                key: ValueKey<int>(value),
+                style: const TextStyle(
+                  fontSize: 200,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             );
           },
-          child: Text(
-            count.toString(),
-            style: const TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
         ),
       ),
       floatingActionButton: Column(
@@ -66,9 +72,8 @@ class _MyWidgetState extends State<MyWidget> {
           FloatingActionButton(
             heroTag: 'Increment',
             onPressed: () {
-              prevCount = count;
-              count++;
-              setState(() {});
+              prevCount = number.value;
+              number.value = prevCount + 1;
             },
             child: const Icon(Icons.add),
           ),
@@ -76,9 +81,8 @@ class _MyWidgetState extends State<MyWidget> {
           FloatingActionButton(
             heroTag: 'Decrement',
             onPressed: () {
-              prevCount = count;
-              count--;
-              setState(() {});
+              prevCount = number.value;
+              number.value = prevCount - 1;
             },
             child: const Icon(Icons.remove),
           )
