@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const App());
@@ -34,7 +35,7 @@ class _MyWidgetState extends State<MyWidget> {
           duration: const Duration(milliseconds: 1500),
           curve: Curves.bounceOut,
           textStyle: const TextStyle(
-            fontSize: 150,
+            fontSize: 200,
             fontWeight: FontWeight.bold,
             color: Colors.blueAccent,
             shadows: [
@@ -50,9 +51,10 @@ class _MyWidgetState extends State<MyWidget> {
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: 'Increment',
-        onPressed: () {
+        onPressed: () async {
           value++;
           setState(() {});
+          HapticFeedback.mediumImpact();
         },
         child: const Icon(Icons.add),
       ),
