@@ -37,12 +37,12 @@ class _MyWidgetState extends State<MyWidget> {
           textStyle: const TextStyle(
             fontSize: 200,
             fontWeight: FontWeight.bold,
-            color: Colors.blueAccent,
+            color: Colors.yellow,
             shadows: [
               BoxShadow(
-                color: Colors.blue,
-                offset: Offset(8, 8),
-                blurRadius: 4,
+                color: Colors.red,
+                offset: Offset(4, 4),
+                blurRadius: 10,
               ),
             ],
           ),
@@ -54,7 +54,8 @@ class _MyWidgetState extends State<MyWidget> {
         onPressed: () async {
           value++;
           setState(() {});
-          HapticFeedback.mediumImpact();
+          await Future<void>.delayed(const Duration(milliseconds: 600));
+          HapticFeedback.vibrate();
         },
         child: const Icon(Icons.add),
       ),
