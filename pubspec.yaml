@@ -16,4 +16,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+  fonts:
+    - family: Monomaniac_One
+      fonts:
+        - asset: assets/fonts/Monomaniac_One/MonomaniacOne-Regular.ttf
+    - family: Hachi_Maru_Pop
+      fonts:
+        - asset: assets/fonts/Hachi_Maru_Pop/HachiMaruPop-Regular.ttf
   uses-material-design: true

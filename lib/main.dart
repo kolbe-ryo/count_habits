@@ -36,7 +36,8 @@ class _MyWidgetState extends State<MyWidget> {
           curve: Curves.bounceOut,
           textStyle: const TextStyle(
             fontSize: 200,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w400,
+            fontFamily: 'Hachi_Maru_Pop',
             color: Colors.yellow,
             shadows: [
               BoxShadow(
