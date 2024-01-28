@@ -22,7 +22,8 @@ jobs:
      if: ${{ failure() }}
      uses: actions/setup-ruby@v1
      with:
-       ruby-version: '3.2'
+       ruby-version: '2.7'
+       bundler-cache: true
    - name: setup danger
      if: ${{ failure() }}
      run: |
