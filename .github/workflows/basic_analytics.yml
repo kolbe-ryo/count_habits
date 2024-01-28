@@ -24,14 +24,14 @@ jobs:
      with:
        ruby-version: '3.0'
        bundler-cache: true
-   - name: setup danger
-     if: ${{ failure() }}
-     run: |
-       gem install bundler
-       bundle install
+  #  - name: setup danger
+  #    if: ${{ failure() }}
+  #    run: |
+  #      gem install bundler
+  #      bundle install
    - name: execute danger
      if: ${{ failure() }}
-     uses: MeilCli/danger-action@v5
+     uses: MeilCli/danger-action@v5.0.2
      with:
        plugins_file: 'Gemfile'
        install_path: 'vendor/bundle'
