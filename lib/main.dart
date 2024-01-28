@@ -29,7 +29,7 @@ class _MyWidgetState extends State<MyWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: const Center(
           // child: _AnimatedFlipCounter(
           //   duration: const Duration(milliseconds: 1500),
           //   curve: Curves.bounceOut,
