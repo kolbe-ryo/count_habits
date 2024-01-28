@@ -1,0 +1,20 @@
+name: Build, Analytics, Unit, Widget Test
+on:
+ pull_request:
+  branches:
+   - main
+jobs:
+ test:
+  # ローカルのOSと一致させないとGoldenTestで微妙なレイアウトのズレが発生し、テストに失敗する
+  runs-on: macos-latest
+  steps:
+   - uses: actions/checkout@v3
+   - uses: subosito/flutter-action@v2.3.0
+     with:
+      flutter-version: '3.16.8'
+   - name: Install packages
+     run: flutter pub get
+   - name: Linter
+     run: flutter analyze
+   - name: Unit Test
+     run: flutter test
