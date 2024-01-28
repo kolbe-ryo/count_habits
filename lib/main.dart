@@ -299,7 +299,7 @@ class _SingleDigitFlipCounter extends StatelessWidget {
     required double opacity,
   }) {
     // Try to avoid using the `Opacity` widget when possible, for performance.
-    final child;
+    final Widget child;
     if (color.opacity == 1) {
       // If the text style does not involve transparency, we can modify
       // the text color directly.
