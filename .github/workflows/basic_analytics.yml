@@ -22,7 +22,7 @@ jobs:
      if: ${{ failure() }}
      uses: actions/setup-ruby@v1
      with:
-       ruby-version: '2.6'
+       ruby-version: '3.2'
    - name: setup danger
      if: ${{ failure() }}
      run: |
