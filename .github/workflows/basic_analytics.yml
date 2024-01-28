@@ -8,7 +8,7 @@ on:
 
 jobs:
   lint_and_test:
-    # ローカルのOSと一致させないとGoldenTestで微妙なレイアウトのズレが発生し、テストに失敗してしまう
+    # ローカルのOSと一致させないとGoldenTestで微妙なレイアウトのズレが発生し、テストに失敗してしまうので注意
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
