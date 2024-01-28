@@ -8,7 +8,7 @@ on:
 jobs:
  lint_and_test:
   # ローカルのOSと一致させないとGoldenTestで微妙なレイアウトのズレが発生し、テストに失敗する
-  runs-on: macos-latest
+  runs-on: ubuntu-latest
   steps:
    - uses: actions/checkout@v3
    - uses: subosito/flutter-action@v2.3.0
