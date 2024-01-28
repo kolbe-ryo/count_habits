@@ -20,3 +20,22 @@ jobs:
      run: flutter analyze
    - name: Unit Test
      run: flutter test
+   - name: flutter analyze
+     run: flutter analyze > flutter_analyze_report.txt
+      
+   - name: setup ruby
+     if: ${{ failure() }}
+     uses: ruby/setup-ruby@v1
+     with:
+       ruby-version: 3.2
+       bundler-cache: true
+        
+   - name: run danger
+     if: ${{ failure() }}
+     uses: MeilCli/danger-action@v5.0.2
+     with:
+       plugins_file: Gemfile
+       danger_file: Dangerfile
+       danger_id: danger-pr
+     env:
+       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_TOKEN }}
