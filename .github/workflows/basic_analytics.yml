@@ -30,7 +30,7 @@ jobs:
         
    - name: run danger
      if: ${{ failure() }}
-     uses: MeilCli/danger-action@v5.0.2
+     uses: MeilCli/danger-action@v5.6.3
      with:
        plugins_file: Gemfile
        danger_file: Dangerfile
