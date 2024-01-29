@@ -1,18 +1,17 @@
-import 'package:count_habits/presentation/components/custom_animated_flip_counter.dart';
+import 'package:count_habits/presentation/pages/app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const App());
+  runApp(const Habits365());
 }
 
-class App extends StatelessWidget {
-  const App({super.key});
+class Habits365 extends StatelessWidget {
+  const Habits365({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyWidget(),
+      home: App(),
     );
   }
 }
