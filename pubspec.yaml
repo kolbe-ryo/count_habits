@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.4.9
   pedantic_mono: ^1.24.0+1
 
 dev_dependencies:
