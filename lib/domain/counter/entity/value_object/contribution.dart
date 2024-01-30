@@ -13,7 +13,6 @@ class Contribution with _$Contribution {
   const Contribution._();
 
   /// Use this for initializing Contribution
-  /// id is the same of Counter one
   factory Contribution.init() => Contribution(contributedAt: [DateTime.now()]);
 
   factory Contribution.fromJson(Map<String, dynamic> json) => _$ContributionFromJson(json);
