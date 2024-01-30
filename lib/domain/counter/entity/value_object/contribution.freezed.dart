@@ -20,7 +20,6 @@ Contribution _$ContributionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Contribution {
-  String get id => throw _privateConstructorUsedError;
   int get maxCount => throw _privateConstructorUsedError;
   List<DateTime> get contributedAt => throw _privateConstructorUsedError;
 
@@ -36,7 +35,7 @@ abstract class $ContributionCopyWith<$Res> {
           Contribution value, $Res Function(Contribution) then) =
       _$ContributionCopyWithImpl<$Res, Contribution>;
   @useResult
-  $Res call({String id, int maxCount, List<DateTime> contributedAt});
+  $Res call({int maxCount, List<DateTime> contributedAt});
 }
 
 /// @nodoc
@@ -52,15 +51,10 @@ class _$ContributionCopyWithImpl<$Res, $Val extends Contribution>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? maxCount = null,
     Object? contributedAt = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       maxCount: null == maxCount
           ? _value.maxCount
           : maxCount // ignore: cast_nullable_to_non_nullable
@@ -81,7 +75,7 @@ abstract class _$$ContributionImplCopyWith<$Res>
       __$$ContributionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, int maxCount, List<DateTime> contributedAt});
+  $Res call({int maxCount, List<DateTime> contributedAt});
 }
 
 /// @nodoc
@@ -95,15 +89,10 @@ class __$$ContributionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? maxCount = null,
     Object? contributedAt = null,
   }) {
     return _then(_$ContributionImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       maxCount: null == maxCount
           ? _value.maxCount
           : maxCount // ignore: cast_nullable_to_non_nullable
@@ -120,17 +109,13 @@ class __$$ContributionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ContributionImpl extends _Contribution {
   const _$ContributionImpl(
-      {required this.id,
-      this.maxCount = 0,
-      required final List<DateTime> contributedAt})
+      {this.maxCount = 0, required final List<DateTime> contributedAt})
       : _contributedAt = contributedAt,
         super._();
 
   factory _$ContributionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContributionImplFromJson(json);
 
-  @override
-  final String id;
   @override
   @JsonKey()
   final int maxCount;
@@ -144,7 +129,7 @@ class _$ContributionImpl extends _Contribution {
 
   @override
   String toString() {
-    return 'Contribution(id: $id, maxCount: $maxCount, contributedAt: $contributedAt)';
+    return 'Contribution(maxCount: $maxCount, contributedAt: $contributedAt)';
   }
 
   @override
@@ -152,7 +137,6 @@ class _$ContributionImpl extends _Contribution {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ContributionImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.maxCount, maxCount) ||
                 other.maxCount == maxCount) &&
             const DeepCollectionEquality()
@@ -161,7 +145,7 @@ class _$ContributionImpl extends _Contribution {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, maxCount,
+  int get hashCode => Object.hash(runtimeType, maxCount,
       const DeepCollectionEquality().hash(_contributedAt));
 
   @JsonKey(ignore: true)
@@ -180,16 +164,13 @@ class _$ContributionImpl extends _Contribution {
 
 abstract class _Contribution extends Contribution {
   const factory _Contribution(
-      {required final String id,
-      final int maxCount,
+      {final int maxCount,
       required final List<DateTime> contributedAt}) = _$ContributionImpl;
   const _Contribution._() : super._();
 
   factory _Contribution.fromJson(Map<String, dynamic> json) =
       _$ContributionImpl.fromJson;
 
-  @override
-  String get id;
   @override
   int get maxCount;
   @override

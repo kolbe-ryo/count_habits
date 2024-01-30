@@ -9,13 +9,15 @@ part of 'counter.dart';
 _$CounterImpl _$$CounterImplFromJson(Map<String, dynamic> json) =>
     _$CounterImpl(
       id: json['id'] as String,
-      name: json['name'] as String,
-      count: json['count'] as int? ?? 0,
+      counterValue:
+          CounterValue.fromJson(json['counterValue'] as Map<String, dynamic>),
+      contribution:
+          Contribution.fromJson(json['contribution'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CounterImplToJson(_$CounterImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
-      'count': instance.count,
+      'counterValue': instance.counterValue,
+      'contribution': instance.contribution,
     };

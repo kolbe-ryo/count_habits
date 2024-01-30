@@ -21,8 +21,8 @@ Counter _$CounterFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Counter {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  int get count => throw _privateConstructorUsedError;
+  CounterValue get counterValue => throw _privateConstructorUsedError;
+  Contribution get contribution => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,10 @@ abstract class $CounterCopyWith<$Res> {
   factory $CounterCopyWith(Counter value, $Res Function(Counter) then) =
       _$CounterCopyWithImpl<$Res, Counter>;
   @useResult
-  $Res call({String id, String name, int count});
+  $Res call({String id, CounterValue counterValue, Contribution contribution});
+
+  $CounterValueCopyWith<$Res> get counterValue;
+  $ContributionCopyWith<$Res> get contribution;
 }
 
 /// @nodoc
@@ -51,23 +54,39 @@ class _$CounterCopyWithImpl<$Res, $Val extends Counter>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? count = null,
+    Object? counterValue = null,
+    Object? contribution = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      counterValue: null == counterValue
+          ? _value.counterValue
+          : counterValue // ignore: cast_nullable_to_non_nullable
+              as CounterValue,
+      contribution: null == contribution
+          ? _value.contribution
+          : contribution // ignore: cast_nullable_to_non_nullable
+              as Contribution,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CounterValueCopyWith<$Res> get counterValue {
+    return $CounterValueCopyWith<$Res>(_value.counterValue, (value) {
+      return _then(_value.copyWith(counterValue: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ContributionCopyWith<$Res> get contribution {
+    return $ContributionCopyWith<$Res>(_value.contribution, (value) {
+      return _then(_value.copyWith(contribution: value) as $Val);
+    });
   }
 }
 
@@ -78,7 +97,12 @@ abstract class _$$CounterImplCopyWith<$Res> implements $CounterCopyWith<$Res> {
       __$$CounterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, int count});
+  $Res call({String id, CounterValue counterValue, Contribution contribution});
+
+  @override
+  $CounterValueCopyWith<$Res> get counterValue;
+  @override
+  $ContributionCopyWith<$Res> get contribution;
 }
 
 /// @nodoc
@@ -93,22 +117,22 @@ class __$$CounterImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? count = null,
+    Object? counterValue = null,
+    Object? contribution = null,
   }) {
     return _then(_$CounterImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      counterValue: null == counterValue
+          ? _value.counterValue
+          : counterValue // ignore: cast_nullable_to_non_nullable
+              as CounterValue,
+      contribution: null == contribution
+          ? _value.contribution
+          : contribution // ignore: cast_nullable_to_non_nullable
+              as Contribution,
     ));
   }
 }
@@ -116,7 +140,10 @@ class __$$CounterImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CounterImpl implements _Counter {
-  const _$CounterImpl({required this.id, required this.name, this.count = 0});
+  const _$CounterImpl(
+      {required this.id,
+      required this.counterValue,
+      required this.contribution});
 
   factory _$CounterImpl.fromJson(Map<String, dynamic> json) =>
       _$$CounterImplFromJson(json);
@@ -124,14 +151,13 @@ class _$CounterImpl implements _Counter {
   @override
   final String id;
   @override
-  final String name;
+  final CounterValue counterValue;
   @override
-  @JsonKey()
-  final int count;
+  final Contribution contribution;
 
   @override
   String toString() {
-    return 'Counter(id: $id, name: $name, count: $count)';
+    return 'Counter(id: $id, counterValue: $counterValue, contribution: $contribution)';
   }
 
   @override
@@ -140,13 +166,15 @@ class _$CounterImpl implements _Counter {
         (other.runtimeType == runtimeType &&
             other is _$CounterImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.counterValue, counterValue) ||
+                other.counterValue == counterValue) &&
+            (identical(other.contribution, contribution) ||
+                other.contribution == contribution));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, count);
+  int get hashCode => Object.hash(runtimeType, id, counterValue, contribution);
 
   @JsonKey(ignore: true)
   @override
@@ -165,17 +193,17 @@ class _$CounterImpl implements _Counter {
 abstract class _Counter implements Counter {
   const factory _Counter(
       {required final String id,
-      required final String name,
-      final int count}) = _$CounterImpl;
+      required final CounterValue counterValue,
+      required final Contribution contribution}) = _$CounterImpl;
 
   factory _Counter.fromJson(Map<String, dynamic> json) = _$CounterImpl.fromJson;
 
   @override
   String get id;
   @override
-  String get name;
+  CounterValue get counterValue;
   @override
-  int get count;
+  Contribution get contribution;
   @override
   @JsonKey(ignore: true)
   _$$CounterImplCopyWith<_$CounterImpl> get copyWith =>

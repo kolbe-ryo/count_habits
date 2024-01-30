@@ -6,7 +6,6 @@ part 'contribution.g.dart';
 @freezed
 class Contribution with _$Contribution {
   const factory Contribution({
-    required String id,
     @Default(0) int maxCount,
     required List<DateTime> contributedAt,
   }) = _Contribution;
@@ -15,14 +14,7 @@ class Contribution with _$Contribution {
 
   /// Use this for initializing Contribution
   /// id is the same of Counter one
-  factory Contribution.init({
-    required String id,
-  }) {
-    return Contribution(
-      id: id,
-      contributedAt: [DateTime.now()],
-    );
-  }
+  factory Contribution.init() => Contribution(contributedAt: [DateTime.now()]);
 
   factory Contribution.fromJson(Map<String, dynamic> json) => _$ContributionFromJson(json);
 
