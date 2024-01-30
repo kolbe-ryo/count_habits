@@ -21,6 +21,7 @@ Contribution _$ContributionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Contribution {
   String get id => throw _privateConstructorUsedError;
+  int get maxCount => throw _privateConstructorUsedError;
   List<DateTime> get contributedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,7 @@ abstract class $ContributionCopyWith<$Res> {
           Contribution value, $Res Function(Contribution) then) =
       _$ContributionCopyWithImpl<$Res, Contribution>;
   @useResult
-  $Res call({String id, List<DateTime> contributedAt});
+  $Res call({String id, int maxCount, List<DateTime> contributedAt});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$ContributionCopyWithImpl<$Res, $Val extends Contribution>
   @override
   $Res call({
     Object? id = null,
+    Object? maxCount = null,
     Object? contributedAt = null,
   }) {
     return _then(_value.copyWith(
@@ -59,6 +61,10 @@ class _$ContributionCopyWithImpl<$Res, $Val extends Contribution>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      maxCount: null == maxCount
+          ? _value.maxCount
+          : maxCount // ignore: cast_nullable_to_non_nullable
+              as int,
       contributedAt: null == contributedAt
           ? _value.contributedAt
           : contributedAt // ignore: cast_nullable_to_non_nullable
@@ -75,7 +81,7 @@ abstract class _$$ContributionImplCopyWith<$Res>
       __$$ContributionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, List<DateTime> contributedAt});
+  $Res call({String id, int maxCount, List<DateTime> contributedAt});
 }
 
 /// @nodoc
@@ -90,6 +96,7 @@ class __$$ContributionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? maxCount = null,
     Object? contributedAt = null,
   }) {
     return _then(_$ContributionImpl(
@@ -97,6 +104,10 @@ class __$$ContributionImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      maxCount: null == maxCount
+          ? _value.maxCount
+          : maxCount // ignore: cast_nullable_to_non_nullable
+              as int,
       contributedAt: null == contributedAt
           ? _value._contributedAt
           : contributedAt // ignore: cast_nullable_to_non_nullable
@@ -109,7 +120,9 @@ class __$$ContributionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ContributionImpl extends _Contribution {
   const _$ContributionImpl(
-      {required this.id, required final List<DateTime> contributedAt})
+      {required this.id,
+      this.maxCount = 0,
+      required final List<DateTime> contributedAt})
       : _contributedAt = contributedAt,
         super._();
 
@@ -118,6 +131,9 @@ class _$ContributionImpl extends _Contribution {
 
   @override
   final String id;
+  @override
+  @JsonKey()
+  final int maxCount;
   final List<DateTime> _contributedAt;
   @override
   List<DateTime> get contributedAt {
@@ -128,7 +144,7 @@ class _$ContributionImpl extends _Contribution {
 
   @override
   String toString() {
-    return 'Contribution(id: $id, contributedAt: $contributedAt)';
+    return 'Contribution(id: $id, maxCount: $maxCount, contributedAt: $contributedAt)';
   }
 
   @override
@@ -137,14 +153,16 @@ class _$ContributionImpl extends _Contribution {
         (other.runtimeType == runtimeType &&
             other is _$ContributionImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.maxCount, maxCount) ||
+                other.maxCount == maxCount) &&
             const DeepCollectionEquality()
                 .equals(other._contributedAt, _contributedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, const DeepCollectionEquality().hash(_contributedAt));
+  int get hashCode => Object.hash(runtimeType, id, maxCount,
+      const DeepCollectionEquality().hash(_contributedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -163,6 +181,7 @@ class _$ContributionImpl extends _Contribution {
 abstract class _Contribution extends Contribution {
   const factory _Contribution(
       {required final String id,
+      final int maxCount,
       required final List<DateTime> contributedAt}) = _$ContributionImpl;
   const _Contribution._() : super._();
 
@@ -171,6 +190,8 @@ abstract class _Contribution extends Contribution {
 
   @override
   String get id;
+  @override
+  int get maxCount;
   @override
   List<DateTime> get contributedAt;
   @override

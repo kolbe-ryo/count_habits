@@ -7,6 +7,7 @@ part 'contribution.g.dart';
 class Contribution with _$Contribution {
   const factory Contribution({
     required String id,
+    @Default(0) int maxCount,
     required List<DateTime> contributedAt,
   }) = _Contribution;
 
