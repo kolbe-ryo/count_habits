@@ -20,7 +20,7 @@ Counter _$CounterFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Counter {
-  String get title => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
@@ -34,7 +34,7 @@ abstract class $CounterCopyWith<$Res> {
   factory $CounterCopyWith(Counter value, $Res Function(Counter) then) =
       _$CounterCopyWithImpl<$Res, Counter>;
   @useResult
-  $Res call({String title, int count, DateTime? createdAt});
+  $Res call({String name, int count, DateTime? createdAt});
 }
 
 /// @nodoc
@@ -50,14 +50,14 @@ class _$CounterCopyWithImpl<$Res, $Val extends Counter>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
+    Object? name = null,
     Object? count = null,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       count: null == count
           ? _value.count
@@ -78,7 +78,7 @@ abstract class _$$CounterImplCopyWith<$Res> implements $CounterCopyWith<$Res> {
       __$$CounterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, int count, DateTime? createdAt});
+  $Res call({String name, int count, DateTime? createdAt});
 }
 
 /// @nodoc
@@ -92,14 +92,14 @@ class __$$CounterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
+    Object? name = null,
     Object? count = null,
     Object? createdAt = freezed,
   }) {
     return _then(_$CounterImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       count: null == count
           ? _value.count
@@ -117,21 +117,22 @@ class __$$CounterImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CounterImpl implements _Counter {
   const _$CounterImpl(
-      {required this.title, required this.count, required this.createdAt});
+      {required this.name, this.count = 0, required this.createdAt});
 
   factory _$CounterImpl.fromJson(Map<String, dynamic> json) =>
       _$$CounterImplFromJson(json);
 
   @override
-  final String title;
+  final String name;
   @override
+  @JsonKey()
   final int count;
   @override
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Counter(title: $title, count: $count, createdAt: $createdAt)';
+    return 'Counter(name: $name, count: $count, createdAt: $createdAt)';
   }
 
   @override
@@ -139,7 +140,7 @@ class _$CounterImpl implements _Counter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CounterImpl &&
-            (identical(other.title, title) || other.title == title) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -147,7 +148,7 @@ class _$CounterImpl implements _Counter {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, count, createdAt);
+  int get hashCode => Object.hash(runtimeType, name, count, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -165,14 +166,14 @@ class _$CounterImpl implements _Counter {
 
 abstract class _Counter implements Counter {
   const factory _Counter(
-      {required final String title,
-      required final int count,
+      {required final String name,
+      final int count,
       required final DateTime? createdAt}) = _$CounterImpl;
 
   factory _Counter.fromJson(Map<String, dynamic> json) = _$CounterImpl.fromJson;
 
   @override
-  String get title;
+  String get name;
   @override
   int get count;
   @override
