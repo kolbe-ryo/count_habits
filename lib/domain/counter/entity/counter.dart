@@ -1,4 +1,4 @@
-import 'package:count_habits/domain/exception/validator_exception.dart';
+import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -16,7 +16,7 @@ class Counter with _$Counter {
   // Use this for initializing Counter
   factory Counter.init({required String name}) {
     if (name.isEmpty) {
-      throw const ValidatorException('カウンタ名が空です');
+      throw const AppException('カウンタ名が空です');
     }
     return Counter(
       id: const Uuid().v4(),
