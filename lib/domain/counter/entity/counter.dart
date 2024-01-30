@@ -11,7 +11,6 @@ class Counter with _$Counter {
     required String id,
     required String name,
     @Default(0) int count,
-    required DateTime? createdAt,
   }) = _Counter;
 
   // Use this for initializing Counter
@@ -22,7 +21,6 @@ class Counter with _$Counter {
     return Counter(
       id: const Uuid().v4(),
       name: name,
-      createdAt: DateTime.now(),
     );
   }
 
