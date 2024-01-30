@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 part 'contribution.freezed.dart';
 part 'contribution.g.dart';
@@ -23,4 +22,10 @@ class Contribution with _$Contribution {
   }
 
   factory Contribution.fromJson(Map<String, dynamic> json) => _$ContributionFromJson(json);
+
+  /// Use this if user tap today`s counter
+  List<DateTime> checkIn() {
+    contributedAt.add(DateTime.now());
+    return contributedAt;
+  }
 }
