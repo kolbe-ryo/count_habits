@@ -107,10 +107,11 @@ class __$$ContributionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ContributionImpl implements _Contribution {
+class _$ContributionImpl extends _Contribution {
   const _$ContributionImpl(
       {required this.id, required final List<DateTime> contributedAt})
-      : _contributedAt = contributedAt;
+      : _contributedAt = contributedAt,
+        super._();
 
   factory _$ContributionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContributionImplFromJson(json);
@@ -159,10 +160,11 @@ class _$ContributionImpl implements _Contribution {
   }
 }
 
-abstract class _Contribution implements Contribution {
+abstract class _Contribution extends Contribution {
   const factory _Contribution(
       {required final String id,
       required final List<DateTime> contributedAt}) = _$ContributionImpl;
+  const _Contribution._() : super._();
 
   factory _Contribution.fromJson(Map<String, dynamic> json) =
       _$ContributionImpl.fromJson;

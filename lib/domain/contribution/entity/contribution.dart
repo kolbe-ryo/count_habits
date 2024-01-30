@@ -10,6 +10,8 @@ class Contribution with _$Contribution {
     required List<DateTime> contributedAt,
   }) = _Contribution;
 
+  const Contribution._();
+
   /// Use this for initializing Contribution
   /// id is the same of Counter one
   factory Contribution.init({
