@@ -8,6 +8,7 @@ part of 'counter.dart';
 
 _$CounterImpl _$$CounterImplFromJson(Map<String, dynamic> json) =>
     _$CounterImpl(
+      id: json['id'] as String,
       name: json['name'] as String,
       count: json['count'] as int? ?? 0,
       createdAt: json['createdAt'] == null
@@ -17,6 +18,7 @@ _$CounterImpl _$$CounterImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$CounterImplToJson(_$CounterImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'count': instance.count,
       'createdAt': instance.createdAt?.toIso8601String(),
