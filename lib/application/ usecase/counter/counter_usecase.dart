@@ -11,6 +11,21 @@ class CounterUsecase {
 
   Future<void> fetchAll() async {
     final counters = await _ref.read(counterRepositoryProvider).fetchAll();
-    _ref.read(countersProvider.notifier).setState = counters;
+    _ref.read(countersProvider.notifier).setCounters = counters;
+  }
+
+  Future<void> update({
+    required int id,
+    required String name,
+  }) async {
+    final counter = await _ref.read(counterRepositoryProvider).update(
+          id: id,
+          name: name,
+        );
+    _ref.read(countersProvider.notifier).setCounter(counter);
+  }
+
+  Future<void> delete(int id) async {
+    await _ref.read(counterRepositoryProvider).delete(id);
   }
 }
