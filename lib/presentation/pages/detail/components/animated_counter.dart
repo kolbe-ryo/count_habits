@@ -1,4 +1,4 @@
-import 'package:count_habits/presentation/components/custom_animated_flip_counter.dart';
+import 'package:count_habits/util/library/custom_animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
