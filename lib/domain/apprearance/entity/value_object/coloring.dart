@@ -19,5 +19,5 @@ const colors = {
     counterShadow: Colors.greenAccent,
     contributionColor: Colors.blueAccent,
   ),
-  // TODO: バリエーションを増やすこと
+  // TODO(kolbe): バリエーションを増やすこと
 };
