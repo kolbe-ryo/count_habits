@@ -8,7 +8,7 @@ abstract interface class CounterRepository {
 
   Future<Counter> update({
     required int id,
-    String? name,
+    required String name,
   });
 
   Future<void> delete(int id);
