@@ -26,6 +26,8 @@ dev_dependencies:
   json_serializable: ^6.7.1
 
 flutter:
+  assets:
+    - assets/animation/spark.json
   fonts:
     - family: Monomaniac_One
       fonts:

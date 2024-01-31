@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class AnimatedBox extends StatefulWidget {
   const AnimatedBox({super.key});
@@ -10,6 +11,21 @@ class AnimatedBox extends StatefulWidget {
 class _AnimatedBoxState extends State<AnimatedBox> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Stack(
+      children: [
+        Lottie.asset(
+          'assets/animation/spark.json',
+          repeat: false,
+        ),
+        Container(
+          height: 100,
+          width: 100,
+          decoration: BoxDecoration(
+            color: Colors.greenAccent,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+      ],
+    );
   }
 }
