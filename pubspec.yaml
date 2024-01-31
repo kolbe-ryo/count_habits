@@ -28,6 +28,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/animation/spark.json
+    - assets/animation/square.json
   fonts:
     - family: Monomaniac_One
       fonts:
