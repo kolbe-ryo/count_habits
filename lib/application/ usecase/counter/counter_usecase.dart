@@ -2,6 +2,8 @@ import 'package:count_habits/application/%20usecase/counter/state/counter_provid
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final counterUsecaseProvider = Provider<CounterUsecase>(CounterUsecase.new);
+
 class CounterUsecase {
   CounterUsecase(this._ref);
 
