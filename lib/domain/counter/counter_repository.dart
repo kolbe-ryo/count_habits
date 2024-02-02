@@ -7,9 +7,9 @@ abstract interface class CounterRepository {
   Future<List<Counter>> fetchAll();
 
   Future<Counter> update({
-    required int id,
+    required String id,
     required String name,
   });
 
-  Future<void> delete(int id);
+  Future<List<Counter>> delete(String id);
 }
