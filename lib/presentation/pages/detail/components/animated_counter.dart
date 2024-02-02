@@ -27,7 +27,7 @@ class _AnimatedCounterState extends State<AnimatedCounter> {
         textStyle: const TextStyle(
           fontSize: 200,
           fontWeight: FontWeight.w400,
-          fontFamily: 'Hachi_Maru_Pop',
+          fontFamily: 'Monomaniac_One',
           color: Colors.yellow,
           shadows: [
             BoxShadow(
