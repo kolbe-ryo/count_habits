@@ -20,8 +20,10 @@ class MockCounterRepository implements CounterRepository {
   }
 
   @override
-  Future<void> delete(String id) async {
+  Future<List<Counter>> delete(String id) async {
     await Future<void>.delayed(const Duration(seconds: 2));
+    _counters.removeAt(int.parse(id));
+    return _counters;
   }
 }
 

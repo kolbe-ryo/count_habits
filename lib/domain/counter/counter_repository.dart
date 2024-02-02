@@ -11,5 +11,5 @@ abstract interface class CounterRepository {
     required String name,
   });
 
-  Future<void> delete(String id);
+  Future<List<Counter>> delete(String id);
 }
