@@ -10,5 +10,7 @@ class Appearance with _$Appearance {
     String? fontFamily,
   }) = _Appearance;
 
+  factory Appearance.init() => const Appearance(fontFamily: 'Monomaniac_One');
+
   factory Appearance.fromJson(Map<String, dynamic> json) => _$AppearanceFromJson(json);
 }
