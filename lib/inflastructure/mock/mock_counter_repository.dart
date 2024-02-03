@@ -3,6 +3,7 @@ import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/counter/entity/value_object/contribution.dart';
 import 'package:count_habits/domain/counter/entity/value_object/counter_value.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
+import 'package:count_habits/domain/exception/app_exception_enum.dart';
 
 class MockCounterRepository implements CounterRepository {
   // テスト用にexceptionフラグを用意しているので通信失敗時のテストの際に利用すること
@@ -10,7 +11,7 @@ class MockCounterRepository implements CounterRepository {
   Future<List<Counter>> fetchAll([bool? exception]) async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (exception ?? false) {
-      throw const AppException('カウンタ一覧の取得に失敗しました');
+      throw const AppException(AppExceptionEnum.counterFetchAll);
     }
     return _counters;
   }
@@ -23,7 +24,7 @@ class MockCounterRepository implements CounterRepository {
   }) async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (exception ?? false) {
-      throw const AppException('カウンタの更新に失敗しました');
+      throw const AppException(AppExceptionEnum.counterUpdate);
     }
     return _counters[int.parse(id)];
   }
@@ -32,7 +33,7 @@ class MockCounterRepository implements CounterRepository {
   Future<List<Counter>> delete(String id, [bool? exception]) async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (exception ?? false) {
-      throw const AppException('カウンタの削除に失敗しました');
+      throw const AppException(AppExceptionEnum.counterDelete);
     }
     _counters.removeAt(int.parse(id));
     return _counters;

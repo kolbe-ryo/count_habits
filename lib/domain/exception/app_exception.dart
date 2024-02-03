@@ -1,10 +1,10 @@
+import 'package:count_habits/domain/exception/app_exception_enum.dart';
+
 class AppException implements Exception {
-  const AppException([this.message = 'エラーが発生しました']);
+  const AppException([this.exceptionEnum = AppExceptionEnum.defaultException]);
 
-  final String message;
-
-  // TODO: ExceptionのEnumを設定し設定値として持つようにすること
+  final AppExceptionEnum exceptionEnum;
 
   @override
-  String toString() => message;
+  String toString() => exceptionEnum.message;
 }
