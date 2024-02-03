@@ -5,6 +5,7 @@ import 'package:count_habits/domain/counter/entity/value_object/counter_value.da
 import 'package:count_habits/domain/exception/app_exception.dart';
 
 class MockCounterRepository implements CounterRepository {
+  // テスト用にexceptionフラグを用意しているので通信失敗時のテストの際に利用すること
   @override
   Future<List<Counter>> fetchAll([bool? exception]) async {
     await Future<void>.delayed(const Duration(seconds: 2));
