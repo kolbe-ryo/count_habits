@@ -1,10 +1,11 @@
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final countersProvider = NotifierProvider<Counters, List<Counter>>(Counters.new);
+part 'counters_provider.g.dart';
 
-class Counters extends Notifier<List<Counter>> {
+@riverpod
+class Counters extends _$Counters {
   @override
   List<Counter> build() => [];
 
