@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Coloring {
-  dynamic get counterColor => throw _privateConstructorUsedError;
-  dynamic get counterShadow => throw _privateConstructorUsedError;
-  dynamic get contributionColor => throw _privateConstructorUsedError;
+  Color get counterColor => throw _privateConstructorUsedError;
+  Color get counterShadow => throw _privateConstructorUsedError;
+  Color get contributionColor => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ColoringCopyWith<Coloring> get copyWith =>
@@ -30,8 +30,7 @@ abstract class $ColoringCopyWith<$Res> {
   factory $ColoringCopyWith(Coloring value, $Res Function(Coloring) then) =
       _$ColoringCopyWithImpl<$Res, Coloring>;
   @useResult
-  $Res call(
-      {dynamic counterColor, dynamic counterShadow, dynamic contributionColor});
+  $Res call({Color counterColor, Color counterShadow, Color contributionColor});
 }
 
 /// @nodoc
@@ -47,23 +46,23 @@ class _$ColoringCopyWithImpl<$Res, $Val extends Coloring>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counterColor = freezed,
-    Object? counterShadow = freezed,
-    Object? contributionColor = freezed,
+    Object? counterColor = null,
+    Object? counterShadow = null,
+    Object? contributionColor = null,
   }) {
     return _then(_value.copyWith(
-      counterColor: freezed == counterColor
+      counterColor: null == counterColor
           ? _value.counterColor
           : counterColor // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      counterShadow: freezed == counterShadow
+              as Color,
+      counterShadow: null == counterShadow
           ? _value.counterShadow
           : counterShadow // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      contributionColor: freezed == contributionColor
+              as Color,
+      contributionColor: null == contributionColor
           ? _value.contributionColor
           : contributionColor // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Color,
     ) as $Val);
   }
 }
@@ -76,8 +75,7 @@ abstract class _$$ColoringImplCopyWith<$Res>
       __$$ColoringImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {dynamic counterColor, dynamic counterShadow, dynamic contributionColor});
+  $Res call({Color counterColor, Color counterShadow, Color contributionColor});
 }
 
 /// @nodoc
@@ -91,18 +89,23 @@ class __$$ColoringImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counterColor = freezed,
-    Object? counterShadow = freezed,
-    Object? contributionColor = freezed,
+    Object? counterColor = null,
+    Object? counterShadow = null,
+    Object? contributionColor = null,
   }) {
     return _then(_$ColoringImpl(
-      counterColor:
-          freezed == counterColor ? _value.counterColor! : counterColor,
-      counterShadow:
-          freezed == counterShadow ? _value.counterShadow! : counterShadow,
-      contributionColor: freezed == contributionColor
-          ? _value.contributionColor!
-          : contributionColor,
+      counterColor: null == counterColor
+          ? _value.counterColor
+          : counterColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      counterShadow: null == counterShadow
+          ? _value.counterShadow
+          : counterShadow // ignore: cast_nullable_to_non_nullable
+              as Color,
+      contributionColor: null == contributionColor
+          ? _value.contributionColor
+          : contributionColor // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -117,13 +120,13 @@ class _$ColoringImpl implements _Coloring {
 
   @override
   @JsonKey()
-  final dynamic counterColor;
+  final Color counterColor;
   @override
   @JsonKey()
-  final dynamic counterShadow;
+  final Color counterShadow;
   @override
   @JsonKey()
-  final dynamic contributionColor;
+  final Color contributionColor;
 
   @override
   String toString() {
@@ -135,20 +138,17 @@ class _$ColoringImpl implements _Coloring {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ColoringImpl &&
-            const DeepCollectionEquality()
-                .equals(other.counterColor, counterColor) &&
-            const DeepCollectionEquality()
-                .equals(other.counterShadow, counterShadow) &&
-            const DeepCollectionEquality()
-                .equals(other.contributionColor, contributionColor));
+            (identical(other.counterColor, counterColor) ||
+                other.counterColor == counterColor) &&
+            (identical(other.counterShadow, counterShadow) ||
+                other.counterShadow == counterShadow) &&
+            (identical(other.contributionColor, contributionColor) ||
+                other.contributionColor == contributionColor));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(counterColor),
-      const DeepCollectionEquality().hash(counterShadow),
-      const DeepCollectionEquality().hash(contributionColor));
+  int get hashCode =>
+      Object.hash(runtimeType, counterColor, counterShadow, contributionColor);
 
   @JsonKey(ignore: true)
   @override
@@ -159,16 +159,16 @@ class _$ColoringImpl implements _Coloring {
 
 abstract class _Coloring implements Coloring {
   const factory _Coloring(
-      {final dynamic counterColor,
-      final dynamic counterShadow,
-      final dynamic contributionColor}) = _$ColoringImpl;
+      {final Color counterColor,
+      final Color counterShadow,
+      final Color contributionColor}) = _$ColoringImpl;
 
   @override
-  dynamic get counterColor;
+  Color get counterColor;
   @override
-  dynamic get counterShadow;
+  Color get counterShadow;
   @override
-  dynamic get contributionColor;
+  Color get contributionColor;
   @override
   @JsonKey(ignore: true)
   _$$ColoringImplCopyWith<_$ColoringImpl> get copyWith =>
