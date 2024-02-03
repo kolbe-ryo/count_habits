@@ -14,6 +14,7 @@ class AppearanceUsecase {
     _ref.read(appearanceStateProvider.notifier).setAppearance = currentAppearance;
   }
 
+  // TODO: Implement
   Future<void> update() async {}
 
   Future<void> reset() async {}
