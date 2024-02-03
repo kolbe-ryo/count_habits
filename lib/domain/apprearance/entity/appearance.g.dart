@@ -9,7 +9,7 @@ part of 'appearance.dart';
 _$AppearanceImpl _$$AppearanceImplFromJson(Map<String, dynamic> json) =>
     _$AppearanceImpl(
       colorId: json['colorId'] as int? ?? 0,
-      fontFamily: json['fontFamily'] as String?,
+      fontFamily: json['fontFamily'] as String? ?? 'Monomaniac_One',
     );
 
 Map<String, dynamic> _$$AppearanceImplToJson(_$AppearanceImpl instance) =>
