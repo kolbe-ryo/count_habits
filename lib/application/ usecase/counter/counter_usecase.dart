@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final counterUsecaseProvider = Provider<CounterUsecase>(CounterUsecase.new);
 
 class CounterUsecase {
-  CounterUsecase(this._ref);
+  const CounterUsecase(this._ref);
 
   final Ref _ref;
 
