@@ -8,6 +8,9 @@ class AppearanceState extends _$AppearanceState {
   @override
   Appearance build() => const Appearance();
 
+  // ignore: avoid_setters_without_getters
+  set setAppearance(Appearance appearance) => state = appearance;
+
   void setColorPalette(int colorId) => state = state.copyWith(colorId: colorId);
 
   void setFontFamily(String fontFamily) => state = state.copyWith(fontFamily: fontFamily);
