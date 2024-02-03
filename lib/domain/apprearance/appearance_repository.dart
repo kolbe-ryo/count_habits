@@ -1,5 +1,6 @@
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final appearanceRepositoryProvider = Provider<AppearanceRepository>((ref) => throw UnimplementedError());
 
