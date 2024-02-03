@@ -2,11 +2,15 @@ import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/counter/entity/value_object/contribution.dart';
 import 'package:count_habits/domain/counter/entity/value_object/counter_value.dart';
+import 'package:count_habits/domain/exception/app_exception.dart';
 
 class MockCounterRepository implements CounterRepository {
   @override
-  Future<List<Counter>> fetchAll() async {
+  Future<List<Counter>> fetchAll([bool? exception]) async {
     await Future<void>.delayed(const Duration(seconds: 2));
+    if (exception ?? false) {
+      throw const AppException('カウンタ一覧の取得に失敗しました');
+    }
     return _counters;
   }
 
@@ -14,14 +18,21 @@ class MockCounterRepository implements CounterRepository {
   Future<Counter> update({
     required String id,
     required String name,
+    bool? exception,
   }) async {
     await Future<void>.delayed(const Duration(seconds: 2));
+    if (exception ?? false) {
+      throw const AppException('カウンタの更新に失敗しました');
+    }
     return _counters[int.parse(id)];
   }
 
   @override
-  Future<List<Counter>> delete(String id) async {
+  Future<List<Counter>> delete(String id, [bool? exception]) async {
     await Future<void>.delayed(const Duration(seconds: 2));
+    if (exception ?? false) {
+      throw const AppException('カウンタの削除に失敗しました');
+    }
     _counters.removeAt(int.parse(id));
     return _counters;
   }
