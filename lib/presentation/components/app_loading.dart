@@ -8,9 +8,8 @@ class AppLoading extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(appLoadingProvider);
     return Visibility(
-      visible: isLoading,
+      visible: ref.watch(appLoadingProvider),
       child: const ColoredBox(
         color: Colors.black26,
         child: Center(
