@@ -15,7 +15,12 @@ class AppearanceUsecase {
   }
 
   // TODO: Implement
-  Future<void> update() async {}
+  Future<void> update({
+    int? colorid,
+    String? fontFamily,
+  }) async {
+    final updatedAppearance = await _ref.read(appearanceRepositoryProvider).update();
+  }
 
   Future<void> reset() async {}
 }
