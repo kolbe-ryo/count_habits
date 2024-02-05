@@ -27,6 +27,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   json_serializable: ^6.7.1
+  mocktail: ^1.0.3
 
 flutter:
   assets:
