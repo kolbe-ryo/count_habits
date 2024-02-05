@@ -1,5 +1,6 @@
 import 'package:count_habits/application/%20usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/domain/apprearance/appearance_repository.dart';
+import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final appearanceProvider = Provider<AppearanceUsecase>(AppearanceUsecase.new);
@@ -14,13 +15,19 @@ class AppearanceUsecase {
     _ref.read(appearanceStateProvider.notifier).setAppearance = currentAppearance;
   }
 
-  // TODO: Implement
   Future<void> update({
     int? colorid,
     String? fontFamily,
   }) async {
-    final updatedAppearance = await _ref.read(appearanceRepositoryProvider).update();
+    final updatedAppearance = await _ref.read(appearanceRepositoryProvider).update(
+          colorId: colorid,
+          fontFamily: fontFamily,
+        );
+    _ref.read(appearanceStateProvider.notifier).setAppearance = updatedAppearance;
   }
 
-  Future<void> reset() async {}
+  Future<void> reset() async {
+    await _ref.read(appearanceRepositoryProvider).reset();
+    _ref.read(appearanceStateProvider.notifier).setAppearance = const Appearance();
+  }
 }

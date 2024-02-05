@@ -34,11 +34,10 @@ class MockAppearanceRepository implements AppearanceRepository {
   }
 
   @override
-  Future<Appearance> reset([bool? exception]) async {
+  Future<void> reset([bool? exception]) async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (exception ?? false) {
       throw const AppException(AppExceptionEnum.appearanceReset);
     }
-    return const Appearance();
   }
 }
