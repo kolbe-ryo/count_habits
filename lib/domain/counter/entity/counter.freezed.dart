@@ -139,11 +139,12 @@ class __$$CounterImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CounterImpl implements _Counter {
+class _$CounterImpl extends _Counter {
   const _$CounterImpl(
       {required this.id,
       required this.counterValue,
-      required this.contribution});
+      required this.contribution})
+      : super._();
 
   factory _$CounterImpl.fromJson(Map<String, dynamic> json) =>
       _$$CounterImplFromJson(json);
@@ -190,11 +191,12 @@ class _$CounterImpl implements _Counter {
   }
 }
 
-abstract class _Counter implements Counter {
+abstract class _Counter extends Counter {
   const factory _Counter(
       {required final String id,
       required final CounterValue counterValue,
       required final Contribution contribution}) = _$CounterImpl;
+  const _Counter._() : super._();
 
   factory _Counter.fromJson(Map<String, dynamic> json) = _$CounterImpl.fromJson;
 
