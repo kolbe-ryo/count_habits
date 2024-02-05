@@ -21,7 +21,7 @@ Appearance _$AppearanceFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Appearance {
   int get colorId => throw _privateConstructorUsedError;
-  String? get fontFamily => throw _privateConstructorUsedError;
+  String get fontFamily => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $AppearanceCopyWith<$Res> {
           Appearance value, $Res Function(Appearance) then) =
       _$AppearanceCopyWithImpl<$Res, Appearance>;
   @useResult
-  $Res call({int colorId, String? fontFamily});
+  $Res call({int colorId, String fontFamily});
 }
 
 /// @nodoc
@@ -52,17 +52,17 @@ class _$AppearanceCopyWithImpl<$Res, $Val extends Appearance>
   @override
   $Res call({
     Object? colorId = null,
-    Object? fontFamily = freezed,
+    Object? fontFamily = null,
   }) {
     return _then(_value.copyWith(
       colorId: null == colorId
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as int,
-      fontFamily: freezed == fontFamily
+      fontFamily: null == fontFamily
           ? _value.fontFamily
           : fontFamily // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$AppearanceImplCopyWith<$Res>
       __$$AppearanceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int colorId, String? fontFamily});
+  $Res call({int colorId, String fontFamily});
 }
 
 /// @nodoc
@@ -90,17 +90,17 @@ class __$$AppearanceImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? colorId = null,
-    Object? fontFamily = freezed,
+    Object? fontFamily = null,
   }) {
     return _then(_$AppearanceImpl(
       colorId: null == colorId
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as int,
-      fontFamily: freezed == fontFamily
+      fontFamily: null == fontFamily
           ? _value.fontFamily
           : fontFamily // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -108,7 +108,8 @@ class __$$AppearanceImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AppearanceImpl implements _Appearance {
-  const _$AppearanceImpl({this.colorId = 0, this.fontFamily});
+  const _$AppearanceImpl(
+      {this.colorId = 0, this.fontFamily = 'Monomaniac_One'});
 
   factory _$AppearanceImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppearanceImplFromJson(json);
@@ -117,7 +118,8 @@ class _$AppearanceImpl implements _Appearance {
   @JsonKey()
   final int colorId;
   @override
-  final String? fontFamily;
+  @JsonKey()
+  final String fontFamily;
 
   @override
   String toString() {
@@ -153,7 +155,7 @@ class _$AppearanceImpl implements _Appearance {
 }
 
 abstract class _Appearance implements Appearance {
-  const factory _Appearance({final int colorId, final String? fontFamily}) =
+  const factory _Appearance({final int colorId, final String fontFamily}) =
       _$AppearanceImpl;
 
   factory _Appearance.fromJson(Map<String, dynamic> json) =
@@ -162,7 +164,7 @@ abstract class _Appearance implements Appearance {
   @override
   int get colorId;
   @override
-  String? get fontFamily;
+  String get fontFamily;
   @override
   @JsonKey(ignore: true)
   _$$AppearanceImplCopyWith<_$AppearanceImpl> get copyWith =>

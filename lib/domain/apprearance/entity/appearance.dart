@@ -7,10 +7,8 @@ part 'appearance.g.dart';
 class Appearance with _$Appearance {
   const factory Appearance({
     @Default(0) int colorId,
-    String? fontFamily,
+    @Default('Monomaniac_One') String fontFamily,
   }) = _Appearance;
-
-  factory Appearance.init() => const Appearance(fontFamily: 'Monomaniac_One');
 
   factory Appearance.fromJson(Map<String, dynamic> json) => _$AppearanceFromJson(json);
 }

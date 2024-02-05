@@ -1,4 +1,5 @@
 import 'package:count_habits/domain/exception/app_exception.dart';
+import 'package:count_habits/domain/exception/app_exception_enum.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'counter_value.freezed.dart';
@@ -14,7 +15,7 @@ class CounterValue with _$CounterValue {
   // Use this for initializing CounterValue
   factory CounterValue.init({required String name}) {
     if (name.isEmpty) {
-      throw const AppException('カウンタ名が空です');
+      throw const AppException(AppExceptionEnum.counterInvalid);
     }
     return CounterValue(name: name);
   }
