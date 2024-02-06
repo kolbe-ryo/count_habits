@@ -27,10 +27,9 @@ class Counter with _$Counter {
 
   factory Counter.fromJson(Map<String, dynamic> json) => _$CounterFromJson(json);
 
-  Counter get increment => copyWith(counterValue: counterValue.increment);
-
-  /// Add Contribution in the last
+  /// Add Counter and Contribution in the last
   Counter get checkIn => copyWith(
+        counterValue: counterValue.increment,
         contribution: Contribution(
           contributedAt: [
             ...contribution.contributedAt,
