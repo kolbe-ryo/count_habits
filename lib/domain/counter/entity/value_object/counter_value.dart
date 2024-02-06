@@ -12,6 +12,8 @@ class CounterValue with _$CounterValue {
     @Default(0) int count,
   }) = _CounterValue;
 
+  const CounterValue._();
+
   // Use this for initializing CounterValue
   factory CounterValue.init({required String name}) {
     if (name.isEmpty) {
@@ -21,4 +23,6 @@ class CounterValue with _$CounterValue {
   }
 
   factory CounterValue.fromJson(Map<String, dynamic> json) => _$CounterValueFromJson(json);
+
+  CounterValue get increment => copyWith(count: count + 1);
 }
