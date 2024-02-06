@@ -6,6 +6,10 @@ import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
 
 class MockCounterRepository implements CounterRepository {
+  final List<Counter> _counters = [..._initCounter];
+
+  List<Counter> get counters => _counters;
+
   // テスト用にexceptionフラグを用意しているので通信失敗時のテストの際に利用すること
   @override
   Future<List<Counter>> fetchAll({bool exception = false}) async {
@@ -52,7 +56,7 @@ class MockCounterRepository implements CounterRepository {
   }
 }
 
-final _counters = [
+final _initCounter = [
   Counter(
     id: '0',
     counterValue: const CounterValue(
