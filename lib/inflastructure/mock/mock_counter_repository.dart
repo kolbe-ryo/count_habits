@@ -38,6 +38,15 @@ class MockCounterRepository implements CounterRepository {
     _counters.removeAt(int.parse(id));
     return _counters;
   }
+
+  @override
+  Future<Counter> checkIn(String id, [bool? exception]) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    if (exception ?? false) {
+      throw const AppException(AppExceptionEnum.counterUpdate);
+    }
+    return _counters[int.parse(id)];
+  }
 }
 
 final _counters = [

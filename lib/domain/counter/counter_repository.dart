@@ -12,4 +12,6 @@ abstract interface class CounterRepository {
   });
 
   Future<List<Counter>> delete(String id);
+
+  Future<Counter> checkIn(String id);
 }
