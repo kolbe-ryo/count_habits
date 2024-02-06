@@ -36,7 +36,7 @@ class CounterUsecase {
     // TODO 上記の処理
     try {
       await _ref.read(counterRepositoryProvider).checkIn(id);
-    } on AppException catch (e, trace) {
+    } on AppException catch (_) {
       // TODO loggerの実装
       // print('$e, $trace');
     }
