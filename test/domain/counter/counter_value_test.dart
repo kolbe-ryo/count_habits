@@ -20,4 +20,14 @@ void main() {
       );
     });
   });
+
+  group('increment getterテスト', () {
+    test('incrementメソッドによって+1インクリメントされたCounterValueが返却されること', () {
+      const name = 'testName';
+      final counterValue = CounterValue.init(name: name);
+      expect(counterValue.count, 0);
+      final incrementValue = counterValue.increment;
+      expect(incrementValue.count, 1);
+    });
+  });
 }
