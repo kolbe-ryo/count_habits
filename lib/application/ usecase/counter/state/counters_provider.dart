@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
@@ -19,5 +20,13 @@ class Counters extends _$Counters {
       throw const AppException(AppExceptionEnum.unexpectedException);
     }
     state[matchIndex] = counter;
+  }
+
+  Counter getCounter(String id) {
+    final counter = state.firstWhereOrNull((element) => element.id == id);
+    if (counter == null) {
+      throw const AppException(AppExceptionEnum.unexpectedException);
+    }
+    return counter;
   }
 }
