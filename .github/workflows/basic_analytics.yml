@@ -20,7 +20,9 @@ jobs:
       - name: Unit Test
         run: flutter test
       - name: flutter analyze to txt  
-        run: flutter analyze > flutter_analyze_report.txt
+        shell: bash
+        run: |
+          flutter analyze | tee ./flutter_analyze_report.txt
       - name: setup ruby
         if: ${{ failure() }}
         uses: ruby/setup-ruby@v1
