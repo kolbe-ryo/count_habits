@@ -8,9 +8,9 @@ import 'package:count_habits/domain/exception/app_exception_enum.dart';
 class MockCounterRepository implements CounterRepository {
   // テスト用にexceptionフラグを用意しているので通信失敗時のテストの際に利用すること
   @override
-  Future<List<Counter>> fetchAll([bool? exception]) async {
+  Future<List<Counter>> fetchAll({bool exception = false}) async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (exception ?? false) {
+    if (exception) {
       throw const AppException(AppExceptionEnum.counterFetchAll);
     }
     return _counters;
@@ -20,19 +20,22 @@ class MockCounterRepository implements CounterRepository {
   Future<Counter> update({
     required String id,
     required String name,
-    bool? exception,
+    bool exception = false,
   }) async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (exception ?? false) {
+    if (exception) {
       throw const AppException(AppExceptionEnum.counterUpdate);
     }
     return _counters[int.parse(id)];
   }
 
   @override
-  Future<List<Counter>> delete(String id, [bool? exception]) async {
+  Future<List<Counter>> delete(
+    String id, {
+    bool exception = false,
+  }) async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (exception ?? false) {
+    if (exception) {
       throw const AppException(AppExceptionEnum.counterDelete);
     }
     _counters.removeAt(int.parse(id));
@@ -40,9 +43,9 @@ class MockCounterRepository implements CounterRepository {
   }
 
   @override
-  Future<Counter> checkIn(String id, [bool? exception]) async {
+  Future<Counter> checkIn(String id, {bool exception = false}) async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (exception ?? false) {
+    if (exception) {
       throw const AppException(AppExceptionEnum.counterUpdate);
     }
     return _counters[int.parse(id)];

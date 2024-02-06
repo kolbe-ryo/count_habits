@@ -29,7 +29,9 @@ class MockAppearanceRepository implements AppearanceRepository {
     }
     const initAppearance = Appearance();
     return _appearance.copyWith(
-        colorId: colorId ?? initAppearance.colorId, fontFamily: fontFamily ?? initAppearance.fontFamily);
+      colorId: colorId ?? initAppearance.colorId,
+      fontFamily: fontFamily ?? initAppearance.fontFamily,
+    );
   }
 
   @override
