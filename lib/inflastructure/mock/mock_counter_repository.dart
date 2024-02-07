@@ -1,3 +1,4 @@
+import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/counter/entity/value_object/contribution.dart';
@@ -30,6 +31,8 @@ class MockCounterRepository implements CounterRepository {
     if (exception) {
       throw const AppException(AppExceptionEnum.counterUpdate);
     }
+    final updatedCounterValue = _counters[int.parse(id)].counterValue.copyWith(name: name);
+    _counters[int.parse(id)] = _counters[int.parse(id)].copyWith(counterValue: updatedCounterValue);
     return _counters[int.parse(id)];
   }
 
@@ -38,11 +41,20 @@ class MockCounterRepository implements CounterRepository {
     String id, {
     bool exception = false,
   }) async {
+    if (_counters.isEmpty) {
+      return [];
+    }
     await Future<void>.delayed(const Duration(seconds: 2));
     if (exception) {
       throw const AppException(AppExceptionEnum.counterDelete);
     }
-    _counters.removeAt(int.parse(id));
+    final previousLen = _counters.length;
+    _counters.removeWhere((element) => element.id == id);
+
+    // 削除したのに要素に変更がない場合は予期せぬエラー
+    if (_counters.length == previousLen) {
+      throw const AppException(AppExceptionEnum.unexpectedException);
+    }
     return _counters;
   }
 
@@ -52,7 +64,8 @@ class MockCounterRepository implements CounterRepository {
     if (exception) {
       throw const AppException(AppExceptionEnum.counterUpdate);
     }
-    return _counters[int.parse(id)];
+
+    return _counters[int.parse(id)].checkIn;
   }
 }
 
