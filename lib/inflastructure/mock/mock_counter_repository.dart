@@ -13,7 +13,7 @@ class MockCounterRepository implements CounterRepository {
   List<Counter> get counters => _counters;
 
   @override
-  Future<List<Counter>> create(
+  Future<Counter> create(
     String name, {
     bool exception = false,
   }) async {
@@ -22,8 +22,9 @@ class MockCounterRepository implements CounterRepository {
       throw const AppException(AppExceptionEnum.counterCreate);
     }
     final createCounter = Counter.init(name: name);
+    // インメモリに作成したカウンタを保存する
     _counters.add(createCounter);
-    return _counters;
+    return createCounter;
   }
 
   @override
