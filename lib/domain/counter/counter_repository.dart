@@ -4,7 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final counterRepositoryProvider = Provider<CounterRepository>((ref) => throw UnimplementedError());
 
 abstract interface class CounterRepository {
-  Future<List<Counter>> fetchAll({bool exception = false});
+  Future<List<Counter>> create(
+    String name, {
+    bool exception = false,
+  });
+
+  Future<List<Counter>> fetchAll({
+    bool exception = false,
+  });
 
   Future<Counter> update({
     required String id,
