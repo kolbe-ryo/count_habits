@@ -3,6 +3,7 @@ import 'package:count_habits/util/constants/const_text.dart';
 enum AppExceptionEnum {
   defaultException(message: 'エラーが発生しました'),
   unexpectedException(message: '予期せぬエラーが発生しました'),
+  counterCreate(message: 'カウンタの作成$defaultText'),
   counterFetchAll(message: 'カウンタの取得$defaultText'),
   counterUpdate(message: 'カウンタの更新$defaultText'),
   counterDelete(message: 'カウンタの削除$defaultText'),
