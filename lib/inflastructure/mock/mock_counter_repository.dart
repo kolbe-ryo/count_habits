@@ -5,7 +5,6 @@ import 'package:count_habits/domain/counter/entity/value_object/contribution.dar
 import 'package:count_habits/domain/counter/entity/value_object/counter_value.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
-import 'package:count_habits/util/constants/logger.dart';
 
 // テスト用にexceptionフラグを用意しているので通信失敗時のテストの際に利用すること
 class MockCounterRepository implements CounterRepository {
