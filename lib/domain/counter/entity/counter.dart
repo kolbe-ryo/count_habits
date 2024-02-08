@@ -14,6 +14,8 @@ class Counter with _$Counter {
     required Contribution contribution,
   }) = _Counter;
 
+  const Counter._();
+
   // Use this for initializing Counter
   factory Counter.init({required String name}) {
     return Counter(
@@ -24,4 +26,44 @@ class Counter with _$Counter {
   }
 
   factory Counter.fromJson(Map<String, dynamic> json) => _$CounterFromJson(json);
+
+  /// Add Counter and Contribution in the last
+  Counter get checkIn => copyWith(
+        counterValue: counterValue.increment,
+        contribution: Contribution(
+          contributedAt: [
+            ...contribution.contributedAt,
+            DateTime.now(),
+          ],
+        ),
+      );
+
+  int get maxConsecutiveCount {
+    final contributedAt = contribution.contributedAt;
+    if (contributedAt.isEmpty) {
+      return 0;
+    }
+
+    // 最大値保持用の変数
+    var maxConsecutiveCount = 1;
+
+    // 一時保存用の変数
+    var currentConsecutiveCount = 1;
+
+    for (var i = 1; i < contributedAt.length; i++) {
+      // 日付が連続している場合
+      if (contributedAt[i].difference(contributedAt[i - 1]).inDays == 1) {
+        currentConsecutiveCount++;
+        continue;
+      }
+      // 日付が連続していない場合
+      // 暫定最大値を超過している場合
+      if (currentConsecutiveCount > maxConsecutiveCount) {
+        maxConsecutiveCount = currentConsecutiveCount;
+      }
+      // 連続カウントをリセットする
+      currentConsecutiveCount = 1;
+    }
+    return currentConsecutiveCount > maxConsecutiveCount ? currentConsecutiveCount : maxConsecutiveCount;
+  }
 }

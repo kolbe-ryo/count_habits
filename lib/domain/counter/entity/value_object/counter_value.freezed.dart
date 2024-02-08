@@ -107,8 +107,8 @@ class __$$CounterValueImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CounterValueImpl implements _CounterValue {
-  const _$CounterValueImpl({required this.name, this.count = 0});
+class _$CounterValueImpl extends _CounterValue {
+  const _$CounterValueImpl({required this.name, this.count = 0}) : super._();
 
   factory _$CounterValueImpl.fromJson(Map<String, dynamic> json) =>
       _$$CounterValueImplFromJson(json);
@@ -151,9 +151,10 @@ class _$CounterValueImpl implements _CounterValue {
   }
 }
 
-abstract class _CounterValue implements CounterValue {
+abstract class _CounterValue extends CounterValue {
   const factory _CounterValue({required final String name, final int count}) =
       _$CounterValueImpl;
+  const _CounterValue._() : super._();
 
   factory _CounterValue.fromJson(Map<String, dynamic> json) =
       _$CounterValueImpl.fromJson;

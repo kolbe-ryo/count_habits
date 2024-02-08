@@ -4,40 +4,42 @@ import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
 
 class MockAppearanceRepository implements AppearanceRepository {
+  Appearance _appearance = const Appearance();
+
+  Appearance get appearance => _appearance;
+
   @override
-  Future<Appearance> fetch([bool? exception]) async {
+  Future<Appearance> fetch({bool exception = false}) async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (exception ?? false) {
+    if (exception) {
       throw const AppException(AppExceptionEnum.appearanceFetch);
     }
-    return const Appearance(
-      colorId: 1,
-      fontFamily: 'Hachi_Maru_Pop',
-    );
+    return _appearance;
   }
 
   @override
   Future<Appearance> update({
     int? colorId,
     String? fontFamily,
-    bool? exception,
+    bool exception = false,
   }) async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (exception ?? false) {
+    if (exception) {
       throw const AppException(AppExceptionEnum.appearanceUpdate);
     }
     const initAppearance = Appearance();
-    return Appearance(
+    return _appearance.copyWith(
       colorId: colorId ?? initAppearance.colorId,
       fontFamily: fontFamily ?? initAppearance.fontFamily,
     );
   }
 
   @override
-  Future<void> reset([bool? exception]) async {
+  Future<void> reset({bool exception = false}) async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (exception ?? false) {
+    if (exception) {
       throw const AppException(AppExceptionEnum.appearanceReset);
     }
+    _appearance = const Appearance();
   }
 }
