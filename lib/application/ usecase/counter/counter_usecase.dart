@@ -1,6 +1,7 @@
 import 'package:count_habits/application/%20usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
+import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final counterUsecaseProvider = Provider<CounterUsecase>(CounterUsecase.new);
@@ -12,7 +13,10 @@ class CounterUsecase {
 
   Future<void> create({
     required String name,
-  }) async {}
+  }) async {
+    final counters = await _ref.read(counterRepositoryProvider).create(name);
+    _ref.read(countersProvider.notifier).setCounters = counters;
+  }
 
   Future<void> fetchAll() async {
     final counters = await _ref.read(counterRepositoryProvider).fetchAll();
@@ -40,9 +44,9 @@ class CounterUsecase {
     // TODO 上記の処理
     try {
       await _ref.read(counterRepositoryProvider).checkIn(id);
-    } on AppException catch (_) {
+    } on AppException catch (e) {
       // TODO loggerの実装
-      // print('$e, $trace');
+      logger.i(e);
     }
 
     // Count up and add datetime element in the last
