@@ -10,6 +10,10 @@ class CounterUsecase {
 
   final Ref _ref;
 
+  Future<void> create({
+    required String name,
+  }) async {}
+
   Future<void> fetchAll() async {
     final counters = await _ref.read(counterRepositoryProvider).fetchAll();
     _ref.read(countersProvider.notifier).setCounters = counters;
