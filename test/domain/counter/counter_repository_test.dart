@@ -18,8 +18,8 @@ void main() {
     test('作成に成功した場合、引数で与えた任意のnameが設定されたCounterが存在すること', () async {
       const name = 'create';
       final addNewCounters = await providerContainer.read(counterRepositoryProvider).create(name);
-      expect(addNewCounters.counterValue.name, name);
-      logger.i(addNewCounters);
+      expect(addNewCounters.last.counterValue.name, name);
+      logger.i(addNewCounters.length);
     });
     test('作成に失敗した場合、AppExceptionがthrowされること', () {
       expect(
