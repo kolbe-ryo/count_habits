@@ -5,6 +5,7 @@ import 'package:count_habits/domain/counter/entity/value_object/contribution.dar
 import 'package:count_habits/domain/counter/entity/value_object/counter_value.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
+import 'package:count_habits/util/constants/logger.dart';
 
 // テスト用にexceptionフラグを用意しているので通信失敗時のテストの際に利用すること
 class MockCounterRepository implements CounterRepository {
@@ -84,9 +85,8 @@ class MockCounterRepository implements CounterRepository {
   Future<Counter> checkIn(String id, {bool exception = false}) async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (exception) {
-      throw const AppException(AppExceptionEnum.counterUpdate);
+      throw const AppException(AppExceptionEnum.counterCheckIn);
     }
-
     return _counters[int.parse(id)].checkIn;
   }
 }
