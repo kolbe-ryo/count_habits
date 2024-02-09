@@ -29,10 +29,16 @@ void main() {
       ],
     );
     test('更新したAppearanceがstateに格納されていること', () async {
+      const matcherState = Appearance(
+        colorId: 1,
+        fontFamily: 'Hachi_Maru_Pop',
+      );
       await providerContariner.read(appearanceProvider).update(
-            colorid: 1,
-            fontFamily: 'Hachi_Maru_Pop',
+            colorid: matcherState.colorId,
+            fontFamily: matcherState.fontFamily,
           );
+      final state = providerContariner.read(appearanceStateProvider);
+      expect(state, matcherState);
     });
   });
 
