@@ -49,6 +49,21 @@ void main() {
         appearanceRepositoryProvider.overrideWithValue(mockAppearanceRepository),
       ],
     );
-    test('', () async {});
+    test('初期値ではないstateをリセットすると初期値に設定されること', () async {
+      const matcherState = Appearance(
+        colorId: 1,
+        fontFamily: 'Hachi_Maru_Pop',
+      );
+      await providerContariner.read(appearanceProvider).update(
+            colorid: matcherState.colorId,
+            fontFamily: matcherState.fontFamily,
+          );
+      var state = providerContariner.read(appearanceStateProvider);
+      expect(state, matcherState);
+
+      await providerContariner.read(appearanceProvider).reset();
+      state = providerContariner.read(appearanceStateProvider);
+      expect(state, const Appearance());
+    });
   });
 }
