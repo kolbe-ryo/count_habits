@@ -17,12 +17,10 @@ void main() {
     test('任意のnameを渡してcreateをコールするとinitCounterValueがstateに反映されること', () async {
       const name = 'create';
       final initCounter = Counter.init(name: name);
-
       await providerContariner.read(counterUsecaseProvider).create(name: name);
       final state = providerContariner.read(countersProvider).firstWhere(
             (element) => element.counterValue.name == name,
           );
-
       expect(state.counterValue, initCounter.counterValue);
     });
   });
@@ -34,7 +32,12 @@ void main() {
         counterRepositoryProvider.overrideWithValue(mockCounterRepository),
       ],
     );
-    test('fetchAllテスト', () async {});
+    test('すべてのCounterが取得可能なこと', () async {
+      await providerContariner.read(counterUsecaseProvider).fetchAll();
+      final state = providerContariner.read(countersProvider);
+
+      expect(state.length, 3);
+    });
   });
 
   group('updateテスト', () {
