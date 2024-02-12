@@ -4,7 +4,6 @@ import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';
 import 'package:count_habits/util/constants/logger.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
 
@@ -77,6 +76,8 @@ void main() {
           )
           .close();
     });
+
+    test('指定したidが存在しない場合、exceptionがthrowされること', () async {});
   });
 
   group('deleteテスト', () {
@@ -86,7 +87,8 @@ void main() {
         counterRepositoryProvider.overrideWithValue(mockCounterRepository),
       ],
     );
-    test('deleteテスト', () async {});
+    test('任意のCounterを指定すると指定したCounterがstateから削除されていること', () async {});
+    test('任意のCounterがstateに存在しない場合exceptionをthrowすること', () async {});
   });
 
   group('counteUpテスト', () {
@@ -96,6 +98,7 @@ void main() {
         counterRepositoryProvider.overrideWithValue(mockCounterRepository),
       ],
     );
-    test('counteUpテスト', () async {});
+    test('任意のidを指定すると指定したCounterがCounterValue+1で返却されること', () async {});
+    test('任意のidが存在しない場合exceptionがthrowされること', () async {});
   });
 }
