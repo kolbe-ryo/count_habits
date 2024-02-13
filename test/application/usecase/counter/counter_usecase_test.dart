@@ -68,7 +68,6 @@ void main() {
       expect(counter.counterValue.name, name);
 
       // このようにすることで登録したlistenerを削除できる（ただし、autoDisposeはされなくなる）
-      // TODO: AutoDisposeの調査を少し行うこと
       providerContariner
           .listen<List<Counter>>(
             countersProvider,
@@ -76,8 +75,6 @@ void main() {
           )
           .close();
     });
-
-    test('指定したidが存在しない場合、exceptionがthrowされること', () async {});
   });
 
   group('deleteテスト', () {
@@ -87,8 +84,16 @@ void main() {
         counterRepositoryProvider.overrideWithValue(mockCounterRepository),
       ],
     );
-    test('任意のCounterを指定すると指定したCounterがstateから削除されていること', () async {});
-    test('任意のCounterがstateに存在しない場合exceptionをthrowすること', () async {});
+    test('任意のCounterを指定すると指定したCounterがstateから削除されていること', () async {
+      const id = '0';
+
+      await providerContariner.read(counterUsecaseProvider).delete(id);
+      await providerContariner.read(counterUsecaseProvider).fetchAll();
+
+      final counters = providerContariner.read(countersProvider);
+
+      expect(counters.length, 2);
+    });
   });
 
   group('counteUpテスト', () {
@@ -97,8 +102,23 @@ void main() {
       overrides: [
         counterRepositoryProvider.overrideWithValue(mockCounterRepository),
       ],
-    );
-    test('任意のidを指定すると指定したCounterがCounterValue+1で返却されること', () async {});
-    test('任意のidが存在しない場合exceptionがthrowされること', () async {});
+    )..listen<List<Counter>>(
+        countersProvider,
+        (_, __) => logger.i('listen'),
+      );
+
+    test('任意のidを指定すると指定したCounterがCounterValue+1で返却されること（0=>1）', () async {
+      const id = '0';
+      // まずfetchでデータを取得する
+      await providerContariner.read(counterUsecaseProvider).fetchAll();
+
+      final initialCounter = providerContariner.read(countersProvider.notifier).getCounter(id);
+      expect(initialCounter.counterValue.count, 0);
+
+      await providerContariner.read(counterUsecaseProvider).countUp(id);
+      final addedCounter = providerContariner.read(countersProvider.notifier).getCounter(id);
+
+      expect(addedCounter.counterValue.count, 1);
+    });
   });
 }
