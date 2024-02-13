@@ -16,10 +16,12 @@ class Counters extends _$Counters {
 
   void setCounter(Counter counter) {
     final matchIndex = state.indexWhere((element) => element.id == counter.id);
-    if (matchIndex == -1) {
-      throw const AppException(AppExceptionEnum.unexpectedException);
-    }
     state[matchIndex] = counter;
+  }
+
+  void deleteCounter(Counter counter) {
+    final matchIndex = state.indexWhere((element) => element.id == counter.id);
+    state = [...state]..removeAt(matchIndex);
   }
 
   Counter getCounter(String id) {

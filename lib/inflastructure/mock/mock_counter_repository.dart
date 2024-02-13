@@ -86,7 +86,14 @@ class MockCounterRepository implements CounterRepository {
     if (exception) {
       throw const AppException(AppExceptionEnum.counterCheckIn);
     }
-    return _counters[int.parse(id)].checkIn;
+    final checkedInCounter = _counters.firstWhereOrNull((element) => element.id == id);
+
+    // 要素が見当たらなかった場合予期せぬエラー
+    if (checkedInCounter == null) {
+      throw const AppException(AppExceptionEnum.unexpectedException);
+    }
+
+    return checkedInCounter.checkIn;
   }
 }
 
