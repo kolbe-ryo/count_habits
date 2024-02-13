@@ -16,7 +16,6 @@ class Counters extends _$Counters {
 
   void setCounter(Counter counter) {
     final matchIndex = state.indexWhere((element) => element.id == counter.id);
-    // TODO: このstateへのセット方法でstateが更新できているか確認する。予想ではちょっと怪しい
     state[matchIndex] = counter;
   }
 
