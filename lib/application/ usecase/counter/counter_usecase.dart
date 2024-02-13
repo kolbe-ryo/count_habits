@@ -39,18 +39,7 @@ class CounterUsecase {
   }
 
   Future<void> countUp(String id) async {
-    // Update Repo
-    // カウントの反映を優先したいので、非同期にして保存失敗した場合は例外をthrowしてstateをRepoの状態に合わせる
-    // TODO 上記の処理
-    try {
-      await _ref.read(counterRepositoryProvider).checkIn(id);
-    } on AppException catch (e) {
-      // TODO loggerの実装
-      logger.i(e);
-    }
-
-    // Count up and add datetime element in the last
-    final counterCheckedIn = _ref.read(countersProvider.notifier).getCounter(id).checkIn;
-    _ref.read(countersProvider.notifier).setCounter(counterCheckedIn);
+    final counter = await _ref.read(counterRepositoryProvider).checkIn(id);
+    _ref.read(countersProvider.notifier).setCounter(counter);
   }
 }
