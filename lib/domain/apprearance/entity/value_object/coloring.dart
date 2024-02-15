@@ -6,9 +6,9 @@ part 'coloring.freezed.dart';
 @freezed
 class Coloring with _$Coloring {
   const factory Coloring({
-    @Default(Colors.yellow) Color counterColor,
-    @Default(Colors.red) Color counterShadow,
-    @Default(Colors.deepOrange) Color contributionColor,
+    @Default(Colors.green) Color counterColor,
+    @Default(Colors.lightGreen) Color counterShadow,
+    @Default(Colors.lightGreenAccent) Color contributionColor,
   }) = _Coloring;
 }
 
@@ -63,5 +63,10 @@ const colors = {
     counterColor: Color(0xFFEEEEEE),
     counterShadow: Color(0xFFA3C9AA),
     contributionColor: Color(0xFFC68484),
+  ),
+  11: Coloring(
+    counterColor: Colors.yellow,
+    counterShadow: Colors.red,
+    contributionColor: Colors.deepOrange,
   ),
 };
