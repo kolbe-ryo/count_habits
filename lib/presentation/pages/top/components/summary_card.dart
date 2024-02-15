@@ -8,18 +8,24 @@ class SummaryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.lightGreenAccent,
+        color: Colors.yellow, // Changed color to yellow
         borderRadius: BorderRadius.circular(10),
       ),
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Summary',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align children to the start and end
+            children: [
+              Text(
+                'Summary',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Icon(Icons.warning), // Added exclamation mark icon next to the title
+            ],
           ),
           SizedBox(height: 16),
           Text(
