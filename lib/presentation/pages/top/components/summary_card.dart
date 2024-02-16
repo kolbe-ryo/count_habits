@@ -9,6 +9,7 @@ class SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       // color: Colors.blueGrey,
+      elevation: 20,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
