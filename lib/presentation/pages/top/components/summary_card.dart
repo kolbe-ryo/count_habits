@@ -6,37 +6,43 @@ class SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey, // Changed color to yellow
+    return Card(
+      // color: Colors.blueGrey,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align children to the start and end
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(10),
+        child: const Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Summary',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(Icons.warning),
+                ],
+              ),
+              SizedBox(height: 10),
               Text(
-                'Summary',
+                'You have 3 tasks to complete today',
                 style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
-              Icon(Icons.warning), // Added exclamation mark icon next to the title
+              ContributionTile(),
             ],
           ),
-          SizedBox(height: 16),
-          Text(
-            'You have 3 tasks to complete today',
-            style: TextStyle(
-              fontSize: 16,
-            ),
-          ),
-          ContributionTile(),
-        ],
+        ),
       ),
     );
   }
