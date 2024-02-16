@@ -1,3 +1,4 @@
+import 'package:count_habits/presentation/pages/detail/detail_page.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class SummaryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () => Navigator.of(context).push(DetailPage.route()),
         borderRadius: BorderRadius.circular(10),
         child: const Padding(
           padding: EdgeInsets.all(10),
