@@ -9,7 +9,7 @@ class ContributionTile extends StatelessWidget {
     final dt = DateTime.now();
     final weekDay = dt.weekday + 1;
 
-    for (var i = 0; i < 7 * weekDay; i++) {
+    for (var i = 0; i < 21 * weekDay; i++) {
       commit.add(math.Random().nextInt(10));
     }
 

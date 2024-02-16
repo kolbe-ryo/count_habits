@@ -11,7 +11,7 @@ class TopPage extends ConsumerWidget {
       body: SafeArea(
         child: ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: 10,
+          itemCount: 4,
           itemBuilder: (context, item) {
             return const Padding(
               padding: EdgeInsets.only(bottom: 16),
