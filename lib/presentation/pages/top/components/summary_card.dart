@@ -1,3 +1,4 @@
+import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
 import 'package:flutter/material.dart';
 
 class SummaryCard extends StatelessWidget {
@@ -34,6 +35,7 @@ class SummaryCard extends StatelessWidget {
               fontSize: 16,
             ),
           ),
+          ContributionTile(),
         ],
       ),
     );
