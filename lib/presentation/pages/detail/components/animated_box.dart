@@ -17,14 +17,6 @@ class _AnimatedBoxState extends State<AnimatedBox> {
           'assets/animation/spark.json',
           repeat: false,
         ),
-        Container(
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(
-            color: Colors.greenAccent,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
       ],
     );
   }
