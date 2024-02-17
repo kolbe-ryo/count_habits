@@ -19,14 +19,14 @@ class ContributionTile extends StatelessWidget {
   Color? buildColor(int count) {
     if (count == 0) {
       return Colors.grey[300];
-    } else if (count <= 2) {
-      return Colors.green[200];
-    } else if (count <= 4) {
-      return Colors.green[400];
-    } else if (count <= 6) {
-      return Colors.green[600];
+      // } else if (count <= 2) {
+      //   return Colors.green[200];
+      // } else if (count <= 4) {
+      //   return Colors.green[400];
+      // } else if (count <= 6) {
+      //   return Colors.green[600];
     } else {
-      return Colors.green[800];
+      return Colors.greenAccent;
     }
   }
 
@@ -35,7 +35,7 @@ class ContributionTile extends StatelessWidget {
     final commit = getCommit;
     return Center(
       child: Padding(
-        padding: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 8),
         child: SizedBox(
           height: 120,
           child: Row(
@@ -45,18 +45,18 @@ class ContributionTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // 曜日
                   children: [
-                    Spacer(flex: 3),
-                    Text('Mon'),
+                    Text('Sun'),
                     Spacer(flex: 2),
-                    Text('Wed'),
+                    Text('Tue'),
                     Spacer(flex: 2),
-                    Text('Fri'),
-                    Spacer(flex: 3),
+                    Text('Thu'),
+                    Spacer(flex: 2),
+                    Text('Sat'),
                   ],
                 ),
               ),
               Expanded(
-                flex: 11,
+                flex: 8,
                 child: Center(
                   child: GridView.builder(
                     itemCount: commit.length,
@@ -66,7 +66,7 @@ class ContributionTile extends StatelessWidget {
                       mainAxisSpacing: 4,
                       crossAxisSpacing: 4,
                     ),
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(2),
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
                         decoration: BoxDecoration(
