@@ -9,7 +9,7 @@ class SummaryCard extends StatelessWidget {
     return Card(
       // color: Colors.blueGrey,
       elevation: 20,
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -28,7 +28,10 @@ class SummaryCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Icon(Icons.warning),
+                Icon(
+                  Icons.check,
+                  color: Colors.greenAccent,
+                ),
               ],
             ),
             ContributionTile(),
