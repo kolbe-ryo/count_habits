@@ -35,9 +35,9 @@ class ContributionTile extends StatelessWidget {
     final commit = getCommit;
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.only(top: 10),
         child: SizedBox(
-          height: 130,
+          height: 120,
           child: Row(
             children: [
               const Expanded(
@@ -60,7 +60,6 @@ class ContributionTile extends StatelessWidget {
                 child: Center(
                   child: GridView.builder(
                     itemCount: commit.length,
-                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 7,
