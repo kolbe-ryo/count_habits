@@ -1,4 +1,3 @@
-import 'package:count_habits/presentation/pages/detail/components/animated_box.dart';
 import 'package:count_habits/presentation/pages/detail/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/middle_navigaton_bar.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
@@ -46,16 +45,7 @@ class TopPage extends ConsumerWidget {
                 SizedBox(height: 16),
                 MiddleNavigationBar(),
                 Expanded(
-                  child: Stack(
-                    children: [
-                      Align(
-                        child: AnimatedBox(),
-                      ),
-                      Align(
-                        child: AnimatedCounter(),
-                      ),
-                    ],
-                  ),
+                  child: AnimatedCounter(),
                 ),
               ],
             );
