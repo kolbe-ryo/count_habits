@@ -1,3 +1,5 @@
+import 'package:count_habits/presentation/pages/detail/components/animated_box.dart';
+import 'package:count_habits/presentation/pages/detail/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/middle_navigaton_bar.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,30 @@ class TopPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      // TODO: settng系
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: Text(
+              'Habit 365',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              // Add functionality for settings icon here
+            },
+          ),
+          const SizedBox(width: 16),
+        ],
+      ),
       body: SafeArea(
         child: PageView.builder(
           controller: PageController(viewportFraction: 0.9),
@@ -21,9 +45,28 @@ class TopPage extends ConsumerWidget {
                 SummaryCard(),
                 SizedBox(height: 16),
                 MiddleNavigationBar(),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Align(
+                        child: AnimatedBox(),
+                      ),
+                      Align(
+                        child: AnimatedCounter(),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             );
           },
+        ),
+      ),
+      // TODO: set Advertising
+      bottomNavigationBar: const ColoredBox(
+        color: Colors.amberAccent,
+        child: SizedBox(
+          height: 60,
         ),
       ),
     );
