@@ -7,15 +7,14 @@ class SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      // color: Colors.blueGrey,
-      elevation: 20,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: InkWell(
-        onTap: () => Navigator.of(context).push(DetailPage.route()),
-        borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(DetailPage.route()),
+      child: Card(
+        // color: Colors.blueGrey,
+        elevation: 20,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: const Padding(
           padding: EdgeInsets.all(10),
           child: Column(
