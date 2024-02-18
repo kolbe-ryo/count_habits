@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MiddleNavigationBar extends ConsumerStatefulWidget {
+// TODO: CallBackを受け取り、indexの変更を上位に通知する。Providerだと、一つしか持てないので、他の画面にも変更が通知される
+class MiddleNavigationBar extends StatefulWidget {
   const MiddleNavigationBar({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MiddleNaState();
+  State<StatefulWidget> createState() => _MiddleNavigationBarState();
 }
 
-class _MiddleNaState extends ConsumerState<MiddleNavigationBar> {
+class _MiddleNavigationBarState extends State<MiddleNavigationBar> {
   var _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -32,16 +32,16 @@ class _MiddleNaState extends ConsumerState<MiddleNavigationBar> {
           selectedItemColor: Colors.amber,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: Icon(Icons.check),
+              label: 'CheckIn',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
+              icon: Icon(Icons.edit),
+              label: 'Edit',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: 'Notifications',
+              icon: Icon(Icons.delete),
+              label: 'Delete',
             ),
           ],
           onTap: _onItemTapped,
