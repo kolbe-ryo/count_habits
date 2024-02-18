@@ -51,6 +51,10 @@ class TopPage extends ConsumerWidget {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      ),
       // TODO: set Advertising
       bottomNavigationBar: const ColoredBox(
         color: Colors.amberAccent,
