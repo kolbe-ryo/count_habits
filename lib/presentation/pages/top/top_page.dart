@@ -1,3 +1,4 @@
+import 'package:count_habits/presentation/pages/settings/settings_page.dart';
 import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/middle_navigaton_bar.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
@@ -27,9 +28,7 @@ class TopPage extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () {
-              // Add functionality for settings icon here
-            },
+            onPressed: () => Navigator.of(context).push(SettingsPage.route()),
           ),
           const SizedBox(width: 16),
         ],
