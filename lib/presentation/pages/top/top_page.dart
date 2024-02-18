@@ -1,4 +1,4 @@
-import 'package:count_habits/presentation/pages/detail/components/animated_counter.dart';
+import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/middle_navigaton_bar.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
 import 'package:flutter/material.dart';
