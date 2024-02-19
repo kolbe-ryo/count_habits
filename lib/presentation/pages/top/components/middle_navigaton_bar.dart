@@ -1,3 +1,4 @@
+import 'package:count_habits/util/constants/specific_color.dart';
 import 'package:flutter/material.dart';
 
 // TODO: CallBackを受け取り、indexの変更を上位に通知する。Providerだと、一つしか持てないので、他の画面にも変更が通知される
@@ -26,7 +27,7 @@ class _MiddleNavigationBarState extends State<MiddleNavigationBar> {
           Radius.circular(10),
         ),
         child: BottomNavigationBar(
-          backgroundColor: Colors.grey[800],
+          backgroundColor: dartColor,
           currentIndex: _selectedIndex,
           enableFeedback: true,
           selectedItemColor: Colors.amber,
