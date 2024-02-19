@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 // TODO: CallBackを受け取り、indexの変更を上位に通知する。Providerだと、一つしか持てないので、他の画面にも変更が通知される
 class MiddleNavigationBar extends StatefulWidget {
-  const MiddleNavigationBar({super.key});
+  const MiddleNavigationBar({super.key, required this.index});
+
+  final int index;
 
   @override
   State<StatefulWidget> createState() => _MiddleNavigationBarState();

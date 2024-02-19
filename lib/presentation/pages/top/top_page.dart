@@ -2,6 +2,7 @@ import 'package:count_habits/presentation/pages/settings/settings_page.dart';
 import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/middle_navigaton_bar.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
+import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -38,12 +39,12 @@ class TopPage extends ConsumerWidget {
           controller: PageController(viewportFraction: 0.9),
           itemCount: 4,
           itemBuilder: (context, item) {
-            return const Column(
+            return Column(
               children: [
-                SummaryCard(),
-                SizedBox(height: 16),
-                MiddleNavigationBar(),
-                Expanded(
+                const SummaryCard(),
+                const SizedBox(height: 16),
+                MiddleNavigationBar(index: item),
+                const Expanded(
                   child: AnimatedCounter(),
                 ),
               ],
