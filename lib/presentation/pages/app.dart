@@ -12,6 +12,16 @@ class Habits365 extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // TODO: Theme setting
       theme: ThemeData.dark(),
+      // theme: ThemeData(
+      //   colorSchemeSeed: Colors.blueGrey,
+      //   useMaterial3: true,
+      //   brightness: Brightness.light,
+      // ),
+      // darkTheme: ThemeData(
+      //   colorSchemeSeed: Colors.green,
+      //   useMaterial3: true,
+      //   brightness: Brightness.dark,
+      // ),
       home: const TopPage(),
       builder: (_, navigator) {
         return Stack(

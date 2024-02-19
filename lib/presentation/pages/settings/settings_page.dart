@@ -12,24 +12,20 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: Text(
-              'Habit 365',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              ),
-            ),
+        title: const Text(
+          'Settings',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
           ),
         ),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           children: [
             // About App
+            ContentCard(),
+            ContentCard(),
             ContentCard(),
           ],
         ),
