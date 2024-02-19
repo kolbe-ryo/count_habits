@@ -1,27 +1,20 @@
+import 'package:count_habits/presentation/pages/top/state/middle_navigation_bar_state.dart';
+import 'package:count_habits/util/constants/logger.dart';
 import 'package:count_habits/util/constants/specific_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// TODO: CallBackを受け取り、indexの変更を上位に通知する。Providerだと、一つしか持てないので、他の画面にも変更が通知される
-class MiddleNavigationBar extends StatefulWidget {
+class MiddleNavigationBar extends ConsumerWidget {
   const MiddleNavigationBar({super.key, required this.index});
 
   final int index;
 
   @override
-  State<StatefulWidget> createState() => _MiddleNavigationBarState();
-}
-
-class _MiddleNavigationBarState extends State<MiddleNavigationBar> {
-  var _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentItem = ref.watch(
+      middleNavigationBarStateProvider.select((value) => value.barItemList[index].item),
+    );
+    logger.i(currentItem);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: ClipRRect(
@@ -30,7 +23,7 @@ class _MiddleNavigationBarState extends State<MiddleNavigationBar> {
         ),
         child: BottomNavigationBar(
           backgroundColor: dartColor,
-          currentIndex: _selectedIndex,
+          currentIndex: currentItem,
           enableFeedback: true,
           selectedItemColor: Colors.amber,
           items: const [
@@ -47,7 +40,10 @@ class _MiddleNavigationBarState extends State<MiddleNavigationBar> {
               label: 'Delete',
             ),
           ],
-          onTap: _onItemTapped,
+          onTap: (item) => ref.read(middleNavigationBarStateProvider.notifier).changeBarItem(
+                index: index,
+                item: item,
+              ),
         ),
       ),
     );
