@@ -59,7 +59,7 @@ class TopPage extends ConsumerWidget {
       bottomNavigationBar: const ColoredBox(
         color: Colors.amberAccent,
         child: SizedBox(
-          height: 60,
+          height: 80,
         ),
       ),
     );
