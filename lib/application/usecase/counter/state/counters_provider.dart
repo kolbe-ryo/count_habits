@@ -9,20 +9,21 @@ part 'counters_provider.g.dart';
 @riverpod
 class Counters extends _$Counters {
   @override
-  // TODO: もしかするとリスト型だとstateの変更通知がされないかもしれない
   List<Counter> build() => [];
 
   // ignore: avoid_setters_without_getters
   set setCounters(List<Counter> counters) => state = counters;
 
   void setCounter(Counter counter) {
-    final matchIndex = state.indexWhere((element) => element.id == counter.id);
-    state[matchIndex] = counter;
+    final newCounters = state.map((e) => e.id == counter.id ? counter : e).toList();
+    state = newCounters;
   }
 
-  void deleteCounter(Counter counter) {
-    final matchIndex = state.indexWhere((element) => element.id == counter.id);
-    state = [...state]..removeAt(matchIndex);
+  void deleteCounter(Counter deleteCounter) {
+    state = [
+      for (final counter in state)
+        if (counter.id != deleteCounter.id) counter,
+    ];
   }
 
   Counter getCounter(String id) {
