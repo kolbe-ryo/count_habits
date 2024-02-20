@@ -8,10 +8,7 @@ class MiddleNavigationBarState extends _$MiddleNavigationBarState {
   @override
   // TODO: データ数を元にこちらのproviderを生成する
   // List<int> build() => ref.watch(provider);
-  BarItemList build() {
-    final initialList = List.generate(4, (index) => BarItem(index: index));
-    return BarItemList(barItemList: initialList);
-  }
+  List<BarItem> build() => List.generate(4, (index) => BarItem(index: index));
 
   /// Changes the item at the specified index in the middle navigation bar.
   ///
@@ -21,7 +18,7 @@ class MiddleNavigationBarState extends _$MiddleNavigationBarState {
     required int index,
     required int item,
   }) {
-    final newList = state.barItemList
+    final newList = state
         .map(
           (e) => e.index == index
               ? BarItem(
@@ -31,6 +28,6 @@ class MiddleNavigationBarState extends _$MiddleNavigationBarState {
               : e,
         )
         .toList();
-    state = state.copyWith(barItemList: newList);
+    state = newList;
   }
 }
