@@ -15,13 +15,15 @@ class Counters extends _$Counters {
   set setCounters(List<Counter> counters) => state = counters;
 
   void setCounter(Counter counter) {
-    final matchIndex = state.indexWhere((element) => element.id == counter.id);
-    state[matchIndex] = counter;
+    final newCounters = state.map((e) => e.id == counter.id ? counter : e).toList();
+    state = newCounters;
   }
 
-  void deleteCounter(Counter counter) {
-    final matchIndex = state.indexWhere((element) => element.id == counter.id);
-    state = [...state]..removeAt(matchIndex);
+  void deleteCounter(Counter deleteCounter) {
+    state = [
+      for (final counter in state)
+        if (counter.id != deleteCounter.id) counter,
+    ];
   }
 
   Counter getCounter(String id) {

@@ -1,5 +1,5 @@
-import 'package:count_habits/application/%20usecase/appearance/appearance_usecase.dart';
-import 'package:count_habits/application/%20usecase/appearance/state/appearance_state_provider.dart';
+import 'package:count_habits/application/usecase/appearance/appearance_usecase.dart';
+import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/inflastructure/mock/mock_appearance_repository.dart';

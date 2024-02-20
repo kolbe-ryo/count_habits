@@ -114,9 +114,9 @@ class __$$ColoringImplCopyWithImpl<$Res>
 
 class _$ColoringImpl implements _Coloring {
   const _$ColoringImpl(
-      {this.counterColor = Colors.yellow,
-      this.counterShadow = Colors.red,
-      this.contributionColor = Colors.deepOrange});
+      {this.counterColor = Colors.green,
+      this.counterShadow = Colors.lightGreen,
+      this.contributionColor = Colors.lightGreenAccent});
 
   @override
   @JsonKey()

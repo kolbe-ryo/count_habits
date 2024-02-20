@@ -1,5 +1,5 @@
-import 'package:count_habits/application/%20usecase/counter/counter_usecase.dart';
-import 'package:count_habits/application/%20usecase/counter/state/counters_provider.dart';
+import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
+import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';

@@ -1,4 +1,4 @@
-import 'package:count_habits/application/%20usecase/counter/state/counters_provider.dart';
+import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
