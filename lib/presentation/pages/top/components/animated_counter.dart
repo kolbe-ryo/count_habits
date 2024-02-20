@@ -11,7 +11,7 @@ class AnimatedCounter extends StatefulWidget {
 }
 
 class _AnimatedCounterState extends State<AnimatedCounter> with SingleTickerProviderStateMixin {
-  int value = 1;
+  int value = 0;
 
   late final AnimationController _controller;
 
