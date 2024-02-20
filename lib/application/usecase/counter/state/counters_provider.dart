@@ -9,6 +9,7 @@ part 'counters_provider.g.dart';
 @riverpod
 class Counters extends _$Counters {
   @override
+  // TODO: もしかするとリスト型だとstateの変更通知がされないかもしれない
   List<Counter> build() => [];
 
   // ignore: avoid_setters_without_getters
