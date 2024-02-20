@@ -40,10 +40,16 @@ class MiddleNavigationBar extends ConsumerWidget {
               label: 'Delete',
             ),
           ],
-          onTap: (item) => ref.read(middleNavigationBarStateProvider.notifier).changeBarItem(
-                index: index,
-                item: item,
-              ),
+          onTap: (item) {
+            // Deleteはdialogで処理する
+            if (item == 2) {
+              // TODO
+            }
+            ref.read(middleNavigationBarStateProvider.notifier).changeBarItem(
+                  index: index,
+                  item: item,
+                );
+          },
         ),
       ),
     );
