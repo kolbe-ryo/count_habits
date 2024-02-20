@@ -14,7 +14,7 @@ class MiddleNavigationItems extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(
-      middleNavigationBarStateProvider.select((value) => value.barItemList[index].item),
+      middleNavigationBarStateProvider.select((value) => value[index].item),
     );
     switch (item) {
       case 0:

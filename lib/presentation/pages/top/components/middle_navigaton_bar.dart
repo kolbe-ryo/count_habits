@@ -12,7 +12,7 @@ class MiddleNavigationBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentItem = ref.watch(
-      middleNavigationBarStateProvider.select((value) => value.barItemList[index].item),
+      middleNavigationBarStateProvider.select((value) => value[index].item),
     );
     logger.i(currentItem);
     return Padding(
