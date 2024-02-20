@@ -13,6 +13,10 @@ class MiddleNavigationBarState extends _$MiddleNavigationBarState {
     return BarItemList(barItemList: initialList);
   }
 
+  /// Changes the item at the specified index in the middle navigation bar.
+  ///
+  /// [index]: The index of the Counter
+  /// [item]: The middle navigation bar item
   void changeBarItem({
     required int index,
     required int item,
