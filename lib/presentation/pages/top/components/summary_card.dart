@@ -20,6 +20,7 @@ class SummaryCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                //　TODO: TextFieldにして編集可能にする
                 const Text(
                   'Contribution',
                   style: TextStyle(
