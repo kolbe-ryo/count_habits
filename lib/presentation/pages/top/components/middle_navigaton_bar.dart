@@ -1,3 +1,4 @@
+import 'package:count_habits/presentation/components/app_dialog.dart';
 import 'package:count_habits/presentation/pages/top/state/middle_navigation_bar_state.dart';
 import 'package:count_habits/util/constants/logger.dart';
 import 'package:count_habits/util/constants/specific_color.dart';
@@ -40,10 +41,14 @@ class MiddleNavigationBar extends ConsumerWidget {
               label: 'Delete',
             ),
           ],
-          onTap: (item) {
+          onTap: (item) async {
             // Deleteはdialogで処理する
             if (item == 2) {
-              // TODO
+              final result = await showCustomDialog(context) ?? false;
+              if (result) {
+                // TODO Delete処理
+              }
+              return;
             }
             ref.read(middleNavigationBarStateProvider.notifier).changeBarItem(
                   index: index,
