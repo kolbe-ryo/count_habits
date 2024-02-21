@@ -13,14 +13,14 @@ class SummaryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Contribution',
                   style: TextStyle(
                     fontSize: 22,
@@ -33,7 +33,7 @@ class SummaryCard extends StatelessWidget {
                 ),
               ],
             ),
-            ContributionTile(),
+            const ContributionTile(),
           ],
         ),
       ),

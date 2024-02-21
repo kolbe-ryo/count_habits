@@ -1,4 +1,3 @@
-import 'package:count_habits/presentation/pages/color/color_schemes.dart';
 import 'package:count_habits/util/library/custom_animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +24,6 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ref.watch(colorSchemesProvider);
     return GestureDetector(
       onTap: () async {
         value++;
@@ -56,7 +54,7 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
                 fontSize: 200,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Monomaniac_One',
-                // TODO いい感じの色に変える
+                // TODO いい感じの色に変える（Theme.ofの取得を狭めてカラー以外の変更が通知されないようにする）
                 color: Theme.of(context).colorScheme.primary,
                 shadows: [
                   BoxShadow(
