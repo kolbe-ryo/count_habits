@@ -2,6 +2,7 @@ import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/inflastructure/mock/mock_appearance_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
 
@@ -38,12 +39,15 @@ void main() {
       // 更新
       const colorId = 1;
       const fontFamily = 'Hachi_Maru_Pop';
+      const themeMode = ThemeMode.light;
       final appearanceUpdated = await repo.update(
         colorId: colorId,
+        themeMode: themeMode,
         fontFamily: fontFamily,
       );
       expect(appearanceUpdated.colorId, 1);
       expect(appearanceUpdated.fontFamily, fontFamily);
+      expect(appearanceUpdated.themeMode, themeMode);
     });
     test('更新に失敗した場合、AppExceptionがthrowされること', () async {
       expect(

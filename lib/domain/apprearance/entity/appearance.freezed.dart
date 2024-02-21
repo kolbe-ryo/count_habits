@@ -22,6 +22,7 @@ Appearance _$AppearanceFromJson(Map<String, dynamic> json) {
 mixin _$Appearance {
 // TODO: IDを追加して、新規カウンタ作成時に、counterのIDと紐付けること
   int get colorId => throw _privateConstructorUsedError;
+  ThemeMode get themeMode => throw _privateConstructorUsedError;
   String get fontFamily => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $AppearanceCopyWith<$Res> {
           Appearance value, $Res Function(Appearance) then) =
       _$AppearanceCopyWithImpl<$Res, Appearance>;
   @useResult
-  $Res call({int colorId, String fontFamily});
+  $Res call({int colorId, ThemeMode themeMode, String fontFamily});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$AppearanceCopyWithImpl<$Res, $Val extends Appearance>
   @override
   $Res call({
     Object? colorId = null,
+    Object? themeMode = null,
     Object? fontFamily = null,
   }) {
     return _then(_value.copyWith(
@@ -60,6 +62,10 @@ class _$AppearanceCopyWithImpl<$Res, $Val extends Appearance>
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as int,
+      themeMode: null == themeMode
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       fontFamily: null == fontFamily
           ? _value.fontFamily
           : fontFamily // ignore: cast_nullable_to_non_nullable
@@ -76,7 +82,7 @@ abstract class _$$AppearanceImplCopyWith<$Res>
       __$$AppearanceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int colorId, String fontFamily});
+  $Res call({int colorId, ThemeMode themeMode, String fontFamily});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$AppearanceImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? colorId = null,
+    Object? themeMode = null,
     Object? fontFamily = null,
   }) {
     return _then(_$AppearanceImpl(
@@ -98,6 +105,10 @@ class __$$AppearanceImplCopyWithImpl<$Res>
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as int,
+      themeMode: null == themeMode
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       fontFamily: null == fontFamily
           ? _value.fontFamily
           : fontFamily // ignore: cast_nullable_to_non_nullable
@@ -110,7 +121,9 @@ class __$$AppearanceImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AppearanceImpl implements _Appearance {
   const _$AppearanceImpl(
-      {this.colorId = 0, this.fontFamily = 'Monomaniac_One'});
+      {this.colorId = 0,
+      this.themeMode = ThemeMode.system,
+      this.fontFamily = 'Monomaniac_One'});
 
   factory _$AppearanceImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppearanceImplFromJson(json);
@@ -121,11 +134,14 @@ class _$AppearanceImpl implements _Appearance {
   final int colorId;
   @override
   @JsonKey()
+  final ThemeMode themeMode;
+  @override
+  @JsonKey()
   final String fontFamily;
 
   @override
   String toString() {
-    return 'Appearance(colorId: $colorId, fontFamily: $fontFamily)';
+    return 'Appearance(colorId: $colorId, themeMode: $themeMode, fontFamily: $fontFamily)';
   }
 
   @override
@@ -134,13 +150,15 @@ class _$AppearanceImpl implements _Appearance {
         (other.runtimeType == runtimeType &&
             other is _$AppearanceImpl &&
             (identical(other.colorId, colorId) || other.colorId == colorId) &&
+            (identical(other.themeMode, themeMode) ||
+                other.themeMode == themeMode) &&
             (identical(other.fontFamily, fontFamily) ||
                 other.fontFamily == fontFamily));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, colorId, fontFamily);
+  int get hashCode => Object.hash(runtimeType, colorId, themeMode, fontFamily);
 
   @JsonKey(ignore: true)
   @override
@@ -157,14 +175,18 @@ class _$AppearanceImpl implements _Appearance {
 }
 
 abstract class _Appearance implements Appearance {
-  const factory _Appearance({final int colorId, final String fontFamily}) =
-      _$AppearanceImpl;
+  const factory _Appearance(
+      {final int colorId,
+      final ThemeMode themeMode,
+      final String fontFamily}) = _$AppearanceImpl;
 
   factory _Appearance.fromJson(Map<String, dynamic> json) =
       _$AppearanceImpl.fromJson;
 
   @override // TODO: IDを追加して、新規カウンタ作成時に、counterのIDと紐付けること
   int get colorId;
+  @override
+  ThemeMode get themeMode;
   @override
   String get fontFamily;
   @override

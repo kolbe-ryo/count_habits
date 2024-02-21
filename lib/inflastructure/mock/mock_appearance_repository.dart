@@ -2,6 +2,7 @@ import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
+import 'package:flutter/material.dart';
 
 class MockAppearanceRepository implements AppearanceRepository {
   Appearance _appearance = const Appearance();
@@ -20,6 +21,7 @@ class MockAppearanceRepository implements AppearanceRepository {
   @override
   Future<Appearance> update({
     int? colorId,
+    ThemeMode? themeMode,
     String? fontFamily,
     bool exception = false,
   }) async {
@@ -30,6 +32,7 @@ class MockAppearanceRepository implements AppearanceRepository {
     const initAppearance = Appearance();
     return _appearance.copyWith(
       colorId: colorId ?? initAppearance.colorId,
+      themeMode: themeMode ?? initAppearance.themeMode,
       fontFamily: fontFamily ?? initAppearance.fontFamily,
     );
   }

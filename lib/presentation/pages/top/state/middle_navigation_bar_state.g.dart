@@ -7,7 +7,7 @@ part of 'middle_navigation_bar_state.dart';
 // **************************************************************************
 
 String _$middleNavigationBarStateHash() =>
-    r'436bf027a4ea56c88e0379faaf9ca375e6298c09';
+    r'067c81ac59cace490b85508ad23606bcc68e262c';
 
 /// See also [MiddleNavigationBarState].
 @ProviderFor(MiddleNavigationBarState)

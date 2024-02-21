@@ -17,4 +17,4 @@ final colorSchemesProvider = Provider.autoDispose<List<ColorScheme>>((ref) {
 });
 
 // TODO: 切り替え可能なこと
-final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.dark);
+final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
