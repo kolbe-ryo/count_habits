@@ -1,3 +1,4 @@
+import 'package:count_habits/color_schemes.g.dart';
 import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/top/top_page.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,8 @@ class Habits365 extends StatelessWidget {
       title: 'Habits365',
       debugShowCheckedModeBanner: false,
       // TODO: Theme setting
-      theme: ThemeData.dark(),
+      theme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       // theme: ThemeData(
       //   colorSchemeSeed: Colors.blueGrey,
       //   useMaterial3: true,
