@@ -52,7 +52,8 @@ class _AnimatedCounterState extends State<AnimatedCounter> with SingleTickerProv
                 fontSize: 200,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Monomaniac_One',
-                color: Colors.yellow,
+                // TODO デフォルト以外のカラーを設定する場合、そのカラーを反映する
+                // color: Colors.yellow,
                 shadows: [
                   BoxShadow(
                     color: Colors.red,
