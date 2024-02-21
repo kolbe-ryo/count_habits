@@ -16,7 +16,7 @@ class ContributionTile extends StatelessWidget {
     return commit;
   }
 
-  Color? buildColor(int count) {
+  Color? buildColor(int count, Color color) {
     if (count == 0) {
       return Colors.grey[300];
       // } else if (count <= 2) {
@@ -26,13 +26,14 @@ class ContributionTile extends StatelessWidget {
       // } else if (count <= 6) {
       //   return Colors.green[600];
     } else {
-      return Colors.greenAccent;
+      return color;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final commit = getCommit;
+    final color = Theme.of(context).colorScheme.primary;
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -70,7 +71,7 @@ class ContributionTile extends StatelessWidget {
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: buildColor(commit[i]),
+                          color: buildColor(commit[i], color),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       );

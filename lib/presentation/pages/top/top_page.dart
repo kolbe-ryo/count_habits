@@ -57,7 +57,7 @@ class TopPage extends ConsumerWidget {
       ),
       // TODO: set Advertising
       bottomNavigationBar: const ColoredBox(
-        color: Colors.amberAccent,
+        color: Colors.teal,
         child: SizedBox(
           height: 80,
         ),

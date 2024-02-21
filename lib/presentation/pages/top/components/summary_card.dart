@@ -12,7 +12,7 @@ class SummaryCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Padding(
+      child: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ class SummaryCard extends StatelessWidget {
                 ),
                 Icon(
                   Icons.check,
-                  color: Colors.greenAccent,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ],
             ),

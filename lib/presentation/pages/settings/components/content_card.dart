@@ -10,7 +10,7 @@ class ContentCard extends StatelessWidget {
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.only(top: 30, bottom: 30),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        // color: Colors.grey.shade100,
         borderRadius: BorderRadius.circular(20),
         // boxShadow: const [
         //   BoxShadow(
@@ -31,7 +31,7 @@ class ContentCard extends StatelessWidget {
           children: [
             const Icon(
               Icons.rocket_launch,
-              color: Colors.black45,
+              // color: Colors.black45,
               size: 48,
             ),
             const SizedBox(height: 8),
@@ -41,11 +41,11 @@ class ContentCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             // 説明文
-            Text(
+            const Text(
               'ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。',
               style: TextStyle(
                 fontSize: 15,
-                color: Colors.grey[700],
+                // color: Colors.grey[700],
               ),
             ),
           ],

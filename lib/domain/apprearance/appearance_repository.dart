@@ -5,7 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 final appearanceRepositoryProvider = Provider<AppearanceRepository>((ref) => throw UnimplementedError());
 
 abstract interface class AppearanceRepository {
-  // TODO:  AppearanceのListを取得すること
   Future<Appearance> fetch({bool exception = false});
 
   Future<Appearance> update({
