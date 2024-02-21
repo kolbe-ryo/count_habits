@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 Future<bool?> showCustomDialog(BuildContext context) async {
   return showCupertinoDialog<bool?>(
@@ -13,21 +12,13 @@ Future<bool?> showCustomDialog(BuildContext context) async {
         ),
         actions: [
           CupertinoDialogAction(
-            child: const Text(
-              '削除',
-              style: TextStyle(
-                color: Colors.red,
-              ),
-            ),
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
+            isDestructiveAction: true,
+            child: const Text('削除'),
+            onPressed: () => Navigator.pop(context, true),
           ),
           CupertinoDialogAction(
             child: const Text('キャンセル'),
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
+            onPressed: () => Navigator.pop(context, false),
           ),
         ],
       );
