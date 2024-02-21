@@ -1,7 +1,6 @@
 import 'package:count_habits/presentation/components/app_dialog.dart';
 import 'package:count_habits/presentation/pages/top/state/middle_navigation_bar_state.dart';
 import 'package:count_habits/util/constants/logger.dart';
-import 'package:count_habits/util/constants/specific_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,10 +22,9 @@ class MiddleNavigationBar extends ConsumerWidget {
           Radius.circular(10),
         ),
         child: BottomNavigationBar(
-          backgroundColor: dartColor,
           currentIndex: currentItem,
           enableFeedback: true,
-          selectedItemColor: Colors.amber,
+          elevation: 20,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.check),
