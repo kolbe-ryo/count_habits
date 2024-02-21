@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final colorSchemesProvider = Provider.autoDispose<List<ColorScheme>>((ref) {
-  final colorId = ref.watch<int>(appearanceStateProvider.select((value) => value.colorId));
+  final colorId = ref.watch(appearanceStateProvider.select((value) => value.colorId));
   switch (colorId) {
     case 0:
       return [lightColorScheme0, darkColorScheme0];
@@ -16,5 +16,10 @@ final colorSchemesProvider = Provider.autoDispose<List<ColorScheme>>((ref) {
   }
 });
 
-// TODO: 切り替え可能なこと
-final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
+/// Themeを切り換えるためのProvider
+///
+/// デフォルトはThemeMode.systemが設定されている
+/// Appearanceのstateをwatchしており、リポジトリの値を反映する
+final themeModeProvider = Provider.autoDispose<ThemeMode>((ref) {
+  return ref.watch(appearanceStateProvider.select((value) => value.themeMode));
+});
