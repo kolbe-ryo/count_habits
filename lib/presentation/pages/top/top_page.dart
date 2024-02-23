@@ -33,34 +33,26 @@ class TopPage extends ConsumerWidget {
           const SizedBox(width: 16),
         ],
       ),
-      body: SafeArea(
-        child: PageView.builder(
-          controller: PageController(viewportFraction: 0.9),
-          itemCount: 4,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                const SummaryCard(),
-                const SizedBox(height: 16),
-                MiddleNavigationBar(index: index),
-                Expanded(
-                  child: MiddleNavigationItems(index),
-                ),
-              ],
-            );
-          },
-        ),
+      body: PageView.builder(
+        controller: PageController(viewportFraction: 0.9),
+        itemCount: 4,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              const SummaryCard(),
+              const SizedBox(height: 16),
+              MiddleNavigationBar(index: index),
+              Expanded(
+                child: MiddleNavigationItems(index),
+              ),
+              const SizedBox(height: 100),
+            ],
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {},
-      ),
-      // TODO: set Advertising
-      bottomNavigationBar: const ColoredBox(
-        color: Colors.teal,
-        child: SizedBox(
-          height: 80,
-        ),
       ),
     );
   }
