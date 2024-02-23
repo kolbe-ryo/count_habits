@@ -15,12 +15,7 @@ class SettingsPage extends StatelessWidget {
       child: CustomScrollView(
         slivers: <Widget>[
           CupertinoSliverNavigationBar(
-            // leading: IconButton(
-            //   icon: const Icon(Icons.arrow_back_ios_new),
-            //   onPressed: () => Navigator.of(context).pop(),
-            // ),
-            // leading: Icon(CupertinoIcons.back),
-            largeTitle: const Text('Settings'),
+            largeTitle: Text('Settings'),
           ),
           SliverFillRemaining(
             child: Column(
