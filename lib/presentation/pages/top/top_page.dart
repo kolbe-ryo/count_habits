@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // TODO 全体的にCupertinoDesignを適用すること
-
 class TopPage extends ConsumerWidget {
   const TopPage({super.key});
 
