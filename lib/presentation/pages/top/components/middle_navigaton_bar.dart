@@ -21,27 +21,23 @@ class MiddleNavigationBar extends ConsumerWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
-        child: BottomNavigationBar(
-          currentIndex: currentItem,
-          enableFeedback: true,
+        child: NavigationBar(
+          height: 30,
+          selectedIndex: currentItem,
           elevation: 20,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.check),
-              label: 'CheckIn',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.edit),
-              label: 'Edit',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.delete),
-              label: 'Delete',
-            ),
+          destinations: const [
+            // BottomNavigationBarItem(
+            Icon(Icons.check),
+            //   label: 'CheckIn',
+            // ),
+            // BottomNavigationBarItem(
+            Icon(Icons.delete),
+            //   label: 'Delete',
+            // ),
           ],
-          onTap: (item) async {
+          onDestinationSelected: (item) async {
             // Deleteはdialogで処理する
-            if (item == 2) {
+            if (item == 1) {
               final result = await showCustomDialog(context) ?? false;
               if (result) {
                 // TODO Delete処理
