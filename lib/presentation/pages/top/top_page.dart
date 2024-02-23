@@ -17,7 +17,7 @@ class TopPage extends ConsumerWidget {
           child: Padding(
             padding: EdgeInsets.only(left: 16),
             child: Text(
-              'Habit 365',
+              'Habit365',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
