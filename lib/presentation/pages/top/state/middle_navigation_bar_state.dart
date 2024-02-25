@@ -7,6 +7,7 @@ part 'middle_navigation_bar_state.g.dart';
 class MiddleNavigationBarState extends _$MiddleNavigationBarState {
   @override
   // TODO: データ数を元にこちらのproviderを生成する
+  // THINK: もしかするとindex管理は不要かもしれない
   // List<int> build() => ref.watch(provider);
   List<BarItem> build() => List.generate(4, (index) => BarItem(index: index));
 
