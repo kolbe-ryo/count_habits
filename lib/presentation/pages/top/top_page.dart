@@ -2,6 +2,7 @@ import 'package:count_habits/presentation/pages/top/components/middle_navigation
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // TODO 全体的にCupertinoDesignを適用すること
@@ -39,16 +40,39 @@ class TopPage extends ConsumerWidget {
                         child: MiddleNavigationItems(index),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CupertinoButton.filled(
-                            child: Icon(CupertinoIcons.pen),
+                          CupertinoButton(
+                            borderRadius: BorderRadius.circular(50),
+                            padding: EdgeInsets.zero,
                             onPressed: () {},
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                // color: Colors.yellow,
+                              ),
+                              child: const Icon(
+                                CupertinoIcons.info,
+                                size: 40,
+                              ),
+                            ),
                           ),
-                          const SizedBox(width: 16),
-                          CupertinoButton.filled(
-                            child: Icon(CupertinoIcons.pen),
+                          CupertinoButton(
+                            borderRadius: BorderRadius.circular(50),
+                            padding: EdgeInsets.zero,
                             onPressed: () {},
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.yellow,
+                              ),
+                              child: const Icon(
+                                CupertinoIcons.multiply,
+                                size: 40,
+                              ),
+                            ),
                           ),
                         ],
                       ),
