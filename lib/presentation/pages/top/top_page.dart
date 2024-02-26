@@ -24,6 +24,7 @@ class TopPage extends ConsumerWidget {
           ),
         ),
       ),
+      // TODO: iOS風のScrollを検討する（settingページ参考）
       child: SafeArea(
         child: Column(
           children: [
@@ -43,15 +44,16 @@ class TopPage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CupertinoButton(
-                            borderRadius: BorderRadius.circular(50),
-                            padding: EdgeInsets.zero,
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.blueGrey,
+                            // padding: EdgeInsets.zero,
                             onPressed: () {},
                             child: Container(
                               padding: const EdgeInsets.all(16),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                // color: Colors.yellow,
-                              ),
+                              // decoration: const BoxDecoration(
+                              //   shape: BoxShape.circle,
+                              //   color: Color.fromARGB(255, 215, 215, 215),
+                              // ),
                               child: const Icon(
                                 CupertinoIcons.info,
                                 size: 40,
@@ -66,7 +68,7 @@ class TopPage extends ConsumerWidget {
                               padding: const EdgeInsets.all(16),
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.yellow,
+                                color: Color.fromARGB(255, 215, 215, 215),
                               ),
                               child: const Icon(
                                 CupertinoIcons.multiply,
