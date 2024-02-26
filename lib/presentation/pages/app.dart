@@ -14,6 +14,7 @@ class Habits365 extends ConsumerWidget {
     return CupertinoApp(
       title: 'Habits365',
       debugShowCheckedModeBanner: false,
+      theme: const CupertinoThemeData(brightness: Brightness.light),
       // theme: CupertinoThemeData(useMaterial3: true, colorScheme: colorSchemes.first),
       // darkTheme: ThemeData(useMaterial3: true, colorScheme: colorSchemes.last),
       // themeMode: ref.watch(themeModeProvider),
