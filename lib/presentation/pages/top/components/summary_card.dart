@@ -12,8 +12,8 @@ class SummaryCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,7 +21,7 @@ class SummaryCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //　TODO: TextFieldにして編集可能にする
-                const Text(
+                Text(
                   'Contribution',
                   style: TextStyle(
                     fontSize: 22,
@@ -34,7 +34,7 @@ class SummaryCard extends StatelessWidget {
                 ),
               ],
             ),
-            const ContributionTile(),
+            ContributionTile(),
           ],
         ),
       ),
