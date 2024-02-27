@@ -9,14 +9,11 @@ class Habits365 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorSchemes = ref.watch(colorSchemesProvider);
+    final colorScheme = ref.watch(colorSchemesProvider);
     return CupertinoApp(
       title: 'Habits365',
       debugShowCheckedModeBanner: false,
-      theme: colorSchemes.first,
-      // theme: CupertinoThemeData(useMaterial3: true, colorScheme: colorSchemes.first),
-      // darkTheme: ThemeData(useMaterial3: true, colorScheme: colorSchemes.last),
-      // themeMode: ref.watch(themeModeProvider),
+      theme: colorScheme,
       home: const TopPage(),
       builder: (_, navigator) {
         return Stack(

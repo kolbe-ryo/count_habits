@@ -25,7 +25,7 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
 
   @override
   Widget build(BuildContext context) {
-    final color = ref.watch(colorSchemesProvider).first;
+    final color = ref.watch(colorSchemesProvider);
     return GestureDetector(
       onTap: () async {
         value++;

@@ -73,7 +73,7 @@ class ContributionTile extends ConsumerWidget {
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: buildColor(commit[i], color.first.primaryColor),
+                          color: buildColor(commit[i], color.primaryColor),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       );

@@ -22,13 +22,9 @@ class ActionButtonCard extends StatelessWidget {
               color: Colors.blueGrey,
               // padding: EdgeInsets.zero,
               onPressed: () {},
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                // decoration: const BoxDecoration(
-                //   shape: BoxShape.circle,
-                //   color: Color.fromARGB(255, 215, 215, 215),
-                // ),
-                child: const Icon(
+              child: const Padding(
+                padding: EdgeInsets.all(16),
+                child: Icon(
                   CupertinoIcons.info,
                   size: 40,
                 ),
