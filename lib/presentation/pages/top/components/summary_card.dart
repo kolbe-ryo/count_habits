@@ -7,7 +7,7 @@ class SummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 20,
+      elevation: 1,
       margin: const EdgeInsets.symmetric(horizontal: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

@@ -1,4 +1,5 @@
-import 'package:count_habits/presentation/pages/top/components/middle_navigation_items.dart';
+import 'package:count_habits/presentation/pages/top/components/action_button_card.dart';
+import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,52 +34,13 @@ class TopPage extends ConsumerWidget {
                 controller: PageController(viewportFraction: 0.9),
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  return Column(
+                  return const Column(
                     children: [
-                      const SizedBox(height: 32),
-                      const SummaryCard(),
-                      Expanded(
-                        child: MiddleNavigationItems(index),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CupertinoButton(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.blueGrey,
-                            // padding: EdgeInsets.zero,
-                            onPressed: () {},
-                            child: Container(
-                              padding: const EdgeInsets.all(16),
-                              // decoration: const BoxDecoration(
-                              //   shape: BoxShape.circle,
-                              //   color: Color.fromARGB(255, 215, 215, 215),
-                              // ),
-                              child: const Icon(
-                                CupertinoIcons.info,
-                                size: 40,
-                              ),
-                            ),
-                          ),
-                          CupertinoButton(
-                            borderRadius: BorderRadius.circular(50),
-                            padding: EdgeInsets.zero,
-                            onPressed: () {},
-                            child: Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color.fromARGB(255, 215, 215, 215),
-                              ),
-                              child: const Icon(
-                                CupertinoIcons.multiply,
-                                size: 40,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32),
+                      SummaryCard(),
+                      Expanded(child: AnimatedCounter()),
+                      ActionButtonCard(),
+                      SizedBox(height: 32),
                     ],
                   );
                 },
