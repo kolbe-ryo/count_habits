@@ -1,7 +1,9 @@
 import 'dart:math' as math;
+import 'package:count_habits/presentation/pages/color/color_schemes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ContributionTile extends StatelessWidget {
+class ContributionTile extends ConsumerWidget {
   const ContributionTile({super.key});
 
   List<int> get getCommit {
@@ -31,9 +33,9 @@ class ContributionTile extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final commit = getCommit;
-    final color = Theme.of(context).colorScheme.primary;
+    final color = ref.watch(colorSchemesProvider);
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -71,7 +73,7 @@ class ContributionTile extends StatelessWidget {
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: buildColor(commit[i], color),
+                          color: buildColor(commit[i], color.first.primaryColor),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       );

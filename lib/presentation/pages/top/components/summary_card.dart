@@ -30,7 +30,7 @@ class SummaryCard extends StatelessWidget {
                 ),
                 Icon(
                   Icons.check,
-                  color: Theme.of(context).colorScheme.primary,
+                  // color: Theme.of(context).cupertinoOverrideTheme.primaryColor,
                 ),
               ],
             ),
