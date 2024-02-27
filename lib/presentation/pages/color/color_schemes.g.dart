@@ -1,69 +1,81 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-const lightColorScheme0 = ColorScheme(
+const lightColorScheme1 = CupertinoThemeData(
   brightness: Brightness.light,
-  primary: Color(0xFF006971),
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFF88F3FF),
-  onPrimaryContainer: Color(0xFF001F23),
-  secondary: Color(0xFF4A6366),
-  onSecondary: Color(0xFFFFFFFF),
-  secondaryContainer: Color(0xFFCDE7EB),
-  onSecondaryContainer: Color(0xFF051F22),
-  tertiary: Color(0xFF505E7D),
-  onTertiary: Color(0xFFFFFFFF),
-  tertiaryContainer: Color(0xFFD8E2FF),
-  onTertiaryContainer: Color(0xFF0C1B36),
-  error: Color(0xFFBA1A1A),
-  errorContainer: Color(0xFFFFDAD6),
-  onError: Color(0xFFFFFFFF),
-  onErrorContainer: Color(0xFF410002),
-  background: Color(0xFFFAFDFD),
-  onBackground: Color(0xFF191C1D),
-  surface: Color(0xFFFAFDFD),
-  onSurface: Color(0xFF191C1D),
-  surfaceVariant: Color(0xFFDAE4E5),
-  onSurfaceVariant: Color(0xFF3F484A),
-  outline: Color(0xFF6F797A),
-  onInverseSurface: Color(0xFFEFF1F1),
-  inverseSurface: Color(0xFF2D3131),
-  inversePrimary: Color(0xFF4DD8E7),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFF006971),
-  outlineVariant: Color(0xFFBEC8C9),
-  scrim: Color(0xFF000000),
+  primaryColor: Color(0xFFF4538A),
+  primaryContrastingColor: Color(0xFFFAA300),
+  scaffoldBackgroundColor: Color(0xFFF5DD61),
+  barBackgroundColor: Color(0xFF59D5E0),
 );
 
-const darkColorScheme0 = ColorScheme(
+const lightColorScheme2 = CupertinoThemeData(
+  brightness: Brightness.light,
+  primaryColor: Color(0xFFF2C18D),
+  primaryContrastingColor: Color(0xFFF6F193),
+  scaffoldBackgroundColor: Color(0xFFC5EBAA),
+  barBackgroundColor: Color(0xFFA5DD9B),
+);
+
+const lightColorScheme3 = CupertinoThemeData(
+  brightness: Brightness.light,
+  primaryColor: Color(0xFF337357),
+  primaryContrastingColor: Color(0xFFFFD23F),
+  scaffoldBackgroundColor: Color(0xFFEE4266),
+  barBackgroundColor: Color(0xFF5E1675),
+);
+
+const lightColorScheme4 = CupertinoThemeData(
+  brightness: Brightness.light,
+  primaryColor: Color(0xFF78A083),
+  primaryContrastingColor: Color(0xFF50727B),
+  scaffoldBackgroundColor: Color(0xFF344955),
+  barBackgroundColor: Color(0xFF35374B),
+);
+
+const lightColorScheme5 = CupertinoThemeData(
+  brightness: Brightness.light,
+  primaryColor: Color(0xFF50C4ED),
+  primaryContrastingColor: Color(0xFF387ADF),
+  scaffoldBackgroundColor: Color(0xFF333A73),
+  barBackgroundColor: Color(0xFFFBA834),
+);
+
+const darkColorScheme1 = CupertinoThemeData(
   brightness: Brightness.dark,
-  primary: Color(0xFF4DD8E7),
-  onPrimary: Color(0xFF00363B),
-  primaryContainer: Color(0xFF004F56),
-  onPrimaryContainer: Color(0xFF88F3FF),
-  secondary: Color(0xFFB1CBCF),
-  onSecondary: Color(0xFF1C3437),
-  secondaryContainer: Color(0xFF324B4E),
-  onSecondaryContainer: Color(0xFFCDE7EB),
-  tertiary: Color(0xFFB8C6EA),
-  onTertiary: Color(0xFF22304C),
-  tertiaryContainer: Color(0xFF394764),
-  onTertiaryContainer: Color(0xFFD8E2FF),
-  error: Color(0xFFFFB4AB),
-  errorContainer: Color(0xFF93000A),
-  onError: Color(0xFF690005),
-  onErrorContainer: Color(0xFFFFDAD6),
-  background: Color(0xFF191C1D),
-  onBackground: Color(0xFFE0E3E3),
-  surface: Color(0xFF191C1D),
-  onSurface: Color(0xFFE0E3E3),
-  surfaceVariant: Color(0xFF3F484A),
-  onSurfaceVariant: Color(0xFFBEC8C9),
-  outline: Color(0xFF899294),
-  onInverseSurface: Color(0xFF191C1D),
-  inverseSurface: Color(0xFFE0E3E3),
-  inversePrimary: Color(0xFF006971),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFF4DD8E7),
-  outlineVariant: Color(0xFF3F484A),
-  scrim: Color(0xFF000000),
+  primaryColor: Color(0xFFF4538A),
+  primaryContrastingColor: Color(0xFFFAA300),
+  scaffoldBackgroundColor: Color(0xFFF5DD61),
+  barBackgroundColor: Color(0xFF59D5E0),
+);
+
+const darkColorScheme2 = CupertinoThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Color(0xFFF2C18D),
+  primaryContrastingColor: Color(0xFFF6F193),
+  scaffoldBackgroundColor: Color(0xFFC5EBAA),
+  barBackgroundColor: Color(0xFFA5DD9B),
+);
+
+const darkColorScheme3 = CupertinoThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Color(0xFF337357),
+  primaryContrastingColor: Color(0xFFFFD23F),
+  scaffoldBackgroundColor: Color(0xFFEE4266),
+  barBackgroundColor: Color(0xFF5E1675),
+);
+
+const darkColorScheme4 = CupertinoThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Color(0xFF78A083),
+  primaryContrastingColor: Color(0xFF50727B),
+  scaffoldBackgroundColor: Color(0xFF344955),
+  barBackgroundColor: Color(0xFF35374B),
+);
+
+const darkColorScheme5 = CupertinoThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Color(0xFF50C4ED),
+  primaryContrastingColor: Color(0xFF387ADF),
+  scaffoldBackgroundColor: Color(0xFF333A73),
+  barBackgroundColor: Color(0xFFFBA834),
 );
