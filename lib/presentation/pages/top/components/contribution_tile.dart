@@ -21,12 +21,6 @@ class ContributionTile extends ConsumerWidget {
   Color? buildColor(int count, Color color) {
     if (count == 0) {
       return Colors.grey[300];
-      // } else if (count <= 2) {
-      //   return Colors.green[200];
-      // } else if (count <= 4) {
-      //   return Colors.green[400];
-      // } else if (count <= 6) {
-      //   return Colors.green[600];
     } else {
       return color;
     }

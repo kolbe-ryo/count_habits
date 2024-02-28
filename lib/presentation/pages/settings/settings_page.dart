@@ -1,8 +1,10 @@
+import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/settings/components/content_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
   static Route<Object?> route() => MaterialPageRoute(
@@ -10,20 +12,34 @@ class SettingsPage extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          CupertinoSliverNavigationBar(
+          const CupertinoSliverNavigationBar(
             largeTitle: Text('Settings'),
           ),
-          SliverFillRemaining(
-            child: Column(
-              children: [
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
                 // About App
-                ContentCard(),
-                ContentCard(),
-                ContentCard(),
+                const ContentCard(),
+                const ContentCard(),
+                const ContentCard(),
+                ...List.generate(12, (index) {
+                  return Row(
+                    children: [
+                      CupertinoSwitch(
+                        value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
+                        onChanged: (value) {
+                          ref.read(appearanceStateProvider.notifier).setColorPalette(index);
+                        },
+                      ),
+                      Text('$index'),
+                    ],
+                  );
+                }),
+                const SizedBox(height: 50),
               ],
             ),
           ),
