@@ -55,7 +55,6 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
               textStyle: TextStyle(
                 fontSize: 200,
                 fontWeight: FontWeight.w400,
-                fontFamily: 'Monomaniac_One',
                 // TODO いい感じの色に変える（Theme.ofの取得を狭めてカラー以外の変更が通知されないようにする）
                 color: theme.primaryColor,
                 shadows: [
