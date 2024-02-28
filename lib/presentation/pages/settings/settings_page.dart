@@ -66,7 +66,7 @@ class SettingsPage extends ConsumerWidget {
                             activeColor: theme.primaryColor,
                             value: index == ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId)),
                             onChanged: (value) {
-                              ref.read(appearanceStateProvider.notifier).setColorPalette(index);
+                              ref.read(appearanceStateProvider.notifier).setFontFamily(index);
                             },
                           ),
                           Text('$index'),

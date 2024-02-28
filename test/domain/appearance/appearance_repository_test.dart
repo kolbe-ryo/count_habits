@@ -2,7 +2,6 @@ import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/inflastructure/mock/mock_appearance_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
 
