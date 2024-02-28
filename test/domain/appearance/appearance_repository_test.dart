@@ -34,20 +34,17 @@ void main() {
       final repo = providerContainer.read(appearanceRepositoryProvider);
       final appearance = await repo.fetch();
       expect(appearance.colorId, 0);
-      expect(appearance.fontFamily, 'Monomaniac_One');
+      expect(appearance.fontFamilyId, 0);
 
       // 更新
       const colorId = 1;
-      const fontFamily = 'Hachi_Maru_Pop';
-      const themeMode = ThemeMode.light;
+      const fontFamilyId = 1;
       final appearanceUpdated = await repo.update(
         colorId: colorId,
-        themeMode: themeMode,
-        fontFamily: fontFamily,
+        fontFamilyId: fontFamilyId,
       );
       expect(appearanceUpdated.colorId, 1);
-      expect(appearanceUpdated.fontFamily, fontFamily);
-      expect(appearanceUpdated.themeMode, themeMode);
+      expect(appearanceUpdated.fontFamilyId, fontFamilyId);
     });
     test('更新に失敗した場合、AppExceptionがthrowされること', () async {
       expect(

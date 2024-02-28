@@ -1,4 +1,4 @@
-import 'package:count_habits/presentation/pages/color/color_schemes.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/util/library/custom_animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

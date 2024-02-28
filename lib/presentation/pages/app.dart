@@ -1,5 +1,5 @@
 import 'package:count_habits/presentation/components/app_loading.dart';
-import 'package:count_habits/presentation/pages/color/color_schemes.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/top_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

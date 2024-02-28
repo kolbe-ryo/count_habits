@@ -31,11 +31,11 @@ void main() {
     test('更新したAppearanceがstateに格納されていること', () async {
       const matcherState = Appearance(
         colorId: 1,
-        fontFamily: 'Hachi_Maru_Pop',
+        fontFamilyId: 1,
       );
       await providerContariner.read(appearanceProvider).update(
-            colorid: matcherState.colorId,
-            fontFamily: matcherState.fontFamily,
+            colorId: matcherState.colorId,
+            fontFamilyId: matcherState.fontFamilyId,
           );
       final state = providerContariner.read(appearanceStateProvider);
       expect(state, matcherState);
@@ -52,11 +52,11 @@ void main() {
     test('初期値ではないstateをリセットすると初期値に設定されること', () async {
       const matcherState = Appearance(
         colorId: 1,
-        fontFamily: 'Hachi_Maru_Pop',
+        fontFamilyId: 1,
       );
       await providerContariner.read(appearanceProvider).update(
-            colorid: matcherState.colorId,
-            fontFamily: matcherState.fontFamily,
+            colorId: matcherState.colorId,
+            fontFamilyId: matcherState.fontFamilyId,
           );
       var state = providerContariner.read(appearanceStateProvider);
       expect(state, matcherState);

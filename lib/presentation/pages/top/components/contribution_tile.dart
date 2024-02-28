@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'package:count_habits/presentation/pages/color/color_schemes.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

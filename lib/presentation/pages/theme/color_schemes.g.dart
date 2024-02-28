@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-const colorMap = <int, CupertinoThemeData>{
+const colorSchemes = <int, CupertinoThemeData>{
   0: customColorScheme0,
   1: customColorScheme1,
   2: customColorScheme2,

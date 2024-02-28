@@ -17,14 +17,13 @@ class AppearanceUsecase {
   }
 
   Future<void> update({
-    int? colorid,
+    int? colorId,
     ThemeMode? themeMode,
-    String? fontFamily,
+    int? fontFamilyId,
   }) async {
     final updatedAppearance = await _ref.read(appearanceRepositoryProvider).update(
-          colorId: colorid,
-          themeMode: themeMode,
-          fontFamily: fontFamily,
+          colorId: colorId,
+          fontFamilyId: fontFamilyId,
         );
     _ref.read(appearanceStateProvider.notifier).setAppearance = updatedAppearance;
   }
