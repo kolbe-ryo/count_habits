@@ -1,4 +1,6 @@
 import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
+import 'package:count_habits/presentation/pages/color/color_schemes.dart';
+import 'package:count_habits/presentation/pages/color/color_schemes.g.dart';
 import 'package:count_habits/presentation/pages/settings/components/content_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final color = ref.watch(colorSchemesProvider);
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -22,24 +25,29 @@ class SettingsPage extends ConsumerWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                // About App
+                const ContentCard(),
+                Wrap(
+                  children: List.generate(
+                    colorMap.length,
+                    (index) {
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CupertinoSwitch(
+                            activeColor: color.primaryColor,
+                            value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
+                            onChanged: (value) {
+                              ref.read(appearanceStateProvider.notifier).setColorPalette(index);
+                            },
+                          ),
+                          Text('$index'),
+                        ],
+                      );
+                    },
+                  ),
+                ),
                 const ContentCard(),
                 const ContentCard(),
-                const ContentCard(),
-                ...List.generate(12, (index) {
-                  return Row(
-                    children: [
-                      CupertinoSwitch(
-                        value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
-                        onChanged: (value) {
-                          ref.read(appearanceStateProvider.notifier).setColorPalette(index);
-                        },
-                      ),
-                      Text('$index'),
-                    ],
-                  );
-                }),
-                const SizedBox(height: 50),
               ],
             ),
           ),
