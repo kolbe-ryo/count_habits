@@ -7,11 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final colorSchemesProvider = Provider.autoDispose<CupertinoThemeData>((ref) {
   final colorId = ref.watch(appearanceStateProvider.select((value) => value.colorId));
-  switch (colorId) {
-    case 0:
-      return customColorScheme7;
-    // TODO: darkかlightのどちらかを返却すること
-    default:
-      throw const AppException(AppExceptionEnum.unexpectedException);
+  if (colorMap[colorId] == null) {
+    throw const AppException(AppExceptionEnum.unexpectedException);
   }
+  return colorMap[colorId]!;
 });
