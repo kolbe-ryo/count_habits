@@ -25,7 +25,7 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
 
   @override
   Widget build(BuildContext context) {
-    final color = ref.watch(colorSchemesProvider);
+    final theme = ref.watch(cupertinoThemeProvider);
     return GestureDetector(
       onTap: () async {
         value++;
@@ -57,7 +57,7 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Monomaniac_One',
                 // TODO いい感じの色に変える（Theme.ofの取得を狭めてカラー以外の変更が通知されないようにする）
-                color: color.primaryColor,
+                color: theme.primaryColor,
                 shadows: [
                   BoxShadow(
                     color: Theme.of(context).colorScheme.shadow,

@@ -29,7 +29,7 @@ class ContributionTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final commit = getCommit;
-    final color = ref.watch(colorSchemesProvider);
+    final theme = ref.watch(cupertinoThemeProvider);
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -67,7 +67,7 @@ class ContributionTile extends ConsumerWidget {
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: buildColor(commit[i], color.primaryColor),
+                          color: buildColor(commit[i], theme.primaryColor),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       );

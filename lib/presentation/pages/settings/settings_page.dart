@@ -15,7 +15,7 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final color = ref.watch(colorSchemesProvider);
+    final theme = ref.watch(cupertinoThemeProvider);
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -34,7 +34,7 @@ class SettingsPage extends ConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CupertinoSwitch(
-                            activeColor: color.primaryColor,
+                            activeColor: theme.primaryColor,
                             value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
                             onChanged: (value) {
                               ref.read(appearanceStateProvider.notifier).setColorPalette(index);

@@ -5,7 +5,7 @@ import 'package:count_habits/presentation/pages/color/color_schemes.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final colorSchemesProvider = Provider.autoDispose<CupertinoThemeData>((ref) {
+final cupertinoThemeProvider = Provider.autoDispose<CupertinoThemeData>((ref) {
   final colorId = ref.watch(appearanceStateProvider.select((value) => value.colorId));
   if (colorMap[colorId] == null) {
     throw const AppException(AppExceptionEnum.unexpectedException);
