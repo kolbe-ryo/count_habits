@@ -56,7 +56,7 @@ const customColorScheme4 = CupertinoThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xFF50C4ED),
   primaryContrastingColor: Color(0xFF387ADF),
-  scaffoldBackgroundColor: Color(0xFF333A73),
+  scaffoldBackgroundColor: Color.fromARGB(255, 65, 72, 123),
   barBackgroundColor: Color(0xFFFBA834),
 );
 
@@ -110,8 +110,8 @@ const customColorScheme10 = CupertinoThemeData(
 
 const customColorScheme11 = CupertinoThemeData(
   brightness: Brightness.dark,
-  primaryColor: Color(0xFF0000FF), // Blue as the primary contrasting color
+  primaryColor: Color(0xFF000080), // Blue as the primary contrasting color
   primaryContrastingColor: Color(0xFF000000), // Black as the primary color
-  scaffoldBackgroundColor: Color(0xFF000080), // Navy Blue as the scaffold background color
+  scaffoldBackgroundColor: Color.fromARGB(255, 83, 83, 194), // Navy Blue as the scaffold background color
   barBackgroundColor: Color(0xFF0000CD), // Medium Blue as the bar background color
 );

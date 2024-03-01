@@ -46,4 +46,13 @@ flutter:
     - family: Hachi_Maru_Pop
       fonts:
         - asset: assets/fonts/Hachi_Maru_Pop/HachiMaruPop-Regular.ttf
+    - family: Rock_3D
+      fonts:
+        - asset: assets/fonts/Rock_3D/Rock3D-Regular.ttf
+    - family: Rampart_One
+      fonts:
+        - asset: assets/fonts/Rampart_One/RampartOne-Regular.ttf
+    - family: Kaisei_Opti
+      fonts:
+        - asset: assets/fonts/Kaisei_Opti/KaiseiOpti-Regular.ttf
   uses-material-design: true

@@ -1,11 +1,14 @@
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ContentCard extends StatelessWidget {
+class ContentCard extends ConsumerWidget {
   const ContentCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(cupertinoThemeProvider);
     return GestureDetector(
       onTap: () {
         logger.i('tap');
@@ -31,26 +34,29 @@ class ContentCard extends StatelessWidget {
           // ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(horizontal: 8),
           child: Column(
             children: [
-              const Icon(
+              Icon(
                 Icons.rocket_launch,
                 // color: Colors.black45,
                 size: 48,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 'タイトル',
-                style: Theme.of(context).textTheme.titleLarge,
+                style: theme.textTheme.textStyle.copyWith(
+                  fontSize: 26,
+                  color: Colors.black,
+                ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               // 説明文
-              const Text(
+              Text(
                 'ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。',
                 style: TextStyle(
-                  fontSize: 15,
-                  // color: Colors.grey[700],
+                  fontSize: 20,
+                  color: Colors.black,
                 ),
               ),
             ],

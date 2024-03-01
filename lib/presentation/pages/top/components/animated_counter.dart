@@ -52,11 +52,11 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
             child: CustomAnimatedFlipCounter(
               duration: const Duration(milliseconds: 1500),
               curve: Curves.bounceOut,
-              textStyle: TextStyle(
+              textStyle: theme.textTheme.textStyle.copyWith(
+                color: theme.primaryColor,
                 fontSize: 200,
                 fontWeight: FontWeight.w400,
-                // TODO いい感じの色に変える（Theme.ofの取得を狭めてカラー以外の変更が通知されないようにする）
-                color: theme.primaryColor,
+                fontFamily: theme.textTheme.textStyle.fontFamily,
                 shadows: [
                   BoxShadow(
                     color: Theme.of(context).colorScheme.shadow,
