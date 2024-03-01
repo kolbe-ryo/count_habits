@@ -20,8 +20,11 @@ class SettingsPage extends ConsumerWidget {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          const CupertinoSliverNavigationBar(
-            largeTitle: Text('Settings'),
+          CupertinoSliverNavigationBar(
+            largeTitle: Text(
+              'Settings',
+              style: theme.textTheme.textStyle,
+            ),
           ),
           SliverList(
             delegate: SliverChildListDelegate(

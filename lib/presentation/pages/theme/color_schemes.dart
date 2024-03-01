@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final cupertinoThemeProvider = Provider.autoDispose<CupertinoThemeData>((ref) {
   final colorId = ref.watch(appearanceStateProvider.select((value) => value.colorId));
   final fontFamilyId = ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId));
-  if (colorSchemes[colorId] == null || textSchemes[fontFamilyId] == null) {
+  if (colorSchemes[colorId] == null) {
     throw const AppException(AppExceptionEnum.unexpectedException);
   }
   return colorSchemes[colorId]!.copyWith(

@@ -1,4 +1,5 @@
 import 'package:count_habits/presentation/pages/settings/settings_page.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/action_button_card.dart';
 import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
@@ -12,6 +13,7 @@ class TopPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(cupertinoThemeProvider);
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         leading: IconButton(
@@ -22,11 +24,12 @@ class TopPage extends ConsumerWidget {
           onPressed: () => Navigator.of(context).push(SettingsPage.route()),
           icon: const Icon(Icons.settings),
         ),
-        middle: const Text(
+        middle: Text(
           'Habit365',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
+            fontFamily: theme.textTheme.textStyle.fontFamily,
           ),
         ),
       ),
