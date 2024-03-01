@@ -21,6 +21,11 @@ class SettingsPage extends ConsumerWidget {
       child: CustomScrollView(
         slivers: <Widget>[
           CupertinoSliverNavigationBar(
+            padding: const EdgeInsetsDirectional.only(start: 1),
+            leading: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(CupertinoIcons.back),
+            ),
             largeTitle: Text(
               'Settings',
               style: theme.textTheme.textStyle,
