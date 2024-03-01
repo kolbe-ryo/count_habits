@@ -37,26 +37,25 @@ class ContentCard extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Column(
             children: [
-              Icon(
+              const Icon(
                 Icons.rocket_launch,
-                // color: Colors.black45,
                 size: 48,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'タイトル',
                 style: theme.textTheme.textStyle.copyWith(
                   fontSize: 26,
-                  color: Colors.black,
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               // 説明文
               Text(
                 'ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.black,
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                 ),
               ),
             ],

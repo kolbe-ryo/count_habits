@@ -11,6 +11,7 @@ class SummaryCard extends ConsumerWidget {
     final theme = ref.watch(cupertinoThemeProvider);
     return Card(
       elevation: 1,
+      color: theme.barBackgroundColor,
       margin: const EdgeInsets.symmetric(horizontal: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -30,6 +31,7 @@ class SummaryCard extends ConsumerWidget {
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
                     fontFamily: theme.textTheme.textStyle.fontFamily,
+                    color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                   ),
                 ),
                 const Icon(

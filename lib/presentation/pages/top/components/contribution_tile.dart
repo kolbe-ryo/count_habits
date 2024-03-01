@@ -37,19 +37,24 @@ class ContributionTile extends ConsumerWidget {
           height: 120,
           child: Row(
             children: [
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // 曜日
-                  children: [
-                    Text('Sun'),
-                    Spacer(flex: 2),
-                    Text('Tue'),
-                    Spacer(flex: 2),
-                    Text('Thu'),
-                    Spacer(flex: 2),
-                    Text('Sat'),
-                  ],
+              Expanded(
+                child: DefaultTextStyle(
+                  style: TextStyle(
+                    color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // 曜日
+                    children: [
+                      Text('Sun'),
+                      Spacer(flex: 2),
+                      Text('Tue'),
+                      Spacer(flex: 2),
+                      Text('Thu'),
+                      Spacer(flex: 2),
+                      Text('Sat'),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
