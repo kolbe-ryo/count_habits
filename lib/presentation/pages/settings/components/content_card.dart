@@ -1,5 +1,8 @@
+import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/settings/theme_setting_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.g.dart';
+import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,33 +12,71 @@ class ContentCard extends ConsumerWidget {
     required this.iconData,
     required this.title,
     required this.subTitle,
-    required this.child,
+    required this.page,
   });
+
+  factory ContentCard.aboutApp() {
+    return const ContentCard._(
+      iconData: Icons.rocket_launch,
+      title: 'About App',
+      subTitle: 'アプリの使い方やその他の情報を確認できます',
+      page: ThemeSettingPage(
+        title: 'About App',
+        child: Text('data'),
+      ),
+    );
+  }
+
+  factory ContentCard.themeSetting() {
+    return const ContentCard._(
+      iconData: Icons.palette_outlined,
+      title: 'App Theme',
+      subTitle: 'アプリの使い方やその他の情報を確認できます',
+      page: ThemeSettingPage(
+        title: 'About App',
+        child: _ThemeSettingForTest(),
+      ),
+    );
+  }
+
+  factory ContentCard.contactUs() {
+    return const ContentCard._(
+      iconData: Icons.contact_support_outlined,
+      title: 'Contact Us',
+      subTitle: 'アプリの開発者にコンタクトできます',
+      page: ThemeSettingPage(
+        title: 'Contact Us',
+        child: Text('data'),
+      ),
+    );
+  }
 
   factory ContentCard.licenses() {
     return const ContentCard._(
       iconData: Icons.badge,
       title: 'Licenses',
       subTitle: 'アプリが使用するライセンスを確認できます',
-      child: LicensePage(),
+      page: null,
     );
   }
 
   final IconData iconData;
   final String title;
   final String subTitle;
-  final Widget child;
+  final Widget? page;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
     return CupertinoButton(
-      onPressed: () => Navigator.of(context).push(
-        ThemeSettingPage.route(
-          title: title,
-          child: child,
-        ),
-      ),
+      onPressed: () {
+        if (page == null) {
+          return showLicensePage(context: context);
+        }
+        Navigator.of(context).push(
+          CupertinoPageRoute<void>(builder: (_) => page!),
+        );
+      },
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -81,6 +122,61 @@ class ContentCard extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ThemeSettingForTest extends ConsumerWidget {
+  const _ThemeSettingForTest();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(cupertinoThemeProvider);
+    return Column(
+      children: [
+        const Text('Color'),
+        Wrap(
+          children: List.generate(
+            colorSchemes.length,
+            (index) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CupertinoSwitch(
+                    activeColor: theme.primaryColor,
+                    value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
+                    onChanged: (value) {
+                      ref.read(appearanceStateProvider.notifier).setColorPalette(index);
+                    },
+                  ),
+                  Text('$index'),
+                ],
+              );
+            },
+          ),
+        ),
+        const Text('Text'),
+        Wrap(
+          children: List.generate(
+            textSchemes.length,
+            (index) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CupertinoSwitch(
+                    activeColor: theme.primaryColor,
+                    value: index == ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId)),
+                    onChanged: (value) {
+                      ref.read(appearanceStateProvider.notifier).setFontFamily(index);
+                    },
+                  ),
+                  Text('$index'),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

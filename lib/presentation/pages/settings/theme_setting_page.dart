@@ -1,24 +1,14 @@
-import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
-import 'package:count_habits/presentation/pages/theme/color_schemes.g.dart';
-import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ThemeSettingPage extends ConsumerWidget {
-  const ThemeSettingPage(this.title, this.child, {super.key});
-
-  static Route<Object?> route({
-    required String title,
-    required Widget child,
-  }) =>
-      MaterialPageRoute(
-        builder: (context) => ThemeSettingPage(
-          title,
-          child,
-        ),
-      );
+  const ThemeSettingPage({
+    required this.title,
+    required this.child,
+    super.key,
+  });
 
   final String title;
   final Widget child;

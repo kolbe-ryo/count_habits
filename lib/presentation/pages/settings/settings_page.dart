@@ -33,22 +33,10 @@ class SettingsPage extends ConsumerWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  const ContentCard(
-                    iconData: Icons.rocket_launch,
-                    title: 'About App',
-                    subTitle: 'アプリの使い方やその他の情報を確認できます',
-                  ),
+                  ContentCard.aboutApp(),
+                  ContentCard.themeSetting(),
+                  ContentCard.contactUs(),
                   ContentCard.licenses(),
-                  const ContentCard(
-                    iconData: Icons.palette_outlined,
-                    title: 'Theme Settings',
-                    subTitle: 'カラーやテキストのスタイルを変更できます',
-                  ),
-                  const ContentCard(
-                    iconData: Icons.contact_support_outlined,
-                    title: 'Contact Us',
-                    subTitle: 'アプリの開発者にコンタクトできます',
-                  ),
                   const SizedBox(height: 32),
                 ],
               ),

@@ -2,6 +2,7 @@ import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/top_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Habits365 extends ConsumerWidget {
@@ -14,6 +15,11 @@ class Habits365 extends ConsumerWidget {
       title: 'Habits365',
       debugShowCheckedModeBanner: false,
       theme: cupertinoTheme,
+      localizationsDelegates: const [
+        DefaultMaterialLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
       home: const TopPage(),
       builder: (_, navigator) {
         return Stack(
