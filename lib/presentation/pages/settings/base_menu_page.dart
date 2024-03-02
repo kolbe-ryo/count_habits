@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThemeSettingPage extends ConsumerWidget {
-  const ThemeSettingPage({
+class BaseMenuPage extends ConsumerWidget {
+  const BaseMenuPage({
     required this.title,
     required this.child,
     super.key,
