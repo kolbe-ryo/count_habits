@@ -8,6 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ThemeSettingPage extends ConsumerWidget {
   const ThemeSettingPage({super.key});
 
+  static Route<Object?> route() => CupertinoPageRoute(
+        builder: (context) => const ThemeSettingPage(),
+      );
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
@@ -62,6 +66,7 @@ class ThemeSettingPage extends ConsumerWidget {
               },
             ),
           ),
+          SizedBox(height: 100),
         ],
       ),
     );

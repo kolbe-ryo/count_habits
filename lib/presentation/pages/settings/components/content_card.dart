@@ -1,3 +1,4 @@
+import 'package:count_habits/presentation/pages/settings/theme_setting_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,9 +21,7 @@ class ContentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
     return CupertinoButton(
-      onPressed: () {
-        logger.i('tap');
-      },
+      onPressed: () => Navigator.of(context).push(ThemeSettingPage.route()),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(

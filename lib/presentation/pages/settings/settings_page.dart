@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
-  static Route<Object?> route() => MaterialPageRoute(
+  static Route<Object?> route() => CupertinoPageRoute(
         builder: (context) => const SettingsPage(),
       );
 
@@ -53,6 +53,7 @@ class SettingsPage extends ConsumerWidget {
                     title: 'Contact Us',
                     subTitle: 'アプリの開発者にコンタクトできます',
                   ),
+                  const SizedBox(height: 32),
                 ],
               ),
             ),
