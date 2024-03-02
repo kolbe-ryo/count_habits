@@ -1,6 +1,5 @@
 import 'package:count_habits/presentation/pages/settings/settings_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
-import 'package:count_habits/presentation/pages/top/components/action_button_card.dart';
 import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
 import 'package:dots_indicator/dots_indicator.dart';

@@ -1,8 +1,5 @@
-import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/settings/components/content_card.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
-import 'package:count_habits/presentation/pages/theme/color_schemes.g.dart';
-import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,61 +28,33 @@ class SettingsPage extends ConsumerWidget {
               style: theme.textTheme.textStyle,
             ),
           ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                const ContentCard(),
-                const Text(
-                  'Color',
-                  style: TextStyle(fontSize: 30),
-                ),
-                Wrap(
-                  children: List.generate(
-                    colorSchemes.length,
-                    (index) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CupertinoSwitch(
-                            activeColor: theme.primaryColor,
-                            value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
-                            onChanged: (value) {
-                              ref.read(appearanceStateProvider.notifier).setColorPalette(index);
-                            },
-                          ),
-                          Text('$index'),
-                        ],
-                      );
-                    },
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  const ContentCard(
+                    iconData: Icons.rocket_launch,
+                    title: 'About App',
+                    subTitle: 'アプリの使い方やその他の情報を確認できます',
                   ),
-                ),
-                const Text(
-                  'Text',
-                  style: TextStyle(fontSize: 30),
-                ),
-                Wrap(
-                  children: List.generate(
-                    textSchemes.length,
-                    (index) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CupertinoSwitch(
-                            activeColor: theme.primaryColor,
-                            value: index == ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId)),
-                            onChanged: (value) {
-                              ref.read(appearanceStateProvider.notifier).setFontFamily(index);
-                            },
-                          ),
-                          Text('$index'),
-                        ],
-                      );
-                    },
+                  const ContentCard(
+                    iconData: Icons.badge,
+                    title: 'Licenses',
+                    subTitle: 'アプリが使用するライセンスを確認できます',
                   ),
-                ),
-                const ContentCard(),
-                const ContentCard(),
-              ],
+                  const ContentCard(
+                    iconData: Icons.palette_outlined,
+                    title: 'Theme Settings',
+                    subTitle: 'カラーやテキストのスタイルを変更できます',
+                  ),
+                  const ContentCard(
+                    iconData: Icons.contact_support_outlined,
+                    title: 'Contact Us',
+                    subTitle: 'アプリの開発者にコンタクトできます',
+                  ),
+                ],
+              ),
             ),
           ),
         ],

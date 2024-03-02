@@ -1,49 +1,55 @@
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/util/constants/logger.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContentCard extends ConsumerWidget {
-  const ContentCard({super.key});
+  const ContentCard({
+    required this.iconData,
+    required this.title,
+    required this.subTitle,
+    super.key,
+  });
+
+  final IconData iconData;
+  final String title;
+  final String subTitle;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
-    return GestureDetector(
-      onTap: () {
+    return CupertinoButton(
+      onPressed: () {
         logger.i('tap');
       },
       child: Container(
-        // width: MediaQuery.of(context).size.width * 0.4,
-        margin: const EdgeInsets.all(12),
-        padding: const EdgeInsets.only(top: 30, bottom: 30),
+        width: double.infinity,
         decoration: BoxDecoration(
-          // color: Colors.grey.shade100,
-          borderRadius: BorderRadius.circular(20),
-          // boxShadow: const [
-          //   BoxShadow(
-          //     blurRadius: 10,
-          //     offset: Offset(-10, -10),
-          //     // color: Colors.white24,
-          //   ),
-          //   BoxShadow(
-          //     blurRadius: 10,
-          //     offset: Offset(10, 10),
-          //     // color: Colors.grey,
-          //   ),
-          // ],
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
+        margin: const EdgeInsets.only(top: 8),
+        padding: const EdgeInsets.all(30),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(
             children: [
-              const Icon(
-                Icons.rocket_launch,
+              Icon(
+                iconData,
                 size: 48,
               ),
               const SizedBox(height: 8),
               Text(
-                'タイトル',
+                title,
                 style: theme.textTheme.textStyle.copyWith(
                   fontSize: 26,
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
@@ -52,9 +58,9 @@ class ContentCard extends ConsumerWidget {
               const SizedBox(height: 8),
               // 説明文
               Text(
-                'ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。',
+                subTitle,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                 ),
               ),

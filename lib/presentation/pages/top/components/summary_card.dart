@@ -1,5 +1,6 @@
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
+import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,7 +45,9 @@ class SummaryCard extends ConsumerWidget {
                 const Expanded(child: SizedBox.shrink()),
                 CupertinoButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {},
+                  onPressed: () {
+                    logger.i('delete');
+                  },
                   child: Icon(
                     CupertinoIcons.delete,
                     color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
