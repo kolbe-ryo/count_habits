@@ -38,11 +38,7 @@ class SettingsPage extends ConsumerWidget {
                     title: 'About App',
                     subTitle: 'アプリの使い方やその他の情報を確認できます',
                   ),
-                  const ContentCard(
-                    iconData: Icons.badge,
-                    title: 'Licenses',
-                    subTitle: 'アプリが使用するライセンスを確認できます',
-                  ),
+                  ContentCard.licenses(),
                   const ContentCard(
                     iconData: Icons.palette_outlined,
                     title: 'Theme Settings',

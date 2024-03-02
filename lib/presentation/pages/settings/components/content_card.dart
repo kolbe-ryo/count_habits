@@ -5,22 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContentCard extends ConsumerWidget {
-  const ContentCard({
+  const ContentCard._({
     required this.iconData,
     required this.title,
     required this.subTitle,
-    super.key,
+    required this.child,
   });
+
+  factory ContentCard.licenses() {
+    return const ContentCard._(
+      iconData: Icons.badge,
+      title: 'Licenses',
+      subTitle: 'アプリが使用するライセンスを確認できます',
+      child: LicensePage(),
+    );
+  }
 
   final IconData iconData;
   final String title;
   final String subTitle;
+  final Widget child;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
     return CupertinoButton(
-      onPressed: () => Navigator.of(context).push(ThemeSettingPage.route(title: title)),
+      onPressed: () => Navigator.of(context).push(
+        ThemeSettingPage.route(
+          title: title,
+          child: child,
+        ),
+      ),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(

@@ -7,16 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ThemeSettingPage extends ConsumerWidget {
-  const ThemeSettingPage(this.title, {super.key});
+  const ThemeSettingPage(this.title, this.child, {super.key});
 
   static Route<Object?> route({
     required String title,
+    required Widget child,
   }) =>
-      CupertinoPageRoute(
-        builder: (context) => ThemeSettingPage(title),
+      MaterialPageRoute(
+        builder: (context) => ThemeSettingPage(
+          title,
+          child,
+        ),
       );
 
   final String title;
+  final Widget child;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,57 +44,7 @@ class ThemeSettingPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             sliver: SliverList(
               delegate: SliverChildListDelegate(
-                [
-                  const Text(
-                    'Color',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Wrap(
-                    children: List.generate(
-                      colorSchemes.length,
-                      (index) {
-                        return Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CupertinoSwitch(
-                              activeColor: theme.primaryColor,
-                              value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
-                              onChanged: (value) {
-                                ref.read(appearanceStateProvider.notifier).setColorPalette(index);
-                              },
-                            ),
-                            Text('$index'),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  const Text(
-                    'Text',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Wrap(
-                    children: List.generate(
-                      textSchemes.length,
-                      (index) {
-                        return Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CupertinoSwitch(
-                              activeColor: theme.primaryColor,
-                              value: index == ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId)),
-                              onChanged: (value) {
-                                ref.read(appearanceStateProvider.notifier).setFontFamily(index);
-                              },
-                            ),
-                            Text('$index'),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 100),
-                ],
+                [child],
               ),
             ),
           ),
