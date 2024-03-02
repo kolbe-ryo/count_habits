@@ -1,8 +1,11 @@
-import 'package:count_habits/presentation/pages/settings/theme_setting_page.dart';
+import 'package:count_habits/presentation/pages/settings/base_menu_page.dart';
+import 'package:count_habits/presentation/pages/settings/webview_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
+import 'package:count_habits/util/constants/const_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class ContentCard extends ConsumerWidget {
   const ContentCard._({
@@ -17,20 +20,18 @@ class ContentCard extends ConsumerWidget {
       iconData: Icons.rocket_launch,
       title: 'About App',
       subTitle: 'アプリの使い方やその他の情報を確認できます',
-      page: ThemeSettingPage(
-        title: 'About App',
-        child: Text('data'),
-      ),
+      page: WebviewPage(url: aboutAppUrl),
     );
   }
 
   factory ContentCard.themeSetting() {
+    const title = 'Theme';
     return const ContentCard._(
       iconData: Icons.palette_outlined,
-      title: 'App Theme',
+      title: title,
       subTitle: 'アプリの使い方やその他の情報を確認できます',
-      page: ThemeSettingPage(
-        title: 'About App',
+      page: BaseMenuPage(
+        title: title,
         child: ThemeSettingForTest(),
       ),
     );
@@ -41,10 +42,7 @@ class ContentCard extends ConsumerWidget {
       iconData: Icons.contact_support_outlined,
       title: 'Contact Us',
       subTitle: 'アプリの開発者にコンタクトできます',
-      page: ThemeSettingPage(
-        title: 'Contact Us',
-        child: Text('data'),
-      ),
+      page: WebviewPage(url: contactUrl),
     );
   }
 
