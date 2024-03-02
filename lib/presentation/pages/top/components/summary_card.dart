@@ -22,7 +22,7 @@ class SummaryCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CupertinoTextField(),
+            const CupertinoTextField(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
