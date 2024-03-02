@@ -5,7 +5,6 @@ import 'package:count_habits/util/constants/const_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class ContentCard extends ConsumerWidget {
   const ContentCard._({
