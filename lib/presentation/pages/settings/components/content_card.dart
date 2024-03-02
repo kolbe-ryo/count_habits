@@ -1,8 +1,5 @@
-import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/settings/theme_setting_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
-import 'package:count_habits/presentation/pages/theme/color_schemes.g.dart';
-import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,7 +31,7 @@ class ContentCard extends ConsumerWidget {
       subTitle: 'アプリの使い方やその他の情報を確認できます',
       page: ThemeSettingPage(
         title: 'About App',
-        child: _ThemeSettingForTest(),
+        child: ThemeSettingForTest(),
       ),
     );
   }
@@ -110,7 +107,6 @@ class ContentCard extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              // 説明文
               Text(
                 subTitle,
                 style: TextStyle(
@@ -122,61 +118,6 @@ class ContentCard extends ConsumerWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _ThemeSettingForTest extends ConsumerWidget {
-  const _ThemeSettingForTest();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(cupertinoThemeProvider);
-    return Column(
-      children: [
-        const Text('Color'),
-        Wrap(
-          children: List.generate(
-            colorSchemes.length,
-            (index) {
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CupertinoSwitch(
-                    activeColor: theme.primaryColor,
-                    value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
-                    onChanged: (value) {
-                      ref.read(appearanceStateProvider.notifier).setColorPalette(index);
-                    },
-                  ),
-                  Text('$index'),
-                ],
-              );
-            },
-          ),
-        ),
-        const Text('Text'),
-        Wrap(
-          children: List.generate(
-            textSchemes.length,
-            (index) {
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CupertinoSwitch(
-                    activeColor: theme.primaryColor,
-                    value: index == ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId)),
-                    onChanged: (value) {
-                      ref.read(appearanceStateProvider.notifier).setFontFamily(index);
-                    },
-                  ),
-                  Text('$index'),
-                ],
-              );
-            },
-          ),
-        ),
-      ],
     );
   }
 }
