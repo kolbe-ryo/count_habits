@@ -3,70 +3,96 @@ import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.g.dart';
 import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ThemeSettingPage extends ConsumerWidget {
-  const ThemeSettingPage({super.key});
+  const ThemeSettingPage(this.title, {super.key});
 
-  static Route<Object?> route() => CupertinoPageRoute(
-        builder: (context) => const ThemeSettingPage(),
+  static Route<Object?> route({
+    required String title,
+  }) =>
+      CupertinoPageRoute(
+        builder: (context) => ThemeSettingPage(title),
       );
+
+  final String title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
     return CupertinoPageScaffold(
-      child: Column(
-        children: [
-          const Text(
-            'Color',
-            style: TextStyle(fontSize: 30),
-          ),
-          Wrap(
-            children: List.generate(
-              colorSchemes.length,
-              (index) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CupertinoSwitch(
-                      activeColor: theme.primaryColor,
-                      value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
-                      onChanged: (value) {
-                        ref.read(appearanceStateProvider.notifier).setColorPalette(index);
-                      },
-                    ),
-                    Text('$index'),
-                  ],
-                );
-              },
+      child: CustomScrollView(
+        slivers: <Widget>[
+          CupertinoSliverNavigationBar(
+            padding: const EdgeInsetsDirectional.only(start: 1),
+            leading: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(CupertinoIcons.back),
+            ),
+            largeTitle: Text(
+              title,
+              style: theme.textTheme.textStyle,
             ),
           ),
-          const Text(
-            'Text',
-            style: TextStyle(fontSize: 30),
-          ),
-          Wrap(
-            children: List.generate(
-              textSchemes.length,
-              (index) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CupertinoSwitch(
-                      activeColor: theme.primaryColor,
-                      value: index == ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId)),
-                      onChanged: (value) {
-                        ref.read(appearanceStateProvider.notifier).setFontFamily(index);
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  const Text(
+                    'Color',
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Wrap(
+                    children: List.generate(
+                      colorSchemes.length,
+                      (index) {
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CupertinoSwitch(
+                              activeColor: theme.primaryColor,
+                              value: index == ref.watch(appearanceStateProvider.select((value) => value.colorId)),
+                              onChanged: (value) {
+                                ref.read(appearanceStateProvider.notifier).setColorPalette(index);
+                              },
+                            ),
+                            Text('$index'),
+                          ],
+                        );
                       },
                     ),
-                    Text('$index'),
-                  ],
-                );
-              },
+                  ),
+                  const Text(
+                    'Text',
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Wrap(
+                    children: List.generate(
+                      textSchemes.length,
+                      (index) {
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CupertinoSwitch(
+                              activeColor: theme.primaryColor,
+                              value: index == ref.watch(appearanceStateProvider.select((value) => value.fontFamilyId)),
+                              onChanged: (value) {
+                                ref.read(appearanceStateProvider.notifier).setFontFamily(index);
+                              },
+                            ),
+                            Text('$index'),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 100),
+                ],
+              ),
             ),
           ),
-          SizedBox(height: 100),
         ],
       ),
     );
