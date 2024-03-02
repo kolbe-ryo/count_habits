@@ -24,9 +24,14 @@ class SummaryCard extends ConsumerWidget {
           children: [
             const CupertinoTextField(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //　TODO: TextFieldにして編集可能にする
+                Icon(
+                  Icons.check,
+                  color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+                ),
+                const SizedBox(width: 8),
                 Text(
                   'Contribution',
                   style: TextStyle(
@@ -36,9 +41,14 @@ class SummaryCard extends ConsumerWidget {
                     color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                   ),
                 ),
-                const Icon(
-                  Icons.check,
-                  // color: Theme.of(context).cupertinoOverrideTheme.primaryColor,
+                const Expanded(child: SizedBox.shrink()),
+                CupertinoButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {},
+                  child: Icon(
+                    CupertinoIcons.delete,
+                    color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+                  ),
                 ),
               ],
             ),

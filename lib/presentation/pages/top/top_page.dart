@@ -46,8 +46,6 @@ class TopPage extends ConsumerWidget {
                       SizedBox(height: 32),
                       SummaryCard(),
                       Expanded(child: AnimatedCounter()),
-                      ActionButtonCard(),
-                      SizedBox(height: 32),
                     ],
                   );
                 },
