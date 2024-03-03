@@ -6,7 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final _textControllerProvider = Provider.family<TextEditingController, String>((ref, text) {
+final _textControllerProvider = Provider.family<TextEditingController, int>((ref, index) {
+  final text = ref.watch(countersProvider.select((value) => value[index].counterValue.name));
   return TextEditingController(text: text);
 });
 
@@ -21,9 +22,7 @@ class SummaryCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
-    final counter = ref.watch(countersProvider.select((value) => value[index]));
-    final counterName = ref.watch(countersProvider.select((value) => value[index].counterValue.name));
-    final controller = ref.watch(_textControllerProvider(counterName));
+    final controller = ref.watch(_textControllerProvider(index));
     return Card(
       elevation: 10,
       color: theme.barBackgroundColor,

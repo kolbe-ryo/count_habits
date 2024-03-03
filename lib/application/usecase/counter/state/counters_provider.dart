@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'counters_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Counters extends _$Counters {
   @override
   List<Counter> build() => [];
