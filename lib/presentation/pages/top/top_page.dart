@@ -13,6 +13,8 @@ class TopPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
+
+    // TODO 読み込み完了後に画面表示する
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         leading: IconButton(
