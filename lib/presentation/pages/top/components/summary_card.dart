@@ -1,3 +1,4 @@
+import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
 import 'package:count_habits/util/constants/logger.dart';
@@ -5,12 +6,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final _textControllerProvider = Provider.family<TextEditingController, String>((ref, text) {
+  return TextEditingController(text: text);
+});
+
 class SummaryCard extends ConsumerWidget {
-  const SummaryCard({super.key});
+  const SummaryCard({
+    required this.index,
+    super.key,
+  });
+
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
+    final counter = ref.watch(countersProvider.select((value) => value[index]));
+    final counterName = ref.watch(countersProvider.select((value) => value[index].counterValue.name));
+    final controller = ref.watch(_textControllerProvider(counterName));
     return Card(
       elevation: 10,
       color: theme.barBackgroundColor,
@@ -23,7 +36,19 @@ class SummaryCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CupertinoTextField(),
+            CupertinoTextField(
+              controller: controller,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              placeholder: 'Enter your text here',
+              padding: const EdgeInsets.all(12),
+              focusNode: FocusNode(),
+              style: TextStyle(
+                color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+              ),
+            ),
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -40,11 +40,11 @@ class TopPage extends ConsumerWidget {
                 controller: PageController(viewportFraction: 0.9),
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  return const Column(
+                  return Column(
                     children: [
-                      SizedBox(height: 32),
-                      SummaryCard(),
-                      Expanded(child: AnimatedCounter()),
+                      const SizedBox(height: 32),
+                      SummaryCard(index: index),
+                      const Expanded(child: AnimatedCounter()),
                     ],
                   );
                 },
