@@ -1,4 +1,4 @@
-import 'package:count_habits/application/state/app_loading_provider.dart';
+import 'package:count_habits/application/state/app_loading_state_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +9,7 @@ class AppLoading extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Visibility(
-      visible: ref.watch(appLoadingProvider),
+      visible: ref.watch(appLoadingStateProvider),
       child: const ColoredBox(
         color: Colors.black26,
         child: Center(
