@@ -6,10 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final _textControllerProvider = Provider.family<TextEditingController, int>((ref, index) {
-  final text = ref.watch(countersProvider.select((value) => value[index].counterValue.name));
-  return TextEditingController(text: text);
-});
+// final _textControllerProvider = Provider.family<TextEditingController, int>((ref, index) {
+//   final text = ref.watch(countersProvider.select((value) => value[index].counterValue.name));
+//   return TextEditingController(text: text);
+// });
 
 class SummaryCard extends ConsumerWidget {
   const SummaryCard({
@@ -22,7 +22,7 @@ class SummaryCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
-    final controller = ref.watch(_textControllerProvider(index));
+    // final controller = ref.watch(_textControllerProvider(index));
     return Card(
       elevation: 10,
       color: theme.barBackgroundColor,
@@ -36,7 +36,7 @@ class SummaryCard extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CupertinoTextField(
-              controller: controller,
+              controller: TextEditingController(),
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
