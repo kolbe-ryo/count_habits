@@ -1,4 +1,3 @@
-import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
 import 'package:count_habits/util/constants/logger.dart';

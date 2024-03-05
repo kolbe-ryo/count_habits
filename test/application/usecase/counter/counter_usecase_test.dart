@@ -2,7 +2,6 @@
 
 import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
-import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
@@ -22,7 +21,6 @@ void main() {
 
     test('任意のnameを渡してcreateをコールするとinitCounterValueがstateに反映されること', () async {
       const name = 'create';
-      final initCounter = Counter.init(name: name);
       final initCountersLength = mockCounterRepository.counters.length;
       await providerContariner.read(counterUsecaseProvider).create(name: name);
 
