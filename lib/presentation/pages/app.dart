@@ -1,4 +1,3 @@
-import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/top_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,14 +20,21 @@ class Habits365 extends ConsumerWidget {
         DefaultWidgetsLocalizations.delegate,
       ],
       home: const TopPage(),
-      builder: (_, navigator) {
-        return Stack(
-          children: [
-            navigator!,
-            const AppLoading(),
-          ],
-        );
-      },
+      // homeをchildとして引き継いで、ローディング状態の時のみローディングをスタックする画面表示などが可能
+      // builder: (_, navigator) {
+      // return Consumer(
+      //     builder: (context, ref, _) {
+      //       final isLoading = ref.watch(overlayLoadingProvider);
+      //       return Stack(
+      //         children: [
+      //           child!,
+      //           // ローディング表示
+      //           if (isLoading) const OverlayLoading()
+      //         ],
+      //       );
+      //     },
+      //   );
+      // },
     );
   }
 }

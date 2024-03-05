@@ -1,7 +1,9 @@
 // import 'dart:ffi';
 
 import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
+import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
+import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
@@ -25,23 +27,31 @@ void main() {
       await providerContariner.read(counterUsecaseProvider).create(name: name);
 
       expect(mockCounterRepository.counters.length, initCountersLength + 1);
+
+      // counter stateから値を取得する
+      final counters = await providerContariner.read(countersProvider.future);
+
+      expect(counters, mockCounterRepository.counters);
     });
   });
 
-  // group('fetchAllテスト', () {
-  //   final mockCounterRepository = MockCounterRepository();
-  //   final providerContariner = ProviderContainer(
-  //     overrides: [
-  //       counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-  //     ],
-  //   );
-  //   test('すべてのCounterが取得可能なこと', () async {
-  //     await providerContariner.read(counterUsecaseProvider).fetchAll();
-  //     final state = providerContariner.read(countersProvider);
+  group('fetchAllテスト', () {
+    late ProviderContainer providerContariner;
+    final mockCounterRepository = MockCounterRepository();
 
-  //     expect(state.length, 3);
-  //   });
-  // });
+    setUp(() {
+      providerContariner = ProviderContainer(
+        overrides: [
+          counterRepositoryProvider.overrideWithValue(mockCounterRepository),
+        ],
+      );
+    });
+
+    test('すべてのCounterが取得可能なこと', () async {
+      await providerContariner.read(counterUsecaseProvider).fetchAll();
+      expect(mockCounterRepository.counters.length, 3);
+    });
+  });
 
   // group('updateテスト', () {
   //   final mockCounterRepository = MockCounterRepository();
@@ -79,24 +89,29 @@ void main() {
   //   });
   // });
 
-  // group('deleteテスト', () {
-  //   final mockCounterRepository = MockCounterRepository();
-  //   final providerContariner = ProviderContainer(
-  //     overrides: [
-  //       counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-  //     ],
-  //   );
-  //   test('任意のCounterを指定すると指定したCounterがstateから削除されていること', () async {
-  //     const id = '0';
+  group('deleteテスト', () {
+    late ProviderContainer providerContariner;
+    final mockCounterRepository = MockCounterRepository();
 
-  //     await providerContariner.read(counterUsecaseProvider).delete(id);
-  //     await providerContariner.read(counterUsecaseProvider).fetchAll();
+    setUp(() {
+      providerContariner = ProviderContainer(
+        overrides: [
+          counterRepositoryProvider.overrideWithValue(mockCounterRepository),
+        ],
+      );
+    });
 
-  //     final counters = providerContariner.read(countersProvider);
+    // test('任意のCounterを指定すると指定したCounterがstateから削除されていること', () async {
+    //   const id = '0';
 
-  //     expect(counters.length, 2);
-  //   });
-  // });
+    //   await providerContariner.read(counterUsecaseProvider).delete(id);
+    //   await providerContariner.read(counterUsecaseProvider).fetchAll();
+
+    //   final counters = providerContariner.read(countersProvider);
+
+    //   expect(counters.length, 2);
+    // });
+  });
 
   // group('counteUpテスト', () {
   //   final mockCounterRepository = MockCounterRepository();
