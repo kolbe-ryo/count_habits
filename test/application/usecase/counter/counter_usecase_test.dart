@@ -114,29 +114,29 @@ void main() {
     });
   });
 
-  // group('counteUpテスト', () {
-  //   final mockCounterRepository = MockCounterRepository();
-  //   final providerContariner = ProviderContainer(
-  //     overrides: [
-  //       counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-  //     ],
-  //   )..listen<List<Counter>>(
-  //       countersProvider,
-  //       (_, __) => logger.i('listen'),
-  //     );
+  group('counteUpテスト', () {
+    late ProviderContainer providerContariner;
+    final mockCounterRepository = MockCounterRepository();
 
-  //   test('任意のidを指定すると指定したCounterがCounterValue+1で返却されること（0=>1）', () async {
-  //     const id = '0';
-  //     // まずfetchでデータを取得する
-  //     await providerContariner.read(counterUsecaseProvider).fetchAll();
+    setUp(() {
+      providerContariner = ProviderContainer(
+        overrides: [
+          counterRepositoryProvider.overrideWithValue(mockCounterRepository),
+        ],
+      );
+    });
 
-  //     final initialCounter = providerContariner.read(countersProvider.notifier).getCounter(id);
-  //     expect(initialCounter.counterValue.count, 0);
+    test('任意のidを指定すると指定したCounterがCounterValue+1で返却されること（0=>1）', () async {
+      const id = '0';
 
-  //     await providerContariner.read(counterUsecaseProvider).countUp(id);
-  //     final addedCounter = providerContariner.read(countersProvider.notifier).getCounter(id);
+      // 初期値は0のはず
+      var counters = await providerContariner.read(countersProvider.future);
+      expect(counters[int.parse(id)].counterValue.count, 0);
 
-  //     expect(addedCounter.counterValue.count, 1);
-  //   });
-  // });
+      await providerContariner.read(counterUsecaseProvider).countUp(id);
+
+      counters = await providerContariner.read(countersProvider.future);
+      expect(counters[int.parse(id)].counterValue.count, 1);
+    });
+  });
 }
