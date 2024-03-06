@@ -102,16 +102,14 @@ void main() {
       );
     });
 
-    // test('任意のCounterを指定すると指定したCounterがstateから削除されていること', () async {
-    //   const id = '0';
+    test('任意のCounterを指定すると指定したCounterがstateから削除されていること', () async {
+      const id = '0';
+      final initialCountersLength = mockCounterRepository.counters.length;
 
-    //   await providerContariner.read(counterUsecaseProvider).delete(id);
-    //   await providerContariner.read(counterUsecaseProvider).fetchAll();
+      await providerContariner.read(counterUsecaseProvider).delete(id);
 
-    //   final counters = providerContariner.read(countersProvider);
-
-    //   expect(counters.length, 2);
-    // });
+      expect(mockCounterRepository.counters.length, initialCountersLength - 1);
+    });
   });
 
   // group('counteUpテスト', () {
