@@ -49,7 +49,8 @@ void main() {
 
     test('すべてのCounterが取得可能なこと', () async {
       await providerContariner.read(counterUsecaseProvider).fetchAll();
-      expect(mockCounterRepository.counters.length, 3);
+      final counters = await providerContariner.read(countersProvider.future);
+      expect(counters.length, 3);
     });
   });
 
@@ -108,7 +109,8 @@ void main() {
 
       await providerContariner.read(counterUsecaseProvider).delete(id);
 
-      expect(mockCounterRepository.counters.length, initialCountersLength - 1);
+      final counters = await providerContariner.read(countersProvider.future);
+      expect(counters.length, initialCountersLength - 1);
     });
   });
 
