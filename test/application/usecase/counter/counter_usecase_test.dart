@@ -3,7 +3,6 @@
 import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
 import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
-import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
@@ -55,41 +54,53 @@ void main() {
   });
 
   // TODO テストの続きを書く
-  // group('updateテスト', () {
-  //   final mockCounterRepository = MockCounterRepository();
-  //   final providerContariner = ProviderContainer(
-  //     overrides: [
-  //       counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-  //     ],
-  //     // プロバイダを監視して変化を検出する（ここでlitenしないとfetchAllとupdateでstateを共有できない）
-  //   )..listen<List<Counter>>(
-  //       countersProvider,
-  //       (_, __) => logger.i('listen'),
-  //     );
+  group('updateテスト', () {
+    // final mockCounterRepository = MockCounterRepository();
+    // final providerContariner = ProviderContainer(
+    //   overrides: [
+    //     counterRepositoryProvider.overrideWithValue(mockCounterRepository),
+    //   ],
+    //   // プロバイダを監視して変化を検出する（ここでlitenしないと、autoDisposeの対象になってしまい、fetchAllとupdate後は破棄されるため、stateを共有できない）
+    // )..listen<List<Counter>>(
+    //     countersProvider,
+    //     (_, __) => logger.i('listen'),
+    //   );
 
-  //   test('存在する任意のidに対して任意のnameを渡すとnameが更新されること', () async {
-  //     const id = '0';
-  //     const name = 'update';
+    late ProviderContainer providerContariner;
+    final mockCounterRepository = MockCounterRepository();
 
-  //     await providerContariner.read(counterUsecaseProvider).fetchAll();
-  //     await providerContariner.read(counterUsecaseProvider).update(
-  //           id: id,
-  //           name: name,
-  //         );
+    setUp(() {
+      providerContariner = ProviderContainer(
+        overrides: [
+          counterRepositoryProvider.overrideWithValue(mockCounterRepository),
+        ],
+      );
+    });
 
-  //     // 初期値は'number 0'
-  //     final counter = providerContariner.read(countersProvider.notifier).getCounter(id);
-  //     expect(counter.counterValue.name, name);
+    test('存在する任意のidに対して任意のnameを渡すとnameが更新されること', () async {
+      const id = '0';
+      const name = 'update';
+      // 初期値は0のはず
+      var counters = await providerContariner.read(countersProvider.future);
+      expect(counters[int.parse(id)].counterValue.name, 'number 0');
 
-  //     // このようにすることで登録したlistenerを削除できる（ただし、autoDisposeはされなくなる）
-  //     providerContariner
-  //         .listen<List<Counter>>(
-  //           countersProvider,
-  //           (previous, next) => logger.i('listen'),
-  //         )
-  //         .close();
-  //   });
-  // });
+      await providerContariner.read(counterUsecaseProvider).update(
+            id: id,
+            name: name,
+          );
+
+      counters = await providerContariner.read(countersProvider.future);
+      expect(counters[int.parse(id)].counterValue.name, name);
+
+      // このようにすることで登録したlistenerを削除できる（ただし、autoDisposeはされなくなる）
+      // providerContariner
+      //     .listen<List<Counter>>(
+      //       countersProvider,
+      //       (previous, next) => logger.i('listen'),
+      //     )
+      //     .close();
+    });
+  });
 
   group('deleteテスト', () {
     late ProviderContainer providerContariner;
