@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+final _pageIndexProvider = StateProvider<int>((ref) => 0);
+
 class TopPage extends ConsumerWidget {
   const TopPage({super.key});
 
@@ -40,34 +42,54 @@ class TopPage extends ConsumerWidget {
             ),
           ),
           child: SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: PageView.builder(
-                    controller: PageController(viewportFraction: 0.9),
-                    itemCount: data.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == data.length) {
-                        return const Column(
+            // TODO Textfieldはどうするか？
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                final currentScope = FocusScope.of(context);
+                if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
+                  FocusManager.instance.primaryFocus!.unfocus();
+                }
+              },
+              child: Column(
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      controller: PageController(viewportFraction: 0.9),
+                      itemCount: data.length + 1,
+                      onPageChanged: (index) {
+                        if (index == data.length) {
+                          // 最後のページ（新規カウント追加）の時は何もしない
+                          return;
+                        }
+                        ref.read(_pageIndexProvider.notifier).state = index;
+                      },
+                      itemBuilder: (context, index) {
+                        if (index == data.length) {
+                          return const Column(
+                            children: [
+                              Expanded(child: SizedBox()),
+                              AddNewOneCard(),
+                              Expanded(child: SizedBox()),
+                            ],
+                          );
+                        }
+                        return Column(
                           children: [
-                            Expanded(child: SizedBox()),
-                            AddNewOneCard(),
-                            Expanded(child: SizedBox()),
+                            const SizedBox(height: 32),
+                            SummaryCard(counter: data[index]),
+                            const Expanded(child: AnimatedCounter()),
                           ],
                         );
-                      }
-                      return Column(
-                        children: [
-                          const SizedBox(height: 32),
-                          SummaryCard(counter: data[index]),
-                          const Expanded(child: AnimatedCounter()),
-                        ],
-                      );
-                    },
+                      },
+                    ),
                   ),
-                ),
-                DotsIndicator(dotsCount: 4),
-              ],
+                  DotsIndicator(
+                    dotsCount: data.length,
+                    position: ref.watch(_pageIndexProvider),
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -80,27 +102,37 @@ class TopPage extends ConsumerWidget {
           fontSize: 18,
           textColor: Colors.white,
         );
-        return CupertinoPageScaffold(
-          child: Center(
-            child: CupertinoButton(
-              color: theme.barBackgroundColor,
-              onPressed: () => ref.invalidate(countersProvider),
-              borderRadius: BorderRadius.circular(10),
-              child: Text(
-                '再読み込み',
-                style: TextStyle(
-                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: theme.textTheme.textStyle.fontFamily,
-                ),
-              ),
-            ),
-          ),
-        );
+        return const _ReLoadingWidget();
       },
       loading: () => const CupertinoPageScaffold(
         child: AppLoading(),
+      ),
+    );
+  }
+}
+
+class _ReLoadingWidget extends ConsumerWidget {
+  const _ReLoadingWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(cupertinoThemeProvider);
+    return CupertinoPageScaffold(
+      child: Center(
+        child: CupertinoButton(
+          color: theme.barBackgroundColor,
+          onPressed: () => ref.invalidate(countersProvider),
+          borderRadius: BorderRadius.circular(10),
+          child: Text(
+            '再読み込み',
+            style: TextStyle(
+              color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              fontFamily: theme.textTheme.textStyle.fontFamily,
+            ),
+          ),
+        ),
       ),
     );
   }

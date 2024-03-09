@@ -1,3 +1,5 @@
+import 'package:count_habits/application/state/loading_state_provider.dart';
+import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
@@ -22,7 +24,7 @@ class SummaryCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
-    // final controller = ref.watch(_textControllerProvider(index));
+    final controller = TextEditingController(text: counter.counterValue.name);
     return Card(
       elevation: 10,
       color: theme.barBackgroundColor,
@@ -36,7 +38,7 @@ class SummaryCard extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CupertinoTextField(
-              controller: TextEditingController(),
+              controller: controller,
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
@@ -46,6 +48,9 @@ class SummaryCard extends ConsumerWidget {
               focusNode: FocusNode(),
               style: TextStyle(
                 color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                fontFamily: theme.textTheme.textStyle.fontFamily,
               ),
             ),
             Row(
@@ -69,9 +74,11 @@ class SummaryCard extends ConsumerWidget {
                 const Expanded(child: SizedBox.shrink()),
                 CupertinoButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {
-                    // TODO delete
-                    logger.i('delete');
+                  onPressed: () async {
+                    final loadingState = ref.read(loadingStateProvider.notifier)..show();
+                    logger.i('Delete counter id = ${counter.id}');
+                    await ref.read(counterUsecaseProvider).delete(counter.id);
+                    loadingState.hide();
                   },
                   child: Icon(
                     CupertinoIcons.delete,

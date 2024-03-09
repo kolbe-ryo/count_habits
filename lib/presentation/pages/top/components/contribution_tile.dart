@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ContributionTile extends ConsumerWidget {
   const ContributionTile({super.key});
 
+  // TODO repoから取得した値を反映すること
   List<int> get getCommit {
     final commit = <int>[];
     final dt = DateTime.now();
