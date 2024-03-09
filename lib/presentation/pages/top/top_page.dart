@@ -24,13 +24,16 @@ class TopPage extends ConsumerWidget {
       data: (data) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            leading: IconButton(
+            trailing: TextButton(
               onPressed: () => Navigator.of(context).push(SettingsPage.route()),
-              icon: const Icon(CupertinoIcons.add),
-            ),
-            trailing: IconButton(
-              onPressed: () => Navigator.of(context).push(SettingsPage.route()),
-              icon: const Icon(Icons.settings),
+              child: Text(
+                'Edit',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                  fontFamily: theme.textTheme.textStyle.fontFamily,
+                ),
+              ),
             ),
             middle: Text(
               'Habit365',
