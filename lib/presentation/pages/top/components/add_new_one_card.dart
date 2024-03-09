@@ -20,7 +20,7 @@ class AddNewOneCard extends ConsumerWidget {
         width: double.infinity,
         child: DefaultTextStyle(
           style: TextStyle(
-            color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+            color: Colors.black54,
             fontFamily: theme.textTheme.textStyle.fontFamily,
           ),
           child: Column(
@@ -29,15 +29,13 @@ class AddNewOneCard extends ConsumerWidget {
                 'カウンタを追加しよう！',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
                 '毎日すべきことを記録すると\n継続を実感できます',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
+                style: TextStyle(fontSize: 15),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
@@ -49,8 +47,8 @@ class AddNewOneCard extends ConsumerWidget {
                 child: Text(
                   '追加する',
                   style: TextStyle(
-                    color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-                    fontSize: 15,
+                    color: Colors.white,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     fontFamily: theme.textTheme.textStyle.fontFamily,
                   ),
