@@ -1,3 +1,4 @@
+import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
 import 'package:count_habits/util/constants/logger.dart';
@@ -12,11 +13,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SummaryCard extends ConsumerWidget {
   const SummaryCard({
-    required this.index,
+    required this.counter,
     super.key,
   });
 
-  final int index;
+  final Counter counter;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
