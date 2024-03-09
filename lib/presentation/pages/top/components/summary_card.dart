@@ -37,22 +37,7 @@ class SummaryCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CupertinoTextField(
-              controller: controller,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              placeholder: 'Enter your text here',
-              padding: const EdgeInsets.all(12),
-              focusNode: FocusNode(),
-              style: TextStyle(
-                color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                fontFamily: theme.textTheme.textStyle.fontFamily,
-              ),
-            ),
+            // TODO アイコンのカラーを変更する
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -62,16 +47,25 @@ class SummaryCard extends ConsumerWidget {
                   color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
                 ),
                 const SizedBox(width: 8),
-                Text(
-                  'Contribution',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: theme.textTheme.textStyle.fontFamily,
-                    color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                Expanded(
+                  child: CupertinoTextField(
+                    controller: controller,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    placeholder: 'Enter your text here',
+                    padding: const EdgeInsets.all(12),
+                    focusNode: FocusNode(),
+                    style: TextStyle(
+                      color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: theme.textTheme.textStyle.fontFamily,
+                    ),
                   ),
                 ),
-                const Expanded(child: SizedBox.shrink()),
+                // const Expanded(child: SizedBox.shrink()),
                 CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () async {

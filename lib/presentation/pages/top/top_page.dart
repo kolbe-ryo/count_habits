@@ -42,7 +42,7 @@ class TopPage extends ConsumerWidget {
             ),
           ),
           child: SafeArea(
-            // TODO Textfieldはどうするか？
+            // TODO Textfieldはどうするか？（unFocusできているか実機で確認）
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
