@@ -20,7 +20,7 @@ class MockAppearanceRepository implements AppearanceRepository {
   @override
   Future<Appearance> update({
     int? colorId,
-    String? fontFamily,
+    int? fontFamilyId,
     bool exception = false,
   }) async {
     await Future<void>.delayed(const Duration(seconds: 2));
@@ -30,7 +30,7 @@ class MockAppearanceRepository implements AppearanceRepository {
     const initAppearance = Appearance();
     return _appearance.copyWith(
       colorId: colorId ?? initAppearance.colorId,
-      fontFamily: fontFamily ?? initAppearance.fontFamily,
+      fontFamilyId: fontFamilyId ?? initAppearance.fontFamilyId,
     );
   }
 

@@ -1,54 +1,118 @@
+import 'package:count_habits/presentation/pages/settings/base_menu_page.dart';
+import 'package:count_habits/presentation/pages/settings/webview_page.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
+import 'package:count_habits/util/constants/const_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ContentCard extends StatelessWidget {
-  const ContentCard({super.key});
+class ContentCard extends ConsumerWidget {
+  const ContentCard._({
+    required this.iconData,
+    required this.title,
+    required this.subTitle,
+    required this.page,
+  });
+
+  factory ContentCard.aboutApp() {
+    return const ContentCard._(
+      iconData: Icons.rocket_launch,
+      title: 'About App',
+      subTitle: 'アプリの使い方やその他の情報を確認できます',
+      page: WebviewPage(url: aboutAppUrl),
+    );
+  }
+
+  factory ContentCard.themeSetting() {
+    const title = 'Theme';
+    return const ContentCard._(
+      iconData: Icons.palette_outlined,
+      title: title,
+      subTitle: 'アプリの使い方やその他の情報を確認できます',
+      page: BaseMenuPage(
+        title: title,
+        child: ThemeSettingForTest(),
+      ),
+    );
+  }
+
+  factory ContentCard.contactUs() {
+    return const ContentCard._(
+      iconData: Icons.contact_support_outlined,
+      title: 'Contact Us',
+      subTitle: 'アプリの開発者にコンタクトできます',
+      page: WebviewPage(url: contactUrl),
+    );
+  }
+
+  factory ContentCard.licenses() {
+    return const ContentCard._(
+      iconData: Icons.badge,
+      title: 'Licenses',
+      subTitle: 'アプリが使用するライセンスを確認できます',
+      page: null,
+    );
+  }
+
+  final IconData iconData;
+  final String title;
+  final String subTitle;
+  final Widget? page;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      // width: MediaQuery.of(context).size.width * 0.4,
-      margin: const EdgeInsets.all(12),
-      padding: const EdgeInsets.only(top: 30, bottom: 30),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(20),
-        // boxShadow: const [
-        //   BoxShadow(
-        //     blurRadius: 10,
-        //     offset: Offset(-10, -10),
-        //     // color: Colors.white24,
-        //   ),
-        //   BoxShadow(
-        //     blurRadius: 10,
-        //     offset: Offset(10, 10),
-        //     // color: Colors.grey,
-        //   ),
-        // ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          children: [
-            const Icon(
-              Icons.rocket_launch,
-              color: Colors.black45,
-              size: 48,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'タイトル',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 8),
-            // 説明文
-            Text(
-              'ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.grey[700],
-              ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(cupertinoThemeProvider);
+    return CupertinoButton(
+      onPressed: () {
+        if (page == null) {
+          return showLicensePage(context: context);
+        }
+        Navigator.of(context).push(
+          CupertinoPageRoute<void>(builder: (_) => page!),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
             ),
           ],
+        ),
+        margin: const EdgeInsets.only(top: 8),
+        padding: const EdgeInsets.all(30),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
+            children: [
+              Icon(
+                iconData,
+                size: 48,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                title,
+                style: theme.textTheme.textStyle.copyWith(
+                  fontSize: 26,
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                subTitle,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

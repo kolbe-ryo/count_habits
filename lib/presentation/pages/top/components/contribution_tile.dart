@@ -1,7 +1,9 @@
 import 'dart:math' as math;
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ContributionTile extends StatelessWidget {
+class ContributionTile extends ConsumerWidget {
   const ContributionTile({super.key});
 
   List<int> get getCommit {
@@ -16,23 +18,18 @@ class ContributionTile extends StatelessWidget {
     return commit;
   }
 
-  Color? buildColor(int count) {
+  Color? buildColor(int count, Color color) {
     if (count == 0) {
       return Colors.grey[300];
-      // } else if (count <= 2) {
-      //   return Colors.green[200];
-      // } else if (count <= 4) {
-      //   return Colors.green[400];
-      // } else if (count <= 6) {
-      //   return Colors.green[600];
     } else {
-      return Colors.greenAccent;
+      return color;
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final commit = getCommit;
+    final theme = ref.watch(cupertinoThemeProvider);
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -40,19 +37,24 @@ class ContributionTile extends StatelessWidget {
           height: 120,
           child: Row(
             children: [
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // 曜日
-                  children: [
-                    Text('Sun'),
-                    Spacer(flex: 2),
-                    Text('Tue'),
-                    Spacer(flex: 2),
-                    Text('Thu'),
-                    Spacer(flex: 2),
-                    Text('Sat'),
-                  ],
+              Expanded(
+                child: DefaultTextStyle(
+                  style: TextStyle(
+                    color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // 曜日
+                    children: [
+                      Text('Sun'),
+                      Spacer(flex: 2),
+                      Text('Tue'),
+                      Spacer(flex: 2),
+                      Text('Thu'),
+                      Spacer(flex: 2),
+                      Text('Sat'),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -70,7 +72,7 @@ class ContributionTile extends StatelessWidget {
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: buildColor(commit[i]),
+                          color: buildColor(commit[i], theme.primaryColor),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       );

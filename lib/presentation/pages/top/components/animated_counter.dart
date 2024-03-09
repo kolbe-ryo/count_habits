@@ -1,16 +1,18 @@
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/util/library/custom_animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
-class AnimatedCounter extends StatefulWidget {
+class AnimatedCounter extends ConsumerStatefulWidget {
   const AnimatedCounter({super.key});
 
   @override
-  State<AnimatedCounter> createState() => _AnimatedCounterState();
+  ConsumerState<AnimatedCounter> createState() => _AnimatedCounterState();
 }
 
-class _AnimatedCounterState extends State<AnimatedCounter> with SingleTickerProviderStateMixin {
+class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTickerProviderStateMixin {
   int value = 0;
 
   late final AnimationController _controller;
@@ -23,10 +25,12 @@ class _AnimatedCounterState extends State<AnimatedCounter> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
+    final theme = ref.watch(cupertinoThemeProvider);
     return GestureDetector(
       onTap: () async {
         value++;
         setState(() {});
+        await HapticFeedback.heavyImpact();
         await Future<void>.delayed(const Duration(milliseconds: 600));
         await HapticFeedback.vibrate();
         await _controller.forward();
@@ -48,16 +52,16 @@ class _AnimatedCounterState extends State<AnimatedCounter> with SingleTickerProv
             child: CustomAnimatedFlipCounter(
               duration: const Duration(milliseconds: 1500),
               curve: Curves.bounceOut,
-              textStyle: const TextStyle(
+              textStyle: theme.textTheme.textStyle.copyWith(
+                color: theme.primaryColor,
                 fontSize: 200,
                 fontWeight: FontWeight.w400,
-                fontFamily: 'Monomaniac_One',
-                color: Colors.yellow,
+                fontFamily: theme.textTheme.textStyle.fontFamily,
                 shadows: [
                   BoxShadow(
-                    color: Colors.red,
-                    offset: Offset(4, 4),
-                    blurRadius: 10,
+                    color: Theme.of(context).colorScheme.shadow,
+                    offset: const Offset(4, 4),
+                    blurRadius: 5,
                   ),
                 ],
               ),

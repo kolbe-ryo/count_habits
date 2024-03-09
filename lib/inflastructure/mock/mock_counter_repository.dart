@@ -93,6 +93,8 @@ class MockCounterRepository implements CounterRepository {
       throw const AppException(AppExceptionEnum.unexpectedException);
     }
 
+    _counters[int.parse(id)] = checkedInCounter.checkIn;
+
     return checkedInCounter.checkIn;
   }
 }

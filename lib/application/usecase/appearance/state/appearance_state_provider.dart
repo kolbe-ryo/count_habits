@@ -13,5 +13,5 @@ class AppearanceState extends _$AppearanceState {
 
   void setColorPalette(int colorId) => state = state.copyWith(colorId: colorId);
 
-  void setFontFamily(String fontFamily) => state = state.copyWith(fontFamily: fontFamily);
+  void setFontFamily(int fontFamilyId) => state = state.copyWith(fontFamilyId: fontFamilyId);
 }

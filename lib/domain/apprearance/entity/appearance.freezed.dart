@@ -22,7 +22,7 @@ Appearance _$AppearanceFromJson(Map<String, dynamic> json) {
 mixin _$Appearance {
 // TODO: IDを追加して、新規カウンタ作成時に、counterのIDと紐付けること
   int get colorId => throw _privateConstructorUsedError;
-  String get fontFamily => throw _privateConstructorUsedError;
+  int get fontFamilyId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $AppearanceCopyWith<$Res> {
           Appearance value, $Res Function(Appearance) then) =
       _$AppearanceCopyWithImpl<$Res, Appearance>;
   @useResult
-  $Res call({int colorId, String fontFamily});
+  $Res call({int colorId, int fontFamilyId});
 }
 
 /// @nodoc
@@ -53,17 +53,17 @@ class _$AppearanceCopyWithImpl<$Res, $Val extends Appearance>
   @override
   $Res call({
     Object? colorId = null,
-    Object? fontFamily = null,
+    Object? fontFamilyId = null,
   }) {
     return _then(_value.copyWith(
       colorId: null == colorId
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as int,
-      fontFamily: null == fontFamily
-          ? _value.fontFamily
-          : fontFamily // ignore: cast_nullable_to_non_nullable
-              as String,
+      fontFamilyId: null == fontFamilyId
+          ? _value.fontFamilyId
+          : fontFamilyId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -76,7 +76,7 @@ abstract class _$$AppearanceImplCopyWith<$Res>
       __$$AppearanceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int colorId, String fontFamily});
+  $Res call({int colorId, int fontFamilyId});
 }
 
 /// @nodoc
@@ -91,17 +91,17 @@ class __$$AppearanceImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? colorId = null,
-    Object? fontFamily = null,
+    Object? fontFamilyId = null,
   }) {
     return _then(_$AppearanceImpl(
       colorId: null == colorId
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as int,
-      fontFamily: null == fontFamily
-          ? _value.fontFamily
-          : fontFamily // ignore: cast_nullable_to_non_nullable
-              as String,
+      fontFamilyId: null == fontFamilyId
+          ? _value.fontFamilyId
+          : fontFamilyId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -109,8 +109,7 @@ class __$$AppearanceImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AppearanceImpl implements _Appearance {
-  const _$AppearanceImpl(
-      {this.colorId = 0, this.fontFamily = 'Monomaniac_One'});
+  const _$AppearanceImpl({this.colorId = 0, this.fontFamilyId = 0});
 
   factory _$AppearanceImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppearanceImplFromJson(json);
@@ -121,11 +120,11 @@ class _$AppearanceImpl implements _Appearance {
   final int colorId;
   @override
   @JsonKey()
-  final String fontFamily;
+  final int fontFamilyId;
 
   @override
   String toString() {
-    return 'Appearance(colorId: $colorId, fontFamily: $fontFamily)';
+    return 'Appearance(colorId: $colorId, fontFamilyId: $fontFamilyId)';
   }
 
   @override
@@ -134,13 +133,13 @@ class _$AppearanceImpl implements _Appearance {
         (other.runtimeType == runtimeType &&
             other is _$AppearanceImpl &&
             (identical(other.colorId, colorId) || other.colorId == colorId) &&
-            (identical(other.fontFamily, fontFamily) ||
-                other.fontFamily == fontFamily));
+            (identical(other.fontFamilyId, fontFamilyId) ||
+                other.fontFamilyId == fontFamilyId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, colorId, fontFamily);
+  int get hashCode => Object.hash(runtimeType, colorId, fontFamilyId);
 
   @JsonKey(ignore: true)
   @override
@@ -157,7 +156,7 @@ class _$AppearanceImpl implements _Appearance {
 }
 
 abstract class _Appearance implements Appearance {
-  const factory _Appearance({final int colorId, final String fontFamily}) =
+  const factory _Appearance({final int colorId, final int fontFamilyId}) =
       _$AppearanceImpl;
 
   factory _Appearance.fromJson(Map<String, dynamic> json) =
@@ -166,7 +165,7 @@ abstract class _Appearance implements Appearance {
   @override // TODO: IDを追加して、新規カウンタ作成時に、counterのIDと紐付けること
   int get colorId;
   @override
-  String get fontFamily;
+  int get fontFamilyId;
   @override
   @JsonKey(ignore: true)
   _$$AppearanceImplCopyWith<_$AppearanceImpl> get copyWith =>

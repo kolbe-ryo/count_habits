@@ -1,36 +1,40 @@
-import 'package:count_habits/presentation/components/app_loading.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/top_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Habits365 extends StatelessWidget {
+class Habits365 extends ConsumerWidget {
   const Habits365({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cupertinoTheme = ref.watch(cupertinoThemeProvider);
+    return CupertinoApp(
       title: 'Habits365',
       debugShowCheckedModeBanner: false,
-      // TODO: Theme setting
-      theme: ThemeData.dark(),
-      // theme: ThemeData(
-      //   colorSchemeSeed: Colors.blueGrey,
-      //   useMaterial3: true,
-      //   brightness: Brightness.light,
-      // ),
-      // darkTheme: ThemeData(
-      //   colorSchemeSeed: Colors.green,
-      //   useMaterial3: true,
-      //   brightness: Brightness.dark,
-      // ),
+      theme: cupertinoTheme,
+      localizationsDelegates: const [
+        DefaultMaterialLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
       home: const TopPage(),
-      builder: (_, navigator) {
-        return Stack(
-          children: [
-            navigator!,
-            const AppLoading(),
-          ],
-        );
-      },
+      // homeをchildとして引き継いで、ローディング状態の時のみローディングをスタックする画面表示などが可能
+      // builder: (_, navigator) {
+      // return Consumer(
+      //     builder: (context, ref, _) {
+      //       final isLoading = ref.watch(overlayLoadingProvider);
+      //       return Stack(
+      //         children: [
+      //           child!,
+      //           // ローディング表示
+      //           if (isLoading) const OverlayLoading()
+      //         ],
+      //       );
+      //     },
+      //   );
+      // },
     );
   }
 }

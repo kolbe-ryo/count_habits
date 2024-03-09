@@ -8,6 +8,9 @@ environment:
 
 dependencies:
   collection: ^1.18.0
+  cupertino_icons: ^1.0.6
+  dots_indicator: ^3.0.0
+  dynamic_color: ^1.6.9
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.4.9
@@ -20,6 +23,7 @@ dependencies:
   riverpod_generator: ^2.3.9
   shared_preferences: ^2.2.2
   uuid: ^4.3.3
+  webview_flutter: ^4.7.0
 
 dev_dependencies:
   build_runner: ^2.4.8
@@ -29,6 +33,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   json_serializable: ^6.7.1
+  mockito: ^5.4.4
   mocktail: ^1.0.3
   test: ^1.24.9
 
@@ -43,4 +48,13 @@ flutter:
     - family: Hachi_Maru_Pop
       fonts:
         - asset: assets/fonts/Hachi_Maru_Pop/HachiMaruPop-Regular.ttf
+    - family: Rock_3D
+      fonts:
+        - asset: assets/fonts/Rock_3D/Rock3D-Regular.ttf
+    - family: Rampart_One
+      fonts:
+        - asset: assets/fonts/Rampart_One/RampartOne-Regular.ttf
+    - family: Kaisei_Opti
+      fonts:
+        - asset: assets/fonts/Kaisei_Opti/KaiseiOpti-Regular.ttf
   uses-material-design: true

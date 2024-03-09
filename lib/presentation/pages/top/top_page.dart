@@ -1,7 +1,10 @@
 import 'package:count_habits/presentation/pages/settings/settings_page.dart';
-import 'package:count_habits/presentation/pages/top/components/middle_navigation_items.dart';
-import 'package:count_habits/presentation/pages/top/components/middle_navigaton_bar.dart';
+import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
+import 'package:count_habits/presentation/pages/top/components/add_new_one_card.dart';
+import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,56 +13,57 @@ class TopPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: Text(
-              'Habit 365',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
+    final theme = ref.watch(cupertinoThemeProvider);
+
+    // TODO 読み込み完了後に画面表示する
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).push(SettingsPage.route()),
+          icon: const Icon(CupertinoIcons.add),
+        ),
+        trailing: IconButton(
+          onPressed: () => Navigator.of(context).push(SettingsPage.route()),
+          icon: const Icon(Icons.settings),
+        ),
+        middle: Text(
+          'Habit365',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            fontFamily: theme.textTheme.textStyle.fontFamily,
+          ),
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: PageController(viewportFraction: 0.9),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  if (index != 4 - 1) {
+                    return Column(
+                      children: [
+                        const SizedBox(height: 32),
+                        SummaryCard(index: index),
+                        const Expanded(child: AnimatedCounter()),
+                      ],
+                    );
+                  }
+                  return const Column(
+                    children: [
+                      Expanded(child: SizedBox()),
+                      AddNewOneCard(),
+                      Expanded(child: SizedBox()),
+                    ],
+                  );
+                },
               ),
             ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () => Navigator.of(context).push(SettingsPage.route()),
-          ),
-          const SizedBox(width: 16),
-        ],
-      ),
-      body: SafeArea(
-        child: PageView.builder(
-          controller: PageController(viewportFraction: 0.9),
-          itemCount: 4,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                const SummaryCard(),
-                const SizedBox(height: 16),
-                MiddleNavigationBar(index: index),
-                Expanded(
-                  child: MiddleNavigationItems(index),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {},
-      ),
-      // TODO: set Advertising
-      bottomNavigationBar: const ColoredBox(
-        color: Colors.amberAccent,
-        child: SizedBox(
-          height: 80,
+            DotsIndicator(dotsCount: 4),
+          ],
         ),
       ),
     );
