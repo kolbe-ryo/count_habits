@@ -8,11 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// final _textControllerProvider = Provider.family<TextEditingController, int>((ref, index) {
-//   final text = ref.watch(countersProvider.select((value) => value[index].counterValue.name));
-//   return TextEditingController(text: text);
-// });
-
 class SummaryCard extends ConsumerWidget {
   const SummaryCard({
     required this.counter,
@@ -37,7 +32,6 @@ class SummaryCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // TODO アイコンのカラーを変更する
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

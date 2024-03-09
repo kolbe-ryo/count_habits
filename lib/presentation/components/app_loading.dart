@@ -15,3 +15,11 @@ class AppLoading extends ConsumerWidget {
     );
   }
 }
+
+// TODO ここに
+Future<void> action(BuildContext context, ) {
+  final loadingState = ref.read(loadingStateProvider.notifier)..show();
+                    logger.i('Delete counter id = ${counter.id}');
+                    await ref.read(counterUsecaseProvider).delete(counter.id);
+                    loadingState.hide();
+}
