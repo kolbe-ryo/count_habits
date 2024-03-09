@@ -73,24 +73,35 @@ class TopPage extends ConsumerWidget {
         );
       },
       error: (error, stack) {
-        Fluttertoast.showToast(msg: '読み込みに失敗しました。');
-        return CupertinoButton(
-          color: theme.barBackgroundColor,
-          // TODO 追加処理
-          onPressed: () {},
-          borderRadius: BorderRadius.circular(10),
-          child: Text(
-            '再読み込み',
-            style: TextStyle(
-              color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              fontFamily: theme.textTheme.textStyle.fontFamily,
+        Fluttertoast.showToast(
+          msg: '読み込みに失敗しました。',
+          backgroundColor: theme.primaryColor,
+          gravity: ToastGravity.TOP,
+          fontSize: 18,
+          textColor: Colors.white,
+        );
+        return CupertinoPageScaffold(
+          child: Center(
+            child: CupertinoButton(
+              color: theme.barBackgroundColor,
+              onPressed: () => ref.invalidate(countersProvider),
+              borderRadius: BorderRadius.circular(10),
+              child: Text(
+                '再読み込み',
+                style: TextStyle(
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: theme.textTheme.textStyle.fontFamily,
+                ),
+              ),
             ),
           ),
         );
       },
-      loading: () => const AppLoading(),
+      loading: () => const CupertinoPageScaffold(
+        child: AppLoading(),
+      ),
     );
   }
 }
