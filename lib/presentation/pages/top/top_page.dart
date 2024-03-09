@@ -27,7 +27,7 @@ class TopPage extends ConsumerWidget {
             trailing: TextButton(
               onPressed: () => Navigator.of(context).push(SettingsPage.route()),
               child: Text(
-                'Edit',
+                'Setting',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w300,

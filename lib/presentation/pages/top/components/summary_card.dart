@@ -43,8 +43,8 @@ class SummaryCard extends ConsumerWidget {
               children: [
                 //　TODO: TextFieldにして編集可能にする
                 Icon(
-                  Icons.check,
-                  color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+                  Icons.check_circle,
+                  color: theme.primaryContrastingColor,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -76,7 +76,7 @@ class SummaryCard extends ConsumerWidget {
                   },
                   child: Icon(
                     CupertinoIcons.delete,
-                    color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+                    color: theme.primaryColor,
                   ),
                 ),
               ],
