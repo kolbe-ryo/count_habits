@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'loading_provider.g.dart';
+part 'loading_state_provider.g.dart';
 
 @riverpod
-class LoadingNotifier extends Notifier<bool> {
+class LoadingState extends _$LoadingState {
   @override
   bool build() => false;
 
