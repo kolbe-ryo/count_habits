@@ -45,22 +45,22 @@ class TopPage extends ConsumerWidget {
                 Expanded(
                   child: PageView.builder(
                     controller: PageController(viewportFraction: 0.9),
-                    itemCount: data.length,
+                    itemCount: data.length + 1,
                     itemBuilder: (context, index) {
-                      if (index != data.length - 1) {
-                        return Column(
+                      if (index == data.length) {
+                        return const Column(
                           children: [
-                            const SizedBox(height: 32),
-                            SummaryCard(counter: data[index]),
-                            const Expanded(child: AnimatedCounter()),
+                            Expanded(child: SizedBox()),
+                            AddNewOneCard(),
+                            Expanded(child: SizedBox()),
                           ],
                         );
                       }
-                      return const Column(
+                      return Column(
                         children: [
-                          Expanded(child: SizedBox()),
-                          AddNewOneCard(),
-                          Expanded(child: SizedBox()),
+                          const SizedBox(height: 32),
+                          SummaryCard(counter: data[index]),
+                          const Expanded(child: AnimatedCounter()),
                         ],
                       );
                     },

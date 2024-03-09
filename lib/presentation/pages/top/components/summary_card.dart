@@ -70,6 +70,7 @@ class SummaryCard extends ConsumerWidget {
                 CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
+                    // TODO delete
                     logger.i('delete');
                   },
                   child: Icon(
