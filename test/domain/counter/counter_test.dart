@@ -1,5 +1,6 @@
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/counter/entity/value_object/contribution.dart';
+import 'package:count_habits/domain/counter/entity/value_object/counter_value.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -15,6 +16,29 @@ void main() {
       expect(counter.contribution.contributedAt.length, 1);
       final checkInCounter = counter.checkIn;
       expect(checkInCounter.contribution.contributedAt.length, 2);
+    });
+  });
+
+  group('didCheckInメソッドのロジックテスト', () {
+    test('', () {
+      final contribution = Contribution(
+        contributedAt: [
+          DateTime(2024, 1, 11),
+          DateTime(2024, 1, 12),
+          DateTime(2024, 1, 14),
+        ],
+      );
+      final counter = Counter(
+        id: '0',
+        counterValue: CounterValue.init(name: 'name'),
+        contribution: contribution,
+      );
+      // チェックイン前はfalseである
+      expect(counter.didCheckIn, false);
+
+      // チェックイン後はtrueである
+      final checkInCounter = counter.checkIn;
+      expect(checkInCounter.didCheckIn, true);
     });
   });
 

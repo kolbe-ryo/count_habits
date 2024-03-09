@@ -38,6 +38,13 @@ class Counter with _$Counter {
         ),
       );
 
+  /// Checks if a check-in was made today.
+  ///
+  /// Returns true if a check-in was made today, false otherwise.
+  bool get didCheckIn => contribution.contributedAt.any(
+        (datetime) => datetime.difference(DateTime.now()).inDays == 0,
+      );
+
   int get maxConsecutiveCount {
     final contributedAt = contribution.contributedAt;
     if (contributedAt.isEmpty) {
