@@ -42,6 +42,7 @@ flutter:
   assets:
     - assets/animation/spark.json
     - assets/animation/square.json
+    - assets/images/
   fonts:
     - family: Monomaniac_One
       fonts:
