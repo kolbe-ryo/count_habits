@@ -18,7 +18,11 @@ class AppLoading extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const Center(
-      child: CircularProgressIndicator(),
+      child: SizedBox(
+        height: 60,
+        width: 60,
+        child: CircularProgressIndicator(strokeWidth: 8),
+      ),
     );
   }
 }
