@@ -32,12 +32,11 @@ class SummaryCard extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //　TODO: TextFieldにして編集可能にする
+                //　TODO: TextFieldの変更を反映する
                 Icon(
                   Icons.check_circle,
-                  color: theme.primaryColor,
+                  color: counter.didCheckIn ? theme.primaryColor : theme.primaryColor.withOpacity(0.4),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -47,8 +46,7 @@ class SummaryCard extends ConsumerWidget {
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    placeholder: 'Enter your text here',
-                    padding: const EdgeInsets.all(12),
+                    placeholder: 'カウンタ名を入力',
                     focusNode: FocusNode(),
                     style: TextStyle(
                       color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
@@ -66,7 +64,7 @@ class SummaryCard extends ConsumerWidget {
                     () => ref.read(counterUsecaseProvider).delete(counter.id),
                   ),
                   child: Icon(
-                    CupertinoIcons.delete,
+                    CupertinoIcons.delete_solid,
                     color: theme.primaryColor,
                   ),
                 ),
