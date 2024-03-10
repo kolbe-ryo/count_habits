@@ -144,7 +144,7 @@ class _ReLoadingWidget extends ConsumerWidget {
           child: Text(
             '再読み込み',
             style: TextStyle(
-              color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+              color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
               fontSize: 15,
               fontWeight: FontWeight.w600,
               fontFamily: theme.textTheme.textStyle.fontFamily,

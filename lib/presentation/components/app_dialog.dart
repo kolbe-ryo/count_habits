@@ -28,9 +28,9 @@ Future<bool?> showDeleteDialog(BuildContext context) async {
   );
 }
 
-Future<bool?> showAddCounterDialog(BuildContext context) async {
+Future<T?> showAddCounterDialog<T>(BuildContext context) async {
   final controller = TextEditingController();
-  return showCupertinoDialog<bool?>(
+  return showCupertinoDialog(
     context: context,
     builder: (context) {
       return CupertinoAlertDialog(
@@ -53,12 +53,12 @@ Future<bool?> showAddCounterDialog(BuildContext context) async {
         actions: [
           CupertinoDialogAction(
             child: const Text('OK'),
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(context, controller.text),
           ),
           CupertinoDialogAction(
             textStyle: const TextStyle(color: Colors.black54),
             child: const Text('キャンセル'),
-            onPressed: () => Navigator.pop(context, false),
+            onPressed: () => Navigator.pop(context),
           ),
         ],
       );

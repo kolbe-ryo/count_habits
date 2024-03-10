@@ -50,7 +50,7 @@ class SummaryCard extends ConsumerWidget {
                     placeholder: 'カウンタ名を入力',
                     focusNode: FocusNode(),
                     style: TextStyle(
-                      color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+                      color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
                       fontFamily: theme.textTheme.textStyle.fontFamily,

@@ -1,4 +1,6 @@
+import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
 import 'package:count_habits/presentation/components/app_dialog.dart';
+import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +44,15 @@ class AddNewOneCard extends ConsumerWidget {
               const SizedBox(height: 16),
               CupertinoButton(
                 color: theme.barBackgroundColor,
-                // TODO 追加処理
                 onPressed: () async {
-                  await showAddCounterDialog(context);
+                  final counterName = await showAddCounterDialog<String?>(context);
+                  if (counterName == null) {
+                    return;
+                  }
+                  await loadingAction(
+                    ref,
+                    () => ref.read(counterUsecaseProvider).create(name: counterName),
+                  );
                 },
                 borderRadius: BorderRadius.circular(10),
                 child: Text(
