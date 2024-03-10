@@ -37,7 +37,7 @@ class SummaryCard extends ConsumerWidget {
                 //　TODO: TextFieldにして編集可能にする
                 Icon(
                   Icons.check_circle,
-                  color: theme.primaryContrastingColor,
+                  color: theme.primaryColor,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
