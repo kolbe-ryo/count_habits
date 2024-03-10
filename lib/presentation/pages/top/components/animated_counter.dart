@@ -28,6 +28,8 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
     final theme = ref.watch(cupertinoThemeProvider);
     return GestureDetector(
       onTap: () async {
+        // TODO: 一度カウントアップしたらさわれないようにする
+        // TODO: countupメソッドのロジックを追加する
         value++;
         setState(() {});
         await HapticFeedback.heavyImpact();
