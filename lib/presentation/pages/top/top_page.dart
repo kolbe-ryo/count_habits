@@ -35,7 +35,7 @@ class TopPage extends ConsumerWidget {
                 child: Text(
                   'Setting',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.w300,
                     fontFamily: theme.textTheme.textStyle.fontFamily,
                   ),
