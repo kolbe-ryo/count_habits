@@ -1,5 +1,6 @@
 import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
+import 'package:count_habits/presentation/components/app_dialog.dart';
 import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
@@ -49,7 +50,7 @@ class SummaryCard extends ConsumerWidget {
                     placeholder: 'カウンタ名を入力',
                     focusNode: FocusNode(),
                     style: TextStyle(
-                      color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                      color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
                       fontFamily: theme.textTheme.textStyle.fontFamily,
@@ -59,10 +60,15 @@ class SummaryCard extends ConsumerWidget {
                 // const Expanded(child: SizedBox.shrink()),
                 CupertinoButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () async => loadingAction(
-                    ref,
-                    () => ref.read(counterUsecaseProvider).delete(counter.id),
-                  ),
+                  onPressed: () async {
+                    final result = await showDeleteDialog(context);
+                    if (result ?? false) {
+                      await loadingAction(
+                        ref,
+                        () => ref.read(counterUsecaseProvider).delete(counter.id),
+                      );
+                    }
+                  },
                   child: Icon(
                     CupertinoIcons.delete_solid,
                     color: theme.primaryColor,

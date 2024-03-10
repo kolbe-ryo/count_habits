@@ -1,3 +1,4 @@
+import 'package:count_habits/presentation/components/app_dialog.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,9 @@ class AddNewOneCard extends ConsumerWidget {
               CupertinoButton(
                 color: theme.barBackgroundColor,
                 // TODO 追加処理
-                onPressed: () {},
+                onPressed: () async {
+                  await showAddCounterDialog(context);
+                },
                 borderRadius: BorderRadius.circular(10),
                 child: Text(
                   '追加する',

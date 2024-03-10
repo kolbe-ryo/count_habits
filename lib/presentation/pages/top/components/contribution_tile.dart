@@ -41,7 +41,7 @@ class ContributionTile extends ConsumerWidget {
               Expanded(
                 child: DefaultTextStyle(
                   style: TextStyle(
-                    color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                    color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
                   ),
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
