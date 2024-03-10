@@ -5,6 +5,7 @@ import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// TODO レイアウトを調整すること
 class ThemeSettingPage extends ConsumerWidget {
   const ThemeSettingPage({super.key});
 
