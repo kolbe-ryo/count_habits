@@ -1,4 +1,5 @@
 import 'package:count_habits/presentation/pages/settings/base_menu_page.dart';
+import 'package:count_habits/presentation/pages/settings/theme_setting_page.dart';
 import 'package:count_habits/presentation/pages/settings/webview_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/util/constants/const_text.dart';
@@ -31,7 +32,7 @@ class ContentCard extends ConsumerWidget {
       subTitle: 'アプリの使い方やその他の情報を確認できます',
       page: BaseMenuPage(
         title: title,
-        child: ThemeSettingForTest(),
+        child: ThemeSettingPage(),
       ),
     );
   }
