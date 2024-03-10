@@ -107,8 +107,16 @@ class TopPage extends ConsumerWidget {
         );
         return const _ReLoadingWidget();
       },
-      loading: () => const CupertinoPageScaffold(
-        child: AppLoading(),
+      loading: () => CupertinoPageScaffold(
+        child: Stack(
+          children: [
+            Center(
+              // TODO Assetsを設定する
+              child: Image.asset('assets/images/image_0.jpg'),
+            ),
+            const AppLoading(),
+          ],
+        ),
       ),
     );
   }
