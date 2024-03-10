@@ -100,7 +100,7 @@ class ContentCard extends ConsumerWidget {
                 title,
                 style: theme.textTheme.textStyle.copyWith(
                   fontSize: 26,
-                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
                 ),
               ),
               const SizedBox(height: 8),
@@ -108,7 +108,7 @@ class ContentCard extends ConsumerWidget {
                 subTitle,
                 style: TextStyle(
                   fontSize: 18,
-                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
                 ),
               ),
             ],
