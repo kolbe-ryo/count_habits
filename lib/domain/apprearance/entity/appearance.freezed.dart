@@ -20,7 +20,6 @@ Appearance _$AppearanceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Appearance {
-// TODO: IDを追加して、新規カウンタ作成時に、counterのIDと紐付けること
   int get colorId => throw _privateConstructorUsedError;
   int get fontFamilyId => throw _privateConstructorUsedError;
 
@@ -114,7 +113,6 @@ class _$AppearanceImpl implements _Appearance {
   factory _$AppearanceImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppearanceImplFromJson(json);
 
-// TODO: IDを追加して、新規カウンタ作成時に、counterのIDと紐付けること
   @override
   @JsonKey()
   final int colorId;
@@ -162,7 +160,7 @@ abstract class _Appearance implements Appearance {
   factory _Appearance.fromJson(Map<String, dynamic> json) =
       _$AppearanceImpl.fromJson;
 
-  @override // TODO: IDを追加して、新規カウンタ作成時に、counterのIDと紐付けること
+  @override
   int get colorId;
   @override
   int get fontFamilyId;
