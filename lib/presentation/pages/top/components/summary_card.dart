@@ -1,9 +1,8 @@
-import 'package:count_habits/application/state/loading_state_provider.dart';
 import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
+import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
-import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,12 +61,10 @@ class SummaryCard extends ConsumerWidget {
                 // const Expanded(child: SizedBox.shrink()),
                 CupertinoButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () async {
-                    final loadingState = ref.read(loadingStateProvider.notifier)..show();
-                    logger.i('Delete counter id = ${counter.id}');
-                    await ref.read(counterUsecaseProvider).delete(counter.id);
-                    loadingState.hide();
-                  },
+                  onPressed: () async => loadingAction(
+                    ref,
+                    () => ref.read(counterUsecaseProvider).delete(counter.id),
+                  ),
                   child: Icon(
                     CupertinoIcons.delete,
                     color: theme.primaryColor,

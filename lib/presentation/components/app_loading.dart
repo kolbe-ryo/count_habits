@@ -1,3 +1,4 @@
+import 'package:count_habits/application/state/loading_state_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,10 +17,11 @@ class AppLoading extends ConsumerWidget {
   }
 }
 
-// TODO ここに
-Future<void> action(BuildContext context, ) {
+Future<void> loadingAction(
+  WidgetRef ref,
+  Future<void> Function() action,
+) async {
   final loadingState = ref.read(loadingStateProvider.notifier)..show();
-                    logger.i('Delete counter id = ${counter.id}');
-                    await ref.read(counterUsecaseProvider).delete(counter.id);
-                    loadingState.hide();
+  await action();
+  loadingState.hide();
 }
