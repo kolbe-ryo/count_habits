@@ -26,7 +26,7 @@ const customColorScheme0 = CupertinoThemeData(
 
 // メロン
 const customColorScheme1 = CupertinoThemeData(
-  brightness: Brightness.light,
+  brightness: Brightness.dark,
   primaryColor: Color(0xFFF2C18D),
   primaryContrastingColor: Color(0xFFF6F193),
   scaffoldBackgroundColor: Color(0xFFC5EBAA),
@@ -61,7 +61,7 @@ const customColorScheme4 = CupertinoThemeData(
 );
 
 const customColorScheme5 = CupertinoThemeData(
-  brightness: Brightness.light,
+  brightness: Brightness.dark,
   primaryColor: Color(0xFF1976D2),
   primaryContrastingColor: Color(0xFF0D47A1),
   scaffoldBackgroundColor: Color(0xFFBBDEFB),
@@ -69,7 +69,7 @@ const customColorScheme5 = CupertinoThemeData(
 );
 
 const customColorScheme6 = CupertinoThemeData(
-  brightness: Brightness.light,
+  brightness: Brightness.dark,
   primaryColor: Color(0xFF388E3C),
   primaryContrastingColor: Color(0xFF4CAF50),
   scaffoldBackgroundColor: Color(0xFF689F38),
@@ -77,7 +77,7 @@ const customColorScheme6 = CupertinoThemeData(
 );
 
 const customColorScheme7 = CupertinoThemeData(
-  brightness: Brightness.light,
+  brightness: Brightness.dark,
   primaryColor: Color(0xFFE57373),
   primaryContrastingColor: Color(0xFFB71C1C),
   scaffoldBackgroundColor: Color(0xFF880E4F),
