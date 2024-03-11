@@ -7,6 +7,7 @@ import 'package:count_habits/presentation/pages/top/components/contribution_tile
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SummaryCard extends ConsumerWidget {
   const SummaryCard({
@@ -81,6 +82,13 @@ class SummaryCard extends ConsumerWidget {
                       await loadingAction(
                         ref,
                         () => ref.read(counterUsecaseProvider).delete(counter.id),
+                      );
+                      await Fluttertoast.showToast(
+                        msg: '削除しました',
+                        backgroundColor: theme.primaryColor,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 18,
+                        textColor: Colors.white,
                       );
                     }
                   },
