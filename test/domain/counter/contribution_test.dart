@@ -15,5 +15,9 @@ void main() {
       const contribution = Contribution(contributedAt: []);
       expect(contribution.getAllDates.isEmpty, true);
     });
+
+    test('contributionがない場合、空のリストを返却する', () {});
+    test('contributionがない場合、空のリストを返却する', () {});
+    test('contributionがない場合、空のリストを返却する', () {});
   });
 }

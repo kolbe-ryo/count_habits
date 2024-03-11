@@ -17,21 +17,18 @@ class Contribution with _$Contribution {
   factory Contribution.fromJson(Map<String, dynamic> json) => _$ContributionFromJson(json);
 
   List<bool> get getAllDates {
-    // ありえないが、リストが空の場合、エラーを投げる
-    if (contributedAt.isEmpty) {
-      return [];
-    }
+    final customCountribute = contributedAt.isNotEmpty ? contributedAt : [DateTime.now()];
 
     final DateTime firstDate;
 
     // 最初のカウント日が日曜の場合はそのまま使用する
-    if (contributedAt.first.weekday == DateTime.sunday) {
-      firstDate = contributedAt.first;
+    if (customCountribute.first.weekday == DateTime.sunday) {
+      firstDate = customCountribute.first;
     } else {
-      firstDate = contributedAt.first.subtract(Duration(days: contributedAt.first.weekday));
+      firstDate = customCountribute.first.subtract(Duration(days: customCountribute.first.weekday));
     }
 
-    final lastDate = contributedAt.last;
+    final lastDate = customCountribute.last;
 
     // 開始日から終了日まででcontributeされている順にtrueを返却するリストを作成
     final allDates = <bool>[];
