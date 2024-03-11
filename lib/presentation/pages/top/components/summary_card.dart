@@ -4,7 +4,6 @@ import 'package:count_habits/presentation/components/app_dialog.dart';
 import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
-import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

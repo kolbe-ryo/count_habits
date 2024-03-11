@@ -5,6 +5,7 @@ import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddNewOneCard extends ConsumerWidget {
   const AddNewOneCard({super.key});
@@ -45,13 +46,21 @@ class AddNewOneCard extends ConsumerWidget {
               CupertinoButton(
                 color: theme.barBackgroundColor,
                 onPressed: () async {
+                  // 追加するカウンタがnullまたは空の場合は何もしない
                   final counterName = await showAddCounterDialog<String?>(context);
-                  if (counterName == null) {
+                  if (counterName?.isEmpty ?? true) {
                     return;
                   }
                   await loadingAction(
                     ref,
-                    () => ref.read(counterUsecaseProvider).create(name: counterName),
+                    () => ref.read(counterUsecaseProvider).create(name: counterName!),
+                  );
+                  await Fluttertoast.showToast(
+                    msg: '「$counterName」を追加しました',
+                    backgroundColor: theme.primaryColor,
+                    gravity: ToastGravity.CENTER,
+                    fontSize: 18,
+                    textColor: Colors.white,
                   );
                 },
                 borderRadius: BorderRadius.circular(10),
