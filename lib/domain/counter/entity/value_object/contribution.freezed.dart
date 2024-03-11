@@ -97,7 +97,7 @@ class __$$ContributionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ContributionImpl extends _Contribution {
-  const _$ContributionImpl({required final List<DateTime> contributedAt})
+  const _$ContributionImpl({final List<DateTime> contributedAt = const []})
       : _contributedAt = contributedAt,
         super._();
 
@@ -106,6 +106,7 @@ class _$ContributionImpl extends _Contribution {
 
   final List<DateTime> _contributedAt;
   @override
+  @JsonKey()
   List<DateTime> get contributedAt {
     if (_contributedAt is EqualUnmodifiableListView) return _contributedAt;
     // ignore: implicit_dynamic_type
@@ -146,7 +147,7 @@ class _$ContributionImpl extends _Contribution {
 }
 
 abstract class _Contribution extends Contribution {
-  const factory _Contribution({required final List<DateTime> contributedAt}) =
+  const factory _Contribution({final List<DateTime> contributedAt}) =
       _$ContributionImpl;
   const _Contribution._() : super._();
 

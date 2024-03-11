@@ -14,6 +14,7 @@ class ContributionTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
+    final getAllDates = contribution.getAllDates;
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -45,7 +46,7 @@ class ContributionTile extends ConsumerWidget {
                 flex: 8,
                 child: Center(
                   child: GridView.builder(
-                    itemCount: contribution.getAllDates.length,
+                    itemCount: getAllDates.length,
                     scrollDirection: Axis.horizontal,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 7,
@@ -56,7 +57,7 @@ class ContributionTile extends ConsumerWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: contribution.getAllDates[index] ? theme.primaryColor : Colors.grey[300],
+                          color: getAllDates[index] ? theme.primaryColor : Colors.grey[300],
                           borderRadius: BorderRadius.circular(2),
                         ),
                       );

@@ -6,36 +6,47 @@ part 'contribution.g.dart';
 @freezed
 class Contribution with _$Contribution {
   const factory Contribution({
-    required List<DateTime> contributedAt,
+    @Default([]) List<DateTime> contributedAt,
   }) = _Contribution;
 
   const Contribution._();
 
-  /// Use this for initializing Contribution
-  factory Contribution.init() => Contribution(contributedAt: [DateTime.now()]);
-
   factory Contribution.fromJson(Map<String, dynamic> json) => _$ContributionFromJson(json);
 
   List<bool> get getAllDates {
-    final customCountribute = contributedAt.isNotEmpty ? contributedAt : [DateTime.now()];
+    final isInitial = contributedAt.isEmpty;
+
+    // 初回追加時は空のリストになるので、擬似的に初日を追加する
+    final now = DateTime.now();
+    final customContribution = isInitial ? [DateTime(now.year, now.month, now.day)] : contributedAt;
 
     final DateTime firstDate;
 
     // 最初のカウント日が日曜の場合はそのまま使用する
-    if (customCountribute.first.weekday == DateTime.sunday) {
-      firstDate = customCountribute.first;
+    if (customContribution.first.weekday == DateTime.sunday) {
+      firstDate = customContribution.first;
     } else {
-      firstDate = customCountribute.first.subtract(Duration(days: customCountribute.first.weekday));
+      firstDate = customContribution.first.subtract(Duration(days: customContribution.first.weekday));
     }
 
-    final lastDate = customCountribute.last;
+    final lastDate = customContribution.last;
 
     // 開始日から終了日まででcontributeされている順にtrueを返却するリストを作成
     final allDates = <bool>[];
     for (var date = firstDate; !date.isAfter(lastDate); date = date.add(const Duration(days: 1))) {
-      contributedAt.contains(date) ? allDates.add(true) : allDates.add(false);
+      // カウンタ追加初日は、カウントアップするまでは空なのでfalseであること
+      if (isInitial) {
+        allDates.add(false);
+      } else {
+        contributedAt.contains(date) ? allDates.add(true) : allDates.add(false);
+      }
     }
 
+    // 最初のカウンタはカウントアップ後に追加するので一旦削除する
+    if (isInitial) {
+      allDates.removeLast();
+      return allDates;
+    }
     return allDates;
   }
 }

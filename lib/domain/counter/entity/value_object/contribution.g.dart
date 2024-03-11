@@ -8,9 +8,10 @@ part of 'contribution.dart';
 
 _$ContributionImpl _$$ContributionImplFromJson(Map<String, dynamic> json) =>
     _$ContributionImpl(
-      contributedAt: (json['contributedAt'] as List<dynamic>)
-          .map((e) => DateTime.parse(e as String))
-          .toList(),
+      contributedAt: (json['contributedAt'] as List<dynamic>?)
+              ?.map((e) => DateTime.parse(e as String))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$ContributionImplToJson(_$ContributionImpl instance) =>
