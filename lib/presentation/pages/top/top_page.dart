@@ -7,6 +7,7 @@ import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/add_new_one_card.dart';
 import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
+import 'package:count_habits/util/constants/background_images.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -105,11 +106,6 @@ class TopPage extends ConsumerWidget {
         return const _ReLoadingWidget();
       },
       loading: () {
-        final backgroundImages = [
-          'assets/images/image_0.jpg',
-          'assets/images/image_1.jpg',
-          'assets/images/image_2.png',
-        ];
         final randomImage = backgroundImages[Random().nextInt(backgroundImages.length)];
         return CupertinoPageScaffold(
           child: DecoratedBox(
