@@ -4,6 +4,7 @@ import 'package:count_habits/presentation/components/app_dialog.dart';
 import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
+import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,8 @@ class SummaryCard extends ConsumerWidget {
   });
 
   final Counter counter;
+
+  bool isSameText(String text) => counter.counterValue.name == text;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,7 +37,6 @@ class SummaryCard extends ConsumerWidget {
           children: [
             Row(
               children: [
-                //　TODO: TextFieldの変更を反映する
                 Icon(
                   Icons.check_circle,
                   color: counter.didCheckIn ? theme.primaryColor : theme.primaryColor.withOpacity(0.4),
@@ -55,6 +57,20 @@ class SummaryCard extends ConsumerWidget {
                       fontWeight: FontWeight.w600,
                       fontFamily: theme.textTheme.textStyle.fontFamily,
                     ),
+                    onSubmitted: (text) {
+                      // テキストが変わっていない場合何もしない
+                      if (isSameText(text)) {
+                        return;
+                      }
+                      // テキストを変更するだけでローディングは不自然なので、非同期的に更新する
+                      ref.read(counterUsecaseProvider).update(id: counter.id, name: controller.text);
+                    },
+                    onTapOutside: (_) {
+                      if (isSameText(controller.text)) {
+                        return;
+                      }
+                      ref.read(counterUsecaseProvider).update(id: counter.id, name: controller.text);
+                    },
                   ),
                 ),
                 // const Expanded(child: SizedBox.shrink()),
