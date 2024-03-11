@@ -1,13 +1,13 @@
 import 'dart:math';
 
 import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
+import 'package:count_habits/gen/assets.gen.dart';
 import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/settings/settings_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/add_new_one_card.dart';
 import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
-import 'package:count_habits/util/constants/background_images.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -106,12 +106,13 @@ class TopPage extends ConsumerWidget {
         return const _ReLoadingWidget();
       },
       loading: () {
-        final randomImage = backgroundImages[Random().nextInt(backgroundImages.length)];
+        final images = Assets.images.values;
+        final randomImage = images[Random().nextInt(images.length)];
         return CupertinoPageScaffold(
           child: DecoratedBox(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(randomImage),
+                image: AssetImage(randomImage.path),
                 fit: BoxFit.cover,
               ),
             ),
