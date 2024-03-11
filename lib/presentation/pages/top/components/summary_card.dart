@@ -91,7 +91,7 @@ class SummaryCard extends ConsumerWidget {
                 ),
               ],
             ),
-            const ContributionTile(),
+            ContributionTile(contribution: counter.contribution),
           ],
         ),
       ),

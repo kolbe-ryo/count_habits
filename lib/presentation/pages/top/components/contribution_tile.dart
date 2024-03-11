@@ -1,10 +1,16 @@
 import 'dart:math' as math;
+import 'package:count_habits/domain/counter/entity/value_object/contribution.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContributionTile extends ConsumerWidget {
-  const ContributionTile({super.key});
+  const ContributionTile({
+    required this.contribution,
+    super.key,
+  });
+
+  final Contribution contribution;
 
   // TODO repoから取得した値を反映すること
   List<int> get getCommit {
@@ -73,7 +79,7 @@ class ContributionTile extends ConsumerWidget {
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: buildColor(commit[i], theme.primaryColor),
+                          color: commit[i] == 0 ? Colors.grey[300] : theme.primaryColor,
                           borderRadius: BorderRadius.circular(2),
                         ),
                       );
