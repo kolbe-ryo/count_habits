@@ -105,7 +105,7 @@ class TopPage extends ConsumerWidget {
           fontSize: 18,
           textColor: Colors.white,
         );
-        return const _ReLoadingWidget();
+        return const ReLoadingWidget();
       },
       loading: () {
         final images = Assets.images.values;
@@ -124,33 +124,6 @@ class TopPage extends ConsumerWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _ReLoadingWidget extends ConsumerWidget {
-  const _ReLoadingWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(cupertinoThemeProvider);
-    return CupertinoPageScaffold(
-      child: Center(
-        child: CupertinoButton(
-          color: theme.barBackgroundColor,
-          onPressed: () => ref.invalidate(countersProvider),
-          borderRadius: BorderRadius.circular(10),
-          child: Text(
-            '再読み込み',
-            style: TextStyle(
-              color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              fontFamily: theme.textTheme.textStyle.fontFamily,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

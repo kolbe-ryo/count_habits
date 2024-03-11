@@ -10,4 +10,10 @@ void main() {
       expect(contribution.contributedAt.first.difference(datetimeNow).inDays == 0, true);
     });
   });
+  group('Contribution getAllDatesのテスト', () {
+    test('contributionがない場合、空のリストを返却する', () {
+      const contribution = Contribution(contributedAt: []);
+      expect(contribution.getAllDates.isEmpty, true);
+    });
+  });
 }

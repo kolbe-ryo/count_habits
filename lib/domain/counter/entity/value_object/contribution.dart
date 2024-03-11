@@ -17,6 +17,11 @@ class Contribution with _$Contribution {
   factory Contribution.fromJson(Map<String, dynamic> json) => _$ContributionFromJson(json);
 
   List<bool> get getAllDates {
+    // ありえないが、リストが空の場合、エラーを投げる
+    if (contributedAt.isEmpty) {
+      return [];
+    }
+
     final DateTime firstDate;
 
     // 最初のカウント日が日曜の場合はそのまま使用する
