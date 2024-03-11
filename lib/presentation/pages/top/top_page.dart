@@ -79,7 +79,9 @@ class TopPage extends ConsumerWidget {
                           children: [
                             const SizedBox(height: 32),
                             SummaryCard(counter: data[index]),
-                            const Expanded(child: AnimatedCounter()),
+                            Expanded(
+                              child: AnimatedCounter(counter: data[index]),
+                            ),
                           ],
                         );
                       },
