@@ -35,6 +35,8 @@ class Contribution with _$Contribution {
     final allDates = <bool>[];
     for (var date = firstDate; !date.isAfter(lastDate); date = date.add(const Duration(days: 1))) {
       // カウンタ追加初日は、カウントアップするまでは空なのでfalseであること
+
+      // TODO: 最終的にisInitialだと削除するからここは不要？確認すること
       if (isInitial) {
         allDates.add(false);
       } else {

@@ -15,12 +15,41 @@ void main() {
     });
   });
   group('Contribution getAllDatesのテスト', () {
-    test('カウンタ作成時には、作成日を含まない全てfalseのリストを返却する（テスト日が日曜日の以外場合）', () {
-      const contribution = Contribution(contributedAt: []);
-      expect(contribution.getAllDates.isEmpty, true);
+    test('カウンタ作成時には、作成日を含まない全てfalseのリストを返却する（テスト日が日曜の場合は長さ0のリスト）', () {
+      const contribution = Contribution();
+      final allDates = contribution.getAllDates;
+      switch (DateTime.now().weekday) {
+        case DateTime.sunday:
+          expect(allDates.length, 0);
+          expect(allDates.any((element) => element), false);
+          return;
+        case DateTime.monday:
+          expect(allDates.length, 1);
+          expect(allDates.any((element) => element), false);
+          return;
+        case DateTime.tuesday:
+          expect(allDates.length, 2);
+          expect(allDates.any((element) => element), false);
+          return;
+        case DateTime.wednesday:
+          expect(allDates.length, 3);
+          expect(allDates.any((element) => element), false);
+          return;
+        case DateTime.thursday:
+          expect(allDates.length, 4);
+          expect(allDates.any((element) => element), false);
+          return;
+        case DateTime.friday:
+          expect(allDates.length, 5);
+          expect(allDates.any((element) => element), false);
+          return;
+        case DateTime.saturday:
+          expect(allDates.length, 6);
+          expect(allDates.any((element) => element), false);
+          return;
+      }
     });
-
-    test('カウンタ作成時には、空のリストを返却する（テスト日が日曜日の場合）', () {});
-    test('過去のcontributionがある場合、その日付はtrueで返却されること', () {});
+    test('過去のcontributionがある場合、それらの日付はtrueで返却されること', () {});
+    test('過去のcontributionがある場合、作成日とそれらの日付の間の数だけfalseが返却されること', () {});
   });
 }
