@@ -15,13 +15,12 @@ void main() {
     });
   });
   group('Contribution getAllDatesのテスト', () {
-    test('カウンタ作成時には、全てfalseのリストを返却する（テスト日が日曜日の場合長さ1のリスト）', () {
+    test('カウンタ作成時には、作成日を含まない全てfalseのリストを返却する（テスト日が日曜日の以外場合）', () {
       const contribution = Contribution(contributedAt: []);
       expect(contribution.getAllDates.isEmpty, true);
     });
 
-    test('contributionがない場合、空のリストを返却する', () {});
-    test('contributionがない場合、空のリストを返却する', () {});
-    test('contributionがない場合、空のリストを返却する', () {});
+    test('カウンタ作成時には、空のリストを返却する（テスト日が日曜日の場合）', () {});
+    test('過去のcontributionがある場合、その日付はtrueで返却されること', () {});
   });
 }
