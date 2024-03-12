@@ -20,7 +20,7 @@ void main() {
   });
 
   group('didCheckInメソッドのロジックテスト', () {
-    test('', () {
+    test('checkInメソッドによって、didCheckInがtrueになること', () {
       final contribution = Contribution(
         contributedAt: [
           DateTime(2024, 1, 11),
