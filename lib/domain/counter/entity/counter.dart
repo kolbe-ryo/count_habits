@@ -21,21 +21,31 @@ class Counter with _$Counter {
     return Counter(
       id: const Uuid().v4(),
       counterValue: CounterValue.init(name: name),
-      contribution: Contribution.init(),
+      contribution: const Contribution(),
     );
   }
 
   factory Counter.fromJson(Map<String, dynamic> json) => _$CounterFromJson(json);
 
   /// Add Counter and Contribution in the last
-  Counter get checkIn => copyWith(
-        counterValue: counterValue.increment,
-        contribution: Contribution(
-          contributedAt: [
-            ...contribution.contributedAt,
-            DateTime.now(),
-          ],
-        ),
+  Counter get checkIn {
+    final now = DateTime.now();
+    return copyWith(
+      counterValue: counterValue.increment,
+      contribution: Contribution(
+        contributedAt: [
+          ...contribution.contributedAt,
+          DateTime(now.year, now.month, now.day),
+        ],
+      ),
+    );
+  }
+
+  /// Checks if a check-in was made today.
+  ///
+  /// Returns true if a check-in was made today, false otherwise.
+  bool get didCheckIn => contribution.contributedAt.any(
+        (datetime) => datetime.difference(DateTime.now()).inDays == 0,
       );
 
   int get maxConsecutiveCount {

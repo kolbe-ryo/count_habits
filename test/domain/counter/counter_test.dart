@@ -1,5 +1,6 @@
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/counter/entity/value_object/contribution.dart';
+import 'package:count_habits/domain/counter/entity/value_object/counter_value.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -12,20 +13,38 @@ void main() {
     });
     test('メソッドコールでDateTimeが1件増加すること', () {
       final counter = Counter.init(name: 'counter');
-      expect(counter.contribution.contributedAt.length, 1);
+      expect(counter.contribution.contributedAt.length, 0);
       final checkInCounter = counter.checkIn;
-      expect(checkInCounter.contribution.contributedAt.length, 2);
+      expect(checkInCounter.contribution.contributedAt.length, 1);
+    });
+  });
+
+  group('didCheckInメソッドのロジックテスト', () {
+    test('checkInメソッドによって、didCheckInがtrueになること', () {
+      final contribution = Contribution(
+        contributedAt: [
+          DateTime(2024, 1, 11),
+          DateTime(2024, 1, 12),
+          DateTime(2024, 1, 14),
+        ],
+      );
+      final counter = Counter(
+        id: '0',
+        counterValue: CounterValue.init(name: 'name'),
+        contribution: contribution,
+      );
+      // チェックイン前はfalseである
+      expect(counter.didCheckIn, false);
+
+      // チェックイン後はtrueである
+      final checkInCounter = counter.checkIn;
+      expect(checkInCounter.didCheckIn, true);
     });
   });
 
   group('maxConsecutiveCountメソッドのロジックテスト', () {
-    test('maxConsecutiveCountメソッドで初期化時には1が返却されること', () {
+    test('maxConsecutiveCountメソッドで初期化時には0が返却されること', () {
       final counter = Counter.init(name: 'counter');
-      expect(counter.maxConsecutiveCount, 1);
-    });
-    test('contributionが空の場合、0が返却されること', () {
-      // 構造上ありえないケースだが、ロジックとして存在するためテストする
-      final counter = Counter.init(name: 'counter').copyWith(contribution: const Contribution(contributedAt: []));
       expect(counter.maxConsecutiveCount, 0);
     });
     test('複数のDateTimeが登録されている場合、最大値が取得可能なこと', () {

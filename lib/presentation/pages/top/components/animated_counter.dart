@@ -1,24 +1,38 @@
+import 'dart:async';
+
+import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
+import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/util/library/custom_animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
 class AnimatedCounter extends ConsumerStatefulWidget {
-  const AnimatedCounter({super.key});
+  const AnimatedCounter({
+    required this.counter,
+    super.key,
+  });
+
+  final Counter counter;
 
   @override
   ConsumerState<AnimatedCounter> createState() => _AnimatedCounterState();
 }
 
 class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTickerProviderStateMixin {
-  int value = 0;
+  late int _value;
+
+  late bool _didChechIn;
 
   late final AnimationController _controller;
 
   @override
   void initState() {
+    _value = widget.counter.counterValue.count;
+    _didChechIn = widget.counter.didCheckIn;
     _controller = AnimationController(vsync: this);
     super.initState();
   }
@@ -28,8 +42,25 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
     final theme = ref.watch(cupertinoThemeProvider);
     return GestureDetector(
       onTap: () async {
-        value++;
+        if (_didChechIn) {
+          await Fluttertoast.showToast(
+            msg: '本日はカウント済みです',
+            backgroundColor: theme.primaryColor,
+            gravity: ToastGravity.CENTER,
+            fontSize: 18,
+            textColor: Colors.white,
+          );
+          return;
+        }
+        // 二重タップ防止とRepository更新
+        _didChechIn = true;
+        unawaited(ref.read(counterUsecaseProvider).countUp(widget.counter.id));
+
+        // カウンタの更新処理
+        _value++;
         setState(() {});
+
+        // アニメーション・バイブ処理
         await HapticFeedback.heavyImpact();
         await Future<void>.delayed(const Duration(milliseconds: 600));
         await HapticFeedback.vibrate();
@@ -65,7 +96,7 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
                   ),
                 ],
               ),
-              value: value,
+              value: _value,
             ),
           ),
         ],

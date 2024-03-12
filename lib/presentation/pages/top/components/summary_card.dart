@@ -1,27 +1,28 @@
+import 'package:count_habits/application/usecase/counter/counter_usecase.dart';
+import 'package:count_habits/domain/counter/entity/counter.dart';
+import 'package:count_habits/presentation/components/app_dialog.dart';
+import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/contribution_tile.dart';
-import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// final _textControllerProvider = Provider.family<TextEditingController, int>((ref, index) {
-//   final text = ref.watch(countersProvider.select((value) => value[index].counterValue.name));
-//   return TextEditingController(text: text);
-// });
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SummaryCard extends ConsumerWidget {
   const SummaryCard({
-    required this.index,
+    required this.counter,
     super.key,
   });
 
-  final int index;
+  final Counter counter;
+
+  bool isSameText(String text) => counter.counterValue.name == text;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
-    // final controller = ref.watch(_textControllerProvider(index));
+    final controller = TextEditingController(text: counter.counterValue.name);
     return Card(
       elevation: 10,
       color: theme.barBackgroundColor,
@@ -34,51 +35,71 @@ class SummaryCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CupertinoTextField(
-              controller: TextEditingController(),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              placeholder: 'Enter your text here',
-              padding: const EdgeInsets.all(12),
-              focusNode: FocusNode(),
-              style: TextStyle(
-                color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-              ),
-            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //　TODO: TextFieldにして編集可能にする
                 Icon(
-                  Icons.check,
-                  color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+                  Icons.check_circle,
+                  color: counter.didCheckIn ? theme.primaryColor : theme.primaryColor.withOpacity(0.4),
                 ),
                 const SizedBox(width: 8),
-                Text(
-                  'Contribution',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: theme.textTheme.textStyle.fontFamily,
-                    color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                Expanded(
+                  child: CupertinoTextField(
+                    controller: controller,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    placeholder: 'カウンタ名を入力',
+                    focusNode: FocusNode(),
+                    style: TextStyle(
+                      color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: theme.textTheme.textStyle.fontFamily,
+                    ),
+                    onSubmitted: (text) {
+                      // テキストが変わっていない場合何もしない
+                      if (isSameText(text)) {
+                        return;
+                      }
+                      // テキストを変更するだけでローディングは不自然なので、非同期的に更新する
+                      ref.read(counterUsecaseProvider).update(id: counter.id, name: controller.text);
+                    },
+                    onTapOutside: (_) {
+                      if (isSameText(controller.text)) {
+                        return;
+                      }
+                      ref.read(counterUsecaseProvider).update(id: counter.id, name: controller.text);
+                    },
                   ),
                 ),
-                const Expanded(child: SizedBox.shrink()),
+                // const Expanded(child: SizedBox.shrink()),
                 CupertinoButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {
-                    logger.i('delete');
+                  onPressed: () async {
+                    final result = await showDeleteDialog(context);
+                    if (result ?? false) {
+                      await loadingAction(
+                        ref,
+                        () => ref.read(counterUsecaseProvider).delete(counter.id),
+                      );
+                      await Fluttertoast.showToast(
+                        msg: '削除しました',
+                        backgroundColor: theme.primaryColor,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 18,
+                        textColor: Colors.white,
+                      );
+                    }
                   },
                   child: Icon(
-                    CupertinoIcons.delete,
-                    color: theme.brightness == Brightness.light ? Colors.black54 : Colors.white,
+                    CupertinoIcons.delete_solid,
+                    color: theme.primaryColor,
                   ),
                 ),
               ],
             ),
-            const ContributionTile(),
+            ContributionTile(contribution: counter.contribution),
           ],
         ),
       ),

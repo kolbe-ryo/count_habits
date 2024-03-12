@@ -13,7 +13,10 @@ dependencies:
   dynamic_color: ^1.6.9
   flutter:
     sdk: flutter
+  flutter_gen_runner: ^5.4.0
+  flutter_launcher_icons: ^0.13.1
   flutter_riverpod: ^2.4.9
+  fluttertoast: ^8.2.4
   freezed: ^2.4.6
   freezed_annotation: ^2.4.1
   logger: ^2.0.2+1
@@ -39,8 +42,8 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/animation/spark.json
-    - assets/animation/square.json
+    - assets/animation/
+    - assets/images/
   fonts:
     - family: Monomaniac_One
       fonts:
@@ -58,3 +61,7 @@ flutter:
       fonts:
         - asset: assets/fonts/Kaisei_Opti/KaiseiOpti-Regular.ttf
   uses-material-design: true
+
+flutter_icons:
+  ios: true
+  image_path: 'assets/images/logo.png'
