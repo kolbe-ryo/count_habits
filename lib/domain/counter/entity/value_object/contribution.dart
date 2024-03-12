@@ -34,20 +34,12 @@ class Contribution with _$Contribution {
     // 開始日から終了日まででcontributeされている順にtrueを返却するリストを作成
     final allDates = <bool>[];
     for (var date = firstDate; !date.isAfter(lastDate); date = date.add(const Duration(days: 1))) {
-      // カウンタ追加初日は、カウントアップするまでは空なのでfalseであること
-
-      // TODO: 最終的にisInitialだと削除するからここは不要？確認すること
-      if (isInitial) {
-        allDates.add(false);
-      } else {
-        contributedAt.contains(date) ? allDates.add(true) : allDates.add(false);
-      }
+      contributedAt.any((e) => e.difference(date).inDays == 0) ? allDates.add(true) : allDates.add(false);
     }
 
-    // 最初のカウンタはカウントアップ後に追加するので一旦削除する
+    // 最初のカウンタはカウントアップ後に追加するので一旦contribution配列から削除する
     if (isInitial) {
       allDates.removeLast();
-      return allDates;
     }
     return allDates;
   }
