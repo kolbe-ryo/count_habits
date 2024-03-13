@@ -1,27 +1,33 @@
+import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ColorStyleButton extends ConsumerWidget {
-  const ColorStyleButton({super.key});
+  const ColorStyleButton({
+    required this.theme,
+    required this.index,
+    super.key,
+  });
+
+  final CupertinoThemeData theme;
+
+  final int index;
+
+  static const _circleRadius = 50.0;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const DecoratedBox(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 3,
-            spreadRadius: 1,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
+    return CupertinoButton(
+      borderRadius: const BorderRadius.all(Radius.circular(_circleRadius)),
+      color: theme.barBackgroundColor,
+      padding: EdgeInsets.zero,
       child: Icon(
         Icons.check,
-        size: 50,
+        color: theme.primaryContrastingColor,
+        size: _circleRadius,
       ),
+      onPressed: () => ref.read(appearanceStateProvider.notifier).setColorPalette(index),
     );
   }
 }
