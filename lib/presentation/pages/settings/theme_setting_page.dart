@@ -1,4 +1,5 @@
 import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
+import 'package:count_habits/presentation/pages/settings/components/color_style_button.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.g.dart';
 import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
@@ -56,6 +57,7 @@ class ThemeSettingPage extends ConsumerWidget {
             },
           ),
         ),
+        const ColorStyleButton(),
       ],
     );
   }
