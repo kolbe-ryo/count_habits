@@ -12,22 +12,25 @@ class TextStyleButton extends ConsumerWidget {
 
   final int index;
 
+  static const _text = '''
+  AIによって21世紀はどのように変革していくのだろうか。
+''';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
     return CupertinoButton(
-      borderRadius: const BorderRadius.all(Radius.circular(10)),
-      // color: theme.barBackgroundColor,
       padding: EdgeInsets.zero,
       child: Text(
-        textSchemes[index + 1] ?? '',
+        _text,
         style: TextStyle(
           color: theme.primaryColor,
           fontSize: 22,
-          fontFamily: textSchemes[index + 1],
+          fontFamily: textSchemes[index],
+          fontWeight: FontWeight.bold,
         ),
       ),
-      onPressed: () => ref.read(appearanceStateProvider.notifier).setFontFamily(index + 1),
+      onPressed: () => ref.read(appearanceStateProvider.notifier).setFontFamily(index),
     );
   }
 }

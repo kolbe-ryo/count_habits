@@ -2,6 +2,7 @@ import 'package:count_habits/presentation/pages/settings/components/color_style_
 import 'package:count_habits/presentation/pages/settings/components/text_style_button.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.g.dart';
+import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,7 @@ class ThemeSettingPage extends ConsumerWidget {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
+          // TODO デフォルトに戻すボタンを設置する
           CupertinoSliverNavigationBar(
             padding: const EdgeInsetsDirectional.only(start: 1),
             leading: IconButton(
@@ -31,9 +33,11 @@ class ThemeSettingPage extends ConsumerWidget {
               padding: const EdgeInsets.all(16),
               child: Text(
                 'Color',
-                style: theme.textTheme.textStyle.copyWith(
-                  fontSize: 26,
+                style: TextStyle(
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  fontSize: 26,
+                  // fontFamily: theme.textTheme.textStyle.fontFamily,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
@@ -54,15 +58,34 @@ class ThemeSettingPage extends ConsumerWidget {
                   .toList(),
             ),
           ),
-          SliverGrid.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-            children: colorSchemes.entries
-                .map(
-                  (e) => TextStyleButton(index: e.key),
-                )
-                .toList(),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 16),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                'Text Style',
+                style: TextStyle(
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            sliver: SliverGrid.count(
+              crossAxisCount: 1,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              childAspectRatio: 5,
+              children: textSchemes.entries.map((e) => TextStyleButton(index: e.key)).toList(),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 32),
           ),
         ],
       ),
