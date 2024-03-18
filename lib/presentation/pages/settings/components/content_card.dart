@@ -1,4 +1,3 @@
-import 'package:count_habits/presentation/pages/settings/base_menu_page.dart';
 import 'package:count_habits/presentation/pages/settings/theme_setting_page.dart';
 import 'package:count_habits/presentation/pages/settings/webview_page.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
@@ -25,15 +24,11 @@ class ContentCard extends ConsumerWidget {
   }
 
   factory ContentCard.themeSetting() {
-    const title = 'Theme';
     return const ContentCard._(
       iconData: Icons.palette_outlined,
-      title: title,
+      title: 'Theme',
       subTitle: 'アプリの使い方やその他の情報を確認できます',
-      page: BaseMenuPage(
-        title: title,
-        child: ThemeSettingPage(),
-      ),
+      page: ThemeSettingPage(),
     );
   }
 

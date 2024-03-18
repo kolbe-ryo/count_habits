@@ -99,27 +99,27 @@ void main() {
       );
       // 本日から10日前と5日前に2回のcontributionが存在するので、8日の間が存在し、日曜からずれた分だけ加算される
       final allDates = contribution.getAllDates;
-      switch (DateTime.now().weekday) {
+      switch (pastDateTime1.weekday) {
         case DateTime.sunday:
-          expect(allDates.where((e) => !e).length, 8 + 0);
+          expect(allDates.where((e) => !e).length, 4 + 0);
           return;
         case DateTime.monday:
-          expect(allDates.where((e) => !e).length, 8 + 1);
+          expect(allDates.where((e) => !e).length, 4 + 1);
           return;
         case DateTime.tuesday:
-          expect(allDates.where((e) => !e).length, 8 + 2);
+          expect(allDates.where((e) => !e).length, 4 + 2);
           return;
         case DateTime.wednesday:
-          expect(allDates.where((e) => !e).length, 8 + 3);
+          expect(allDates.where((e) => !e).length, 4 + 3);
           return;
         case DateTime.thursday:
-          expect(allDates.where((e) => !e).length, 8 + 4);
+          expect(allDates.where((e) => !e).length, 4 + 4);
           return;
         case DateTime.friday:
-          expect(allDates.where((e) => !e).length, 8 + 5);
+          expect(allDates.where((e) => !e).length, 4 + 5);
           return;
         case DateTime.saturday:
-          expect(allDates.where((e) => !e).length, 8 + 6);
+          expect(allDates.where((e) => !e).length, 4 + 6);
           return;
       }
     });
