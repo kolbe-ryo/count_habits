@@ -37,7 +37,7 @@ class ThemeSettingPage extends ConsumerWidget {
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                   fontSize: 26,
                   // fontFamily: theme.textTheme.textStyle.fontFamily,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -59,7 +59,7 @@ class ThemeSettingPage extends ConsumerWidget {
             ),
           ),
           const SliverToBoxAdapter(
-            child: SizedBox(height: 16),
+            child: SizedBox(height: 32),
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -69,7 +69,7 @@ class ThemeSettingPage extends ConsumerWidget {
                 style: TextStyle(
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                   fontSize: 26,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -85,7 +85,7 @@ class ThemeSettingPage extends ConsumerWidget {
             ),
           ),
           const SliverToBoxAdapter(
-            child: SizedBox(height: 32),
+            child: SizedBox(height: 64),
           ),
         ],
       ),
