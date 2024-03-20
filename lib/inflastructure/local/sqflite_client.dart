@@ -14,6 +14,8 @@ class SqfliteClient {
 
   Database? _database;
 
+  Database? get database => _database;
+
   // TODO: FixMe
   Future<void> openDb() async {
     final databasesPath = await getDatabasesPath();
