@@ -1,7 +1,19 @@
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
+import 'package:count_habits/inflastructure/local/sqflite_client.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+final localCounterRepositoryProvider = Provider<CounterRepository>(
+  (ref) => LocalCounterRepository(
+    sqfliteClient: ref.watch(sqfliteClientProvider),
+  ),
+);
 
 class LocalCounterRepository implements CounterRepository {
+  LocalCounterRepository({required this.sqfliteClient});
+
+  final SqfliteClient sqfliteClient;
+
   @override
   Future<Counter> checkIn(String id, {bool exception = false}) {
     // TODO: implement checkIn
