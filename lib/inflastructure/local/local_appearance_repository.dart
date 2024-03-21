@@ -1,6 +1,8 @@
 import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 
+// TODO: Providerを追加すること
+
 class LocalAppearanceRepository implements AppearanceRepository {
   @override
   Future<Appearance> fetch({bool exception = false}) {
