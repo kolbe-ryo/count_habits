@@ -28,10 +28,11 @@ class LocalCounterRepository implements CounterRepository {
     if (sqfliteClient.database == null) {
       await sqfliteClient.openDb();
     }
-    final created = await sqfliteClient.database!.insert(
+    await sqfliteClient.database!.insert(
       'counters',
       Counter.init(name: name).toJson(),
     );
+    return fetchAll();
   }
 
   @override
@@ -41,9 +42,14 @@ class LocalCounterRepository implements CounterRepository {
   }
 
   @override
-  Future<List<Counter>> fetchAll({bool exception = false}) {
-    // TODO: implement fetchAll
-    throw UnimplementedError();
+  Future<List<Counter>> fetchAll({
+    bool exception = false,
+  }) async {
+    if (sqfliteClient.database == null) {
+      await sqfliteClient.openDb();
+    }
+    final allData = await sqfliteClient.database!.query('counters');
+    return allData.map(Counter.fromJson).toList();
   }
 
   @override
