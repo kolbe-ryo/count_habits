@@ -26,7 +26,7 @@ class SqfliteClient {
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)',
+          'CREATE TABLE counters(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)',
         );
       },
     );

@@ -21,9 +21,17 @@ class LocalCounterRepository implements CounterRepository {
   }
 
   @override
-  Future<List<Counter>> create(String name, {bool exception = false}) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<List<Counter>> create(
+    String name, {
+    bool exception = false,
+  }) async {
+    if (sqfliteClient.database == null) {
+      await sqfliteClient.openDb();
+    }
+    final created = await sqfliteClient.database!.insert(
+      'counters',
+      Counter.init(name: name).toJson(),
+    );
   }
 
   @override
