@@ -9,6 +9,7 @@ final localCounterRepositoryProvider = Provider<CounterRepository>(
   ),
 );
 
+// TODO 全体的に文字列表記を止める
 class LocalCounterRepository implements CounterRepository {
   LocalCounterRepository({required this.sqfliteClient});
 
@@ -48,7 +49,9 @@ class LocalCounterRepository implements CounterRepository {
     if (sqfliteClient.database == null) {
       await sqfliteClient.openDb();
     }
-    final allData = await sqfliteClient.database!.query('counters');
+    final allData = await sqfliteClient.database!.rawQuery(
+      'SELECT * FROM "table"',
+    );
     return allData.map(Counter.fromJson).toList();
   }
 

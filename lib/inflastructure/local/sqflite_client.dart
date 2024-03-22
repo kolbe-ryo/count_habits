@@ -16,17 +16,18 @@ class SqfliteClient {
 
   Database? get database => _database;
 
+  static const _databaseName = 'hogehoge.db';
+
   // TODO: FixMe
   Future<void> openDb() async {
     final databasesPath = await getDatabasesPath();
-    const dataBaseName = 'hogehoge.db';
-    final path = join(databasesPath, dataBaseName);
+    final path = join(databasesPath, _databaseName);
     _database ??= await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE counters(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)',
+          '''CREATE TABLE counters(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)''',
         );
       },
     );
