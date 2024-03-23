@@ -16,7 +16,11 @@ class SqfliteClient {
 
   Database? get database => _database;
 
-  static const _databaseName = 'hogehoge.db';
+  static const _databaseName = 'habits365.db';
+
+  static const counterTable = 'Counter';
+
+  static const appearanceTable = 'Appearance';
 
   // TODO: FixMe
   Future<void> openDb() async {
@@ -26,8 +30,12 @@ class SqfliteClient {
       path,
       version: 1,
       onCreate: (db, version) async {
+        // TODO fix appropreate table
         await db.execute(
-          '''CREATE TABLE counters(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)''',
+          '''CREATE TABLE $counterTable (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)''',
+        );
+        await db.execute(
+          '''CREATE TABLE $appearanceTable (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)''',
         );
       },
     );

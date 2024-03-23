@@ -15,6 +15,8 @@ class LocalCounterRepository implements CounterRepository {
 
   final SqfliteClient sqfliteClient;
 
+  String get _tableName => SqfliteClient.counterTable;
+
   @override
   Future<Counter> checkIn(String id, {bool exception = false}) {
     // TODO: implement checkIn
@@ -30,7 +32,7 @@ class LocalCounterRepository implements CounterRepository {
       await sqfliteClient.openDb();
     }
     await sqfliteClient.database!.insert(
-      'counters',
+      _tableName,
       Counter.init(name: name).toJson(),
     );
     return fetchAll();
@@ -50,7 +52,7 @@ class LocalCounterRepository implements CounterRepository {
       await sqfliteClient.openDb();
     }
     final allData = await sqfliteClient.database!.rawQuery(
-      'SELECT * FROM "table"',
+      'SELECT * FROM $_tableName',
     );
     return allData.map(Counter.fromJson).toList();
   }
