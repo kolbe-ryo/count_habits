@@ -9,6 +9,7 @@ SqfliteClient sqfliteClient(SqfliteClientRef ref) {
   return SqfliteClient();
 }
 
+// No use this client
 class SqfliteClient {
   SqfliteClient();
 
@@ -29,9 +30,8 @@ class SqfliteClient {
       path,
       version: 1,
       onCreate: (db, version) async {
-        // TODO fix appropreate table
         await db.execute(
-          '''CREATE TABLE $counterTable (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)''',
+          '''CREATE TABLE $counterTable (id INTEGER PRIMARY KEY, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)''',
         );
         await db.execute(
           '''CREATE TABLE $appearanceTable (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NULL, content TEXT NULL, is_complete INTEGER, date_modified INTEGER)''',
