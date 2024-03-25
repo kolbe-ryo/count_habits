@@ -1,21 +1,20 @@
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
-import 'package:count_habits/inflastructure/local/sqflite_client.dart';
+import 'package:count_habits/inflastructure/local/shared_preferences_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final localCounterRepositoryProvider = Provider<CounterRepository>(
   (ref) => LocalCounterRepository(
-    sqfliteClient: ref.watch(sqfliteClientProvider),
+    sharedPreferences: ref.watch(sharedPreferencesProvider),
   ),
 );
 
 // TODO 全体的に文字列表記を止める
 class LocalCounterRepository implements CounterRepository {
-  LocalCounterRepository({required this.sqfliteClient});
+  LocalCounterRepository({required this.sharedPreferences});
 
-  final SqfliteClient sqfliteClient;
-
-  String get _tableName => SqfliteClient.counterTable;
+  final SharedPreferences sharedPreferences;
 
   @override
   Future<Counter> checkIn(String id, {bool exception = false}) {
@@ -28,13 +27,13 @@ class LocalCounterRepository implements CounterRepository {
     String name, {
     bool exception = false,
   }) async {
-    if (sqfliteClient.database == null) {
-      await sqfliteClient.openDb();
-    }
-    await sqfliteClient.database!.insert(
-      _tableName,
-      Counter.init(name: name).toJson(),
-    );
+    // if (sharedPreferences.database == null) {
+    //   await sharedPreferences.openDb();
+    // }
+    // await sharedPreferences.database!.insert(
+    //   _tableName,
+    //   Counter.init(name: name).toJson(),
+    // );
     return fetchAll();
   }
 
@@ -48,13 +47,13 @@ class LocalCounterRepository implements CounterRepository {
   Future<List<Counter>> fetchAll({
     bool exception = false,
   }) async {
-    if (sqfliteClient.database == null) {
-      await sqfliteClient.openDb();
-    }
-    final allData = await sqfliteClient.database!.rawQuery(
-      'SELECT * FROM $_tableName',
-    );
-    return allData.map(Counter.fromJson).toList();
+    // if (sharedPreferences.database == null) {
+    //   await sharedPreferences.openDb();
+    // }
+    // final allData = await sharedPreferences.database!.rawQuery(
+    //   'SELECT * FROM $_tableName',
+    // );
+    return [];
   }
 
   @override
