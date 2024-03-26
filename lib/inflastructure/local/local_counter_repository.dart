@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
@@ -45,9 +43,13 @@ class LocalCounterRepository implements CounterRepository {
   Future<List<Counter>> delete(
     String id, {
     bool exception = false,
-  }) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  }) async {
+    try {
+      await _sharedPreferences.remove(keyCounter);
+    } on Exception catch (_) {
+      throw const AppException(AppExceptionEnum.counterCreate);
+    }
+    return fetchAll();
   }
 
   @override
