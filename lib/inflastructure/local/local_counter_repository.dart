@@ -42,7 +42,10 @@ class LocalCounterRepository implements CounterRepository {
   }
 
   @override
-  Future<List<Counter>> delete(String id, {bool exception = false}) {
+  Future<List<Counter>> delete(
+    String id, {
+    bool exception = false,
+  }) {
     // TODO: implement delete
     throw UnimplementedError();
   }
@@ -51,6 +54,7 @@ class LocalCounterRepository implements CounterRepository {
   Future<List<Counter>> fetchAll({
     bool exception = false,
   }) async {
+    // TODO: implement fetchAll
     // if (sharedPreferences.database == null) {
     //   await sharedPreferences.openDb();
     // }
@@ -61,7 +65,11 @@ class LocalCounterRepository implements CounterRepository {
   }
 
   @override
-  Future<Counter> update({required String id, required String name, bool exception = false}) {
+  Future<Counter> update({
+    required String id,
+    required String name,
+    bool exception = false,
+  }) {
     // TODO: implement update
     throw UnimplementedError();
   }
