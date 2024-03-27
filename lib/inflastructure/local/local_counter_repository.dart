@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
@@ -73,9 +74,36 @@ class LocalCounterRepository implements CounterRepository {
     required String id,
     required String name,
     bool exception = false,
-  }) {
-    // TODO: implement update
-    throw UnimplementedError();
+  }) async {
+    try {
+      final countersList = _sharedPreferences
+              .getStringList(keyCounter)
+              ?.map(
+                (element) => Counter.fromJson(json.decode(element) as Map<String, dynamic>),
+              )
+              .toList() ??
+          [];
+      final updatedCounter = countersList.firstWhereOrNull((element) => element.id == id);
+      if (updatedCounter == null) {
+        throw const AppException(AppExceptionEnum.counterUpdate);
+      }
+      final updateCounterJsonList = countersList.map(
+        (counter) {
+          // update対象のidと一致したものだけnameを変更したcounterを返却する
+          if (counter.id == id) {
+            final updatedCounterValue = counter.counterValue.copyWith(name: name);
+            return counter.copyWith(counterValue: updatedCounterValue).toJson().toString();
+          }
+          return counter.toJson().toString();
+        },
+      ).toList();
+
+      // 永続化と更新後のカウンタ返却
+      await _sharedPreferences.setStringList(keyCounter, updateCounterJsonList);
+      return updatedCounter;
+    } on Exception catch (_) {
+      throw const AppException(AppExceptionEnum.counterUpdate);
+    }
   }
 
   @override
