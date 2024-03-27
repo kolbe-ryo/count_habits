@@ -76,6 +76,7 @@ class LocalCounterRepository implements CounterRepository {
     bool exception = false,
   }) async {
     try {
+      // RepositoryからCounterのリストを取得する（Jsonをdecodeする）
       final countersList = _sharedPreferences
               .getStringList(keyCounter)
               ?.map(
@@ -83,10 +84,14 @@ class LocalCounterRepository implements CounterRepository {
               )
               .toList() ??
           [];
+
+      // 目的のIDのCounterが存在することを確認する
       final updatedCounter = countersList.firstWhereOrNull((element) => element.id == id);
       if (updatedCounter == null) {
         throw const AppException(AppExceptionEnum.counterUpdate);
       }
+
+      // 永続化のためのCounterJsonのListを作成する
       final updateCounterJsonList = countersList.map(
         (counter) {
           // update対象のidと一致したものだけnameを変更したcounterを返却する
