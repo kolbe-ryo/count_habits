@@ -41,6 +41,8 @@ class Counter with _$Counter {
     );
   }
 
+  // TODO: name変更のロジックを記載する
+
   /// Checks if a check-in was made today.
   ///
   /// Returns true if a check-in was made today, false otherwise.
