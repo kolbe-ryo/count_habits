@@ -5,6 +5,7 @@ import 'package:count_habits/inflastructure/mock/mock_appearance_repository.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
 
+// TODO テストを通す
 void main() {
   final mockAppearanceRepository = MockAppearanceRepository();
   final providerContainer = ProviderContainer(
