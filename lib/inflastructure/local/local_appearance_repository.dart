@@ -22,6 +22,11 @@ class LocalAppearanceRepository implements AppearanceRepository {
   @override
   Future<void> create({bool exception = false}) async {
     try {
+      // ローカルに作成済みの場合は何もしない
+      if (_sharedPreferences.getString(keyAppearance) != null) {
+        return;
+      }
+      // ローカルにAppearanceの設定を保存する
       final initialAppearance = const Appearance().toJson().toString();
       await _sharedPreferences.setString(keyAppearance, initialAppearance);
     } on AppException catch (_) {
