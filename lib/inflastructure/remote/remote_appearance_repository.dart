@@ -19,4 +19,10 @@ class RemoteAppearanceRepository implements AppearanceRepository {
     // TODO: implement update
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> create({bool exception = false}) {
+    // TODO: implement create
+    throw UnimplementedError();
+  }
 }
