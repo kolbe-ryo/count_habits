@@ -41,9 +41,13 @@ class LocalAppearanceRepository implements AppearanceRepository {
   }
 
   @override
-  Future<void> reset({bool exception = false}) {
-    // TODO: implement reset
-    throw UnimplementedError();
+  Future<void> reset({bool exception = false}) async {
+    try {
+      final initialAppearance = const Appearance().toJson().toString();
+      await _sharedPreferences.setString(keyAppearance, initialAppearance);
+    } on AppException catch (_) {
+      throw const AppException(AppExceptionEnum.appearanceReset);
+    }
   }
 
   @override
