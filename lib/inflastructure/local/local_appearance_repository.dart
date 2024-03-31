@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
@@ -51,8 +53,25 @@ class LocalAppearanceRepository implements AppearanceRepository {
   }
 
   @override
-  Future<Appearance> update({int? colorId, int? fontFamilyId, bool exception = false}) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Appearance> update({
+    int? colorId,
+    int? fontFamilyId,
+    bool exception = false,
+  }) async {
+    try {
+      final currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
+      if (currentAppearanceJson == null) {
+        throw const AppException(AppExceptionEnum.appearanceUpdate);
+      }
+      final currentAppearance = Appearance.fromJson(json.decode(currentAppearanceJson) as Map<String, dynamic>);
+      final updateAppearance = currentAppearance.copyWith(
+        colorId: colorId ?? currentAppearance.colorId,
+        fontFamilyId: fontFamilyId ?? currentAppearance.fontFamilyId,
+      );
+      await _sharedPreferences.setString(keyAppearance, updateAppearance.toJson().toString());
+      return updateAppearance;
+    } on AppException catch (_) {
+      throw const AppException(AppExceptionEnum.appearanceUpdate);
+    }
   }
 }
