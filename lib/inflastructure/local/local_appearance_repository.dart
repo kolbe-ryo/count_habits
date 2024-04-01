@@ -40,7 +40,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
   Future<Appearance> fetch({bool exception = false}) async {
     try {
       final currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
-      if (currentAppearanceJson == null) {
+      if (currentAppearanceJson == null || exception) {
         throw const AppException(AppExceptionEnum.appearanceFetch);
       }
       return Appearance.fromJson(json.decode(currentAppearanceJson) as Map<String, dynamic>);
@@ -54,6 +54,9 @@ class LocalAppearanceRepository implements AppearanceRepository {
     try {
       final initialAppearance = const Appearance().toJson().toString();
       await _sharedPreferences.setString(keyAppearance, initialAppearance);
+      if (exception) {
+        throw const AppException(AppExceptionEnum.appearanceReset);
+      }
     } on AppException catch (_) {
       throw const AppException(AppExceptionEnum.appearanceReset);
     }
@@ -67,7 +70,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
   }) async {
     try {
       final currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
-      if (currentAppearanceJson == null) {
+      if (currentAppearanceJson == null || exception) {
         throw const AppException(AppExceptionEnum.appearanceUpdate);
       }
       final currentAppearance = Appearance.fromJson(json.decode(currentAppearanceJson) as Map<String, dynamic>);
