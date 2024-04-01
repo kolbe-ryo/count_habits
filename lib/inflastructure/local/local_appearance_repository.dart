@@ -37,9 +37,16 @@ class LocalAppearanceRepository implements AppearanceRepository {
   }
 
   @override
-  Future<Appearance> fetch({bool exception = false}) {
-    // TODO: implement fetch
-    throw UnimplementedError();
+  Future<Appearance> fetch({bool exception = false}) async {
+    try {
+      final currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
+      if (currentAppearanceJson == null) {
+        throw const AppException(AppExceptionEnum.appearanceFetch);
+      }
+      return Appearance.fromJson(json.decode(currentAppearanceJson) as Map<String, dynamic>);
+    } on AppException catch (_) {
+      rethrow;
+    }
   }
 
   @override
@@ -71,7 +78,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
       await _sharedPreferences.setString(keyAppearance, updateAppearance.toJson().toString());
       return updateAppearance;
     } on AppException catch (_) {
-      throw const AppException(AppExceptionEnum.appearanceUpdate);
+      rethrow;
     }
   }
 }
