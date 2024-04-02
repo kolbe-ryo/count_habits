@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
-// TODO テストを通す
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // モックでテストを行う場合はこちらを利用する
@@ -42,6 +41,8 @@ void main() async {
       );
     });
   });
+
+  // TODO テストを通す（ここから）
   group('updateテスト', () {
     test('任意のcolorId/ fontFamily更新に成功した場合、それぞれ変更された値のAppearanceクラスを取得可能なこと', () async {
       // 取得
