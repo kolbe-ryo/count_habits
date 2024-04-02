@@ -22,7 +22,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
         return;
       }
       // ローカルにAppearanceの設定を保存する
-      final initialAppearance = const Appearance().toJson().toString();
+      final initialAppearance = json.encode(const Appearance().toJson());
       await _sharedPreferences.setString(keyAppearance, initialAppearance);
     } on AppException catch (_) {
       throw const AppException(AppExceptionEnum.appearanceCreate);
@@ -45,7 +45,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
   @override
   Future<void> reset({bool exception = false}) async {
     try {
-      final initialAppearance = const Appearance().toJson().toString();
+      final initialAppearance = json.encode(const Appearance().toJson());
       await _sharedPreferences.setString(keyAppearance, initialAppearance);
       if (exception) {
         throw const AppException(AppExceptionEnum.appearanceReset);
@@ -71,7 +71,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
         colorId: colorId ?? currentAppearance.colorId,
         fontFamilyId: fontFamilyId ?? currentAppearance.fontFamilyId,
       );
-      await _sharedPreferences.setString(keyAppearance, updateAppearance.toJson().toString());
+      await _sharedPreferences.setString(keyAppearance, json.encode(updateAppearance.toJson()));
       return updateAppearance;
     } on AppException catch (_) {
       rethrow;

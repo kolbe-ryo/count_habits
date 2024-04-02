@@ -22,7 +22,7 @@ class LocalCounterRepository implements CounterRepository {
   }) async {
     try {
       final currentJsonList = _sharedPreferences.getStringList(keyCounter) ?? [];
-      final counterJson = Counter.init(name: name).toJson().toString();
+      final counterJson = json.encode(Counter.init(name: name).toJson());
       await _sharedPreferences.setStringList(keyCounter, [...currentJsonList, counterJson]);
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterCreate);
@@ -83,9 +83,9 @@ class LocalCounterRepository implements CounterRepository {
           // update対象のidと一致したものだけnameを変更したcounterを返却する
           if (counter.id == id) {
             final updatedCounterValue = counter.counterValue.copyWith(name: name);
-            return counter.copyWith(counterValue: updatedCounterValue).toJson().toString();
+            return json.encode(counter.copyWith(counterValue: updatedCounterValue).toJson());
           }
-          return counter.toJson().toString();
+          return json.encode(counter.toJson());
         },
       ).toList();
 
@@ -106,9 +106,9 @@ class LocalCounterRepository implements CounterRepository {
         (counter) {
           // checkin対象のidと一致したものだけcheckinしたcounterを返却する
           if (counter.id == id) {
-            return counter.checkIn.toJson().toString();
+            return json.encode(counter.checkIn.toJson());
           }
-          return counter.toJson().toString();
+          return json.encode(counter.toJson());
         },
       ).toList();
       await _sharedPreferences.setStringList(keyCounter, checkInCounterJsonList);
