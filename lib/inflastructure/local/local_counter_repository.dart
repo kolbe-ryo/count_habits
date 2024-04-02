@@ -6,14 +6,7 @@ import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
 import 'package:count_habits/inflastructure/local/shared_preferences_client.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-final localCounterRepositoryProvider = Provider<CounterRepository>(
-  (ref) => LocalCounterRepository(
-    sharedPreferences: ref.watch(sharedPreferencesProvider),
-  ),
-);
 
 class LocalCounterRepository implements CounterRepository {
   LocalCounterRepository({
