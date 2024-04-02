@@ -5,6 +5,7 @@ import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
 import 'package:count_habits/inflastructure/local/shared_preferences_client.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalAppearanceRepository implements AppearanceRepository {
@@ -13,6 +14,15 @@ class LocalAppearanceRepository implements AppearanceRepository {
   }) : _sharedPreferences = sharedPreferences;
 
   final SharedPreferences _sharedPreferences;
+
+  @visibleForTesting
+  Appearance? get appearance {
+    final currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
+    if (currentAppearanceJson == null) {
+      return null;
+    }
+    return Appearance.fromJson(json.decode(currentAppearanceJson) as Map<String, dynamic>);
+  }
 
   @override
   Future<void> create({bool exception = false}) async {
