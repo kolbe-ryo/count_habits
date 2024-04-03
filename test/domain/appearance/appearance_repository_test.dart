@@ -42,7 +42,6 @@ void main() async {
     });
   });
 
-  // TODO テストを通す（ここから）
   group('updateテスト', () {
     test('任意のcolorId/ fontFamily更新に成功した場合、それぞれ変更された値のAppearanceクラスを取得可能なこと', () async {
       // 取得
