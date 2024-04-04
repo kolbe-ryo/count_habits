@@ -2,20 +2,31 @@ import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
+import 'package:count_habits/inflastructure/local/local_counter_repository.dart';
 import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';
 import 'package:count_habits/util/constants/logger.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
-// TODO テストを通す
-void main() {
+void main() async {
+  // モックでテストを行う場合はこちらを利用する
+  // final mockCounterRepository = MockCounterRepository();
+
+  // ローカルストレージをを用いる場合はこちらを利用する
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues({});
+  final sharedPreferences = await SharedPreferences.getInstance();
+  final localCounterRepository = LocalCounterRepository(sharedPreferences: sharedPreferences);
+
+  final providerContainer = ProviderContainer(
+    overrides: [
+      counterRepositoryProvider.overrideWithValue(localCounterRepository),
+    ],
+  );
+
   group('createテスト', () {
-    final mockCounterRepository = MockCounterRepository();
-    final providerContainer = ProviderContainer(
-      overrides: [
-        counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-      ],
-    );
     test('作成に成功した場合、引数で与えた任意のnameが設定されたCounterが存在すること', () async {
       const name = 'create';
       final addNewCounters = await providerContainer.read(counterRepositoryProvider).create(name);
@@ -33,6 +44,7 @@ void main() {
     });
   });
 
+// TODO テストを通す
   group('fetchAllテスト', () {
     final mockCounterRepository = MockCounterRepository();
     final providerContainer = ProviderContainer(
