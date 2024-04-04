@@ -21,6 +21,9 @@ class LocalCounterRepository implements CounterRepository {
     bool exception = false,
   }) async {
     try {
+      if (exception) {
+        throw const AppException(AppExceptionEnum.counterCreate);
+      }
       final currentJsonList = _sharedPreferences.getStringList(keyCounter) ?? [];
       final counterJson = json.encode(Counter.init(name: name).toJson());
       await _sharedPreferences.setStringList(keyCounter, [...currentJsonList, counterJson]);
@@ -36,6 +39,9 @@ class LocalCounterRepository implements CounterRepository {
     bool exception = false,
   }) async {
     try {
+      if (exception) {
+        throw const AppException(AppExceptionEnum.counterCreate);
+      }
       await _sharedPreferences.remove(keyCounter);
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterDelete);
@@ -48,6 +54,9 @@ class LocalCounterRepository implements CounterRepository {
     bool exception = false,
   }) async {
     try {
+      if (exception) {
+        throw const AppException(AppExceptionEnum.counterCreate);
+      }
       final currentJsonList = _sharedPreferences.getStringList(keyCounter) ?? [];
       if (currentJsonList.isEmpty) {
         return [];
@@ -73,7 +82,7 @@ class LocalCounterRepository implements CounterRepository {
       final countersList = await fetchAll();
       // 目的のIDのCounterが存在することを確認する
       final updatedCounter = countersList.firstWhereOrNull((element) => element.id == id);
-      if (updatedCounter == null) {
+      if (updatedCounter == null || exception) {
         throw const AppException(AppExceptionEnum.counterUpdate);
       }
 
@@ -100,6 +109,9 @@ class LocalCounterRepository implements CounterRepository {
   @override
   Future<Counter> checkIn(String id, {bool exception = false}) async {
     try {
+      if (exception) {
+        throw const AppException(AppExceptionEnum.counterCreate);
+      }
       final countersList = await fetchAll();
       // 永続化のためのCounterJsonのListを作成する
       final checkInCounterJsonList = countersList.map(
