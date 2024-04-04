@@ -34,7 +34,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
       // ローカルにAppearanceの設定を保存する
       final initialAppearance = json.encode(const Appearance().toJson());
       await _sharedPreferences.setString(keyAppearance, initialAppearance);
-    } on AppException catch (_) {
+    } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.appearanceCreate);
     }
   }
@@ -47,7 +47,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
         throw const AppException(AppExceptionEnum.appearanceFetch);
       }
       return Appearance.fromJson(json.decode(currentAppearanceJson) as Map<String, dynamic>);
-    } on AppException catch (_) {
+    } on Exception catch (_) {
       rethrow;
     }
   }
@@ -60,7 +60,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
       if (exception) {
         throw const AppException(AppExceptionEnum.appearanceReset);
       }
-    } on AppException catch (_) {
+    } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.appearanceReset);
     }
   }
@@ -83,7 +83,7 @@ class LocalAppearanceRepository implements AppearanceRepository {
       );
       await _sharedPreferences.setString(keyAppearance, json.encode(updateAppearance.toJson()));
       return updateAppearance;
-    } on AppException catch (_) {
+    } on Exception catch (_) {
       rethrow;
     }
   }
