@@ -44,15 +44,11 @@ void main() async {
     });
   });
 
-// TODO テストを通す
   group('fetchAllテスト', () {
-    final mockCounterRepository = MockCounterRepository();
-    final providerContainer = ProviderContainer(
-      overrides: [
-        counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-      ],
-    );
     test('取得に成功した場合、すべてのCounterが返却されること', () async {
+      await providerContainer.read(counterRepositoryProvider).create('first');
+      await providerContainer.read(counterRepositoryProvider).create('second');
+      await providerContainer.read(counterRepositoryProvider).create('third');
       final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
       expect(counters, isA<List<Counter>>());
       expect(counters.length, 3);
@@ -67,6 +63,7 @@ void main() async {
     });
   });
 
+// TODO テストを通す
   group('updateテスト', () {
     final mockCounterRepository = MockCounterRepository();
     final providerContainer = ProviderContainer(
