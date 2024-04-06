@@ -64,15 +64,10 @@ void main() async {
   });
 
 // TODO テストを通す
-  group('updateテスト', () {
-    final mockCounterRepository = MockCounterRepository();
-    final providerContainer = ProviderContainer(
-      overrides: [
-        counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-      ],
-    );
+  group('updateテスト', () async {
     const id = '0';
     const name = 'update';
+    await providerContainer.read(counterRepositoryProvider).create(name);
     test('更新に成功した場合、引数で与えた任意のnameが設定されていること', () async {
       final counter = await providerContainer.read(counterRepositoryProvider).update(
             id: id,
