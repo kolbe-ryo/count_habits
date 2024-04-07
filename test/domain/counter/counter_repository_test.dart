@@ -64,11 +64,11 @@ void main() async {
   });
 
 // TODO テストを通す
-  group('updateテスト', () async {
+  group('updateテスト', () {
     const id = '0';
     const name = 'update';
-    await providerContainer.read(counterRepositoryProvider).create(name);
     test('更新に成功した場合、引数で与えた任意のnameが設定されていること', () async {
+      await providerContainer.read(counterRepositoryProvider).create('name');
       final counter = await providerContainer.read(counterRepositoryProvider).update(
             id: id,
             name: name,
@@ -96,7 +96,7 @@ void main() async {
                 name: name,
               );
         },
-        throwsA(const AppException(AppExceptionEnum.unexpectedException)),
+        throwsA(const AppException(AppExceptionEnum.counterUpdate)),
       );
     });
   });
