@@ -63,24 +63,25 @@ void main() async {
     });
   });
 
-// TODO テストを通す
   group('updateテスト', () {
-    const id = '0';
     const name = 'update';
     test('更新に成功した場合、引数で与えた任意のnameが設定されていること', () async {
       await providerContainer.read(counterRepositoryProvider).create('name');
+      final initCounter = await providerContainer.read(counterRepositoryProvider).fetchAll();
       final counter = await providerContainer.read(counterRepositoryProvider).update(
-            id: id,
+            id: initCounter.first.id,
             name: name,
           );
-      expect(counter.id, id);
+      expect(counter.id, initCounter.first.id);
       expect(counter.counterValue.name, name);
     });
-    test('インフラで更新に失敗した場合、AppExceptionがthrowされること', () {
+    test('インフラで更新に失敗した場合、AppExceptionがthrowされること', () async {
+      await providerContainer.read(counterRepositoryProvider).create('name');
+      final initCounter = await providerContainer.read(counterRepositoryProvider).fetchAll();
       expect(
         () async {
           await providerContainer.read(counterRepositoryProvider).update(
-                id: id,
+                id: initCounter.first.id,
                 name: name,
                 exception: true,
               );
@@ -101,6 +102,7 @@ void main() async {
     });
   });
 
+// TODO テストを通す
   group('deleteテスト', () {
     final mockCounterRepository = MockCounterRepository();
     final providerContainer = ProviderContainer(
