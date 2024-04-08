@@ -81,18 +81,20 @@ class LocalCounterRepository implements CounterRepository {
       // RepositoryからCounterのリストを取得する（Jsonをdecodeする）
       final countersList = await fetchAll();
       // 目的のIDのCounterが存在することを確認する
-      final updatedCounter = countersList.firstWhereOrNull((element) => element.id == id);
-      if (updatedCounter == null || exception) {
+      final updateCounter = countersList.firstWhereOrNull((element) => element.id == id);
+      if (updateCounter == null || exception) {
         throw const AppException(AppExceptionEnum.counterUpdate);
       }
 
       // 永続化のためのCounterJsonのListを作成する
+      Counter? updatedCounter;
       final updateCounterJsonList = countersList.map(
         (counter) {
           // update対象のidと一致したものだけnameを変更したcounterを返却する
           if (counter.id == id) {
             final updatedCounterValue = counter.counterValue.copyWith(name: name);
-            return json.encode(counter.copyWith(counterValue: updatedCounterValue).toJson());
+            updatedCounter = counter.copyWith(counterValue: updatedCounterValue);
+            return json.encode(updatedCounter!.toJson());
           }
           return json.encode(counter.toJson());
         },
@@ -100,7 +102,10 @@ class LocalCounterRepository implements CounterRepository {
 
       // 永続化と更新後のカウンタ返却
       await _sharedPreferences.setStringList(keyCounter, updateCounterJsonList);
-      return updatedCounter;
+      if (updatedCounter == null) {
+        throw const AppException(AppExceptionEnum.counterUpdate);
+      }
+      return updatedCounter!;
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterUpdate);
     }
