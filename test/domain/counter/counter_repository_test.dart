@@ -14,17 +14,21 @@ void main() async {
   // モックでテストを行う場合はこちらを利用する
   // final mockCounterRepository = MockCounterRepository();
 
-  // ローカルストレージをを用いる場合はこちらを利用する
-  WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
-  final sharedPreferences = await SharedPreferences.getInstance();
-  final localCounterRepository = LocalCounterRepository(sharedPreferences: sharedPreferences);
+  late ProviderContainer providerContainer;
 
-  final providerContainer = ProviderContainer(
-    overrides: [
-      counterRepositoryProvider.overrideWithValue(localCounterRepository),
-    ],
-  );
+  setUpAll(() async {
+    // ローカルストレージをを用いる場合はこちらを利用する
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final localCounterRepository = LocalCounterRepository(sharedPreferences: sharedPreferences);
+
+    providerContainer = ProviderContainer(
+      overrides: [
+        counterRepositoryProvider.overrideWithValue(localCounterRepository),
+      ],
+    );
+  });
 
   group('createテスト', () {
     test('作成に成功した場合、引数で与えた任意のnameが設定されたCounterが存在すること', () async {
@@ -32,6 +36,7 @@ void main() async {
       final addNewCounters = await providerContainer.read(counterRepositoryProvider).create(name);
       expect(addNewCounters.last.counterValue.name, name);
       logger.i(addNewCounters.length);
+      await providerContainer.read(counterRepositoryProvider).delete(addNewCounters.first.id);
     });
     test('作成に失敗した場合、AppExceptionがthrowされること', () {
       expect(
@@ -48,10 +53,14 @@ void main() async {
     test('取得に成功した場合、すべてのCounterが返却されること', () async {
       await providerContainer.read(counterRepositoryProvider).create('first');
       await providerContainer.read(counterRepositoryProvider).create('second');
-      await providerContainer.read(counterRepositoryProvider).create('third');
-      final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
+      final counters = await providerContainer.read(counterRepositoryProvider).create('third');
       expect(counters, isA<List<Counter>>());
       expect(counters.length, 3);
+
+      // 作成したものを削除しておく
+      for (final i in counters) {
+        await providerContainer.read(counterRepositoryProvider).delete(i.id);
+      }
     });
     test('取得に失敗した場合、AppExceptionがthrowされること', () {
       expect(
@@ -66,8 +75,7 @@ void main() async {
   group('updateテスト', () {
     const name = 'update';
     test('更新に成功した場合、引数で与えた任意のnameが設定されていること', () async {
-      await providerContainer.read(counterRepositoryProvider).create('name');
-      final initCounter = await providerContainer.read(counterRepositoryProvider).fetchAll();
+      final initCounter = await providerContainer.read(counterRepositoryProvider).create('create');
       final counter = await providerContainer.read(counterRepositoryProvider).update(
             id: initCounter.first.id,
             name: name,
@@ -76,7 +84,6 @@ void main() async {
       expect(counter.counterValue.name, name);
     });
     test('インフラで更新に失敗した場合、AppExceptionがthrowされること', () async {
-      await providerContainer.read(counterRepositoryProvider).create('name');
       final initCounter = await providerContainer.read(counterRepositoryProvider).fetchAll();
       expect(
         () async {
@@ -102,27 +109,20 @@ void main() async {
     });
   });
 
-// TODO テストを通す
   group('deleteテスト', () {
-    final mockCounterRepository = MockCounterRepository();
-    final providerContainer = ProviderContainer(
-      overrides: [
-        counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-      ],
-    );
-    const id = '0';
-
     test('削除に成功した場合、指定したidのCounterが削除されていること', () async {
-      final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
-      expect(counters.first.id, id);
-      final deleteCounters = await providerContainer.read(counterRepositoryProvider).delete(id);
-      expect(deleteCounters.first.id == id, false);
+      final counters = await providerContainer.read(counterRepositoryProvider).create('delete');
+      final counterId = counters.first.id;
+      final deleteCounters = await providerContainer.read(counterRepositoryProvider).delete(counterId);
+      expect(deleteCounters.first.id == counterId, false);
     });
     test('インフラで更新に失敗した場合、AppExceptionがthrowされること', () {
       expect(
         () async {
+          final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
+          final counterId = counters.first.id;
           await providerContainer.read(counterRepositoryProvider).delete(
-                id,
+                counterId,
                 exception: true,
               );
         },
@@ -133,7 +133,7 @@ void main() async {
       expect(
         () async {
           await providerContainer.read(counterRepositoryProvider).delete(
-                id,
+                'nothing',
               );
         },
         throwsA(const AppException(AppExceptionEnum.unexpectedException)),
@@ -141,6 +141,7 @@ void main() async {
     });
   });
 
+// TODO テストを通す
   group('checkInテスト', () {
     final mockCounterRepository = MockCounterRepository();
     final providerContainer = ProviderContainer(
