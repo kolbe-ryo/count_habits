@@ -6,6 +6,7 @@ import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
 import 'package:count_habits/inflastructure/local/shared_preferences_client.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalCounterRepository implements CounterRepository {
@@ -33,6 +34,7 @@ class LocalCounterRepository implements CounterRepository {
     return fetchAll();
   }
 
+  // TODO: 修正する（これだとdleteAllと同じ挙動）
   @override
   Future<List<Counter>> delete(
     String id, {
@@ -133,5 +135,10 @@ class LocalCounterRepository implements CounterRepository {
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterCheckIn);
     }
+  }
+
+  @visibleForTesting
+  Future<void> deleteAll() async {
+    await _sharedPreferences.remove(keyCounter);
   }
 }

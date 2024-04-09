@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
+// TODO: delete関連を全て見直す
 void main() async {
   // モックでテストを行う場合はこちらを利用する
   // final mockCounterRepository = MockCounterRepository();
@@ -114,16 +115,27 @@ void main() async {
       final counters = await providerContainer.read(counterRepositoryProvider).create('delete');
       final counterId = counters.first.id;
       final deleteCounters = await providerContainer.read(counterRepositoryProvider).delete(counterId);
-      expect(deleteCounters.first.id == counterId, false);
+      expect(deleteCounters.isEmpty, true);
     });
     test('インフラで更新に失敗した場合、AppExceptionがthrowされること', () {
       expect(
         () async {
-          final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
+          final counters = await providerContainer.read(counterRepositoryProvider).create('delete');
           final counterId = counters.first.id;
           await providerContainer.read(counterRepositoryProvider).delete(
                 counterId,
                 exception: true,
+              );
+        },
+        throwsA(const AppException(AppExceptionEnum.counterDelete)),
+      );
+    });
+    test('id不一致で削除に失敗した場合、AppExceptionがthrowされること', () {
+      expect(
+        () async {
+          await providerContainer.read(counterRepositoryProvider).create('delete');
+          await providerContainer.read(counterRepositoryProvider).delete(
+                'nothing',
               );
         },
         throwsA(const AppException(AppExceptionEnum.counterDelete)),
@@ -136,7 +148,7 @@ void main() async {
                 'nothing',
               );
         },
-        throwsA(const AppException(AppExceptionEnum.unexpectedException)),
+        throwsA(const AppException(AppExceptionEnum.counterDelete)),
       );
     });
   });
