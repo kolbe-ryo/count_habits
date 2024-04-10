@@ -44,7 +44,10 @@ class LocalCounterRepository implements CounterRepository {
       if (exception) {
         throw const AppException(AppExceptionEnum.counterCreate);
       }
-      await _sharedPreferences.remove(keyCounter);
+      final countersList = await fetchAll();
+      countersList.removeWhere((element) => element.id == id);
+      final deletedJsonList = countersList.map((e) => json.encode(e.toJson())).toList();
+      await _sharedPreferences.setStringList(keyCounter, deletedJsonList);
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterDelete);
     }
