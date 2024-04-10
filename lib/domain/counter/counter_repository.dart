@@ -1,4 +1,5 @@
 import 'package:count_habits/domain/counter/entity/counter.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final counterRepositoryProvider = Provider<CounterRepository>((ref) => throw UnimplementedError());
@@ -28,4 +29,7 @@ abstract interface class CounterRepository {
     String id, {
     bool exception = false,
   });
+
+  @visibleForTesting
+  Future<void> deleteAll();
 }

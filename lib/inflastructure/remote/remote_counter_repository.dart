@@ -1,5 +1,6 @@
 import 'package:count_habits/domain/counter/counter_repository.dart';
 import 'package:count_habits/domain/counter/entity/counter.dart';
+import 'package:flutter/widgets.dart';
 
 class RemoteCounterRepository implements CounterRepository {
   @override
@@ -24,6 +25,12 @@ class RemoteCounterRepository implements CounterRepository {
 
   @override
   Future<Counter> update({required String id, required String name, bool exception = false}) {
+    throw UnimplementedError();
+  }
+
+  @visibleForTesting
+  @override
+  Future<void> deleteAll() {
     throw UnimplementedError();
   }
 }

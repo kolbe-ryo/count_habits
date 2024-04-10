@@ -10,7 +10,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
-// TODO: delete関連を全て見直す
 void main() async {
   // モックでテストを行う場合はこちらを利用する
   // final mockCounterRepository = MockCounterRepository();
@@ -31,13 +30,14 @@ void main() async {
     );
   });
 
+// TODO テストを通す
   group('createテスト', () {
     test('作成に成功した場合、引数で与えた任意のnameが設定されたCounterが存在すること', () async {
       const name = 'create';
       final addNewCounters = await providerContainer.read(counterRepositoryProvider).create(name);
       expect(addNewCounters.last.counterValue.name, name);
       logger.i(addNewCounters.length);
-      await providerContainer.read(counterRepositoryProvider).delete(addNewCounters.first.id);
+      await providerContainer.read(counterRepositoryProvider).deleteAll();
     });
     test('作成に失敗した場合、AppExceptionがthrowされること', () {
       expect(
@@ -59,9 +59,7 @@ void main() async {
       expect(counters.length, 3);
 
       // 作成したものを削除しておく
-      for (final i in counters) {
-        await providerContainer.read(counterRepositoryProvider).delete(i.id);
-      }
+      await providerContainer.read(counterRepositoryProvider).deleteAll();
     });
     test('取得に失敗した場合、AppExceptionがthrowされること', () {
       expect(
@@ -112,6 +110,9 @@ void main() async {
 
   group('deleteテスト', () {
     test('削除に成功した場合、指定したidのCounterが削除されていること', () async {
+      // 作成したものを削除しておく
+      await providerContainer.read(counterRepositoryProvider).deleteAll();
+
       final counters = await providerContainer.read(counterRepositoryProvider).create('delete');
       final counterId = counters.first.id;
       final deleteCounters = await providerContainer.read(counterRepositoryProvider).delete(counterId);
@@ -120,6 +121,9 @@ void main() async {
     test('インフラで更新に失敗した場合、AppExceptionがthrowされること', () {
       expect(
         () async {
+          // 作成したものを削除しておく
+          await providerContainer.read(counterRepositoryProvider).deleteAll();
+
           final counters = await providerContainer.read(counterRepositoryProvider).create('delete');
           final counterId = counters.first.id;
           await providerContainer.read(counterRepositoryProvider).delete(
@@ -133,6 +137,9 @@ void main() async {
     test('id不一致で削除に失敗した場合、AppExceptionがthrowされること', () {
       expect(
         () async {
+          // 作成したものを削除しておく
+          await providerContainer.read(counterRepositoryProvider).deleteAll();
+
           await providerContainer.read(counterRepositoryProvider).create('delete');
           await providerContainer.read(counterRepositoryProvider).delete(
                 'nothing',
@@ -144,6 +151,10 @@ void main() async {
     test('id不一致で更新に失敗した場合、AppExceptionがthrowされること', () {
       expect(
         () async {
+          // 作成したものを削除しておく
+          await providerContainer.read(counterRepositoryProvider).deleteAll();
+
+          await providerContainer.read(counterRepositoryProvider).create('delete');
           await providerContainer.read(counterRepositoryProvider).delete(
                 'nothing',
               );
@@ -153,7 +164,6 @@ void main() async {
     });
   });
 
-// TODO テストを通す
   group('checkInテスト', () {
     final mockCounterRepository = MockCounterRepository();
     final providerContainer = ProviderContainer(

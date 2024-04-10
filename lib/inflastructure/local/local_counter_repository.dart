@@ -141,6 +141,7 @@ class LocalCounterRepository implements CounterRepository {
   }
 
   @visibleForTesting
+  @override
   Future<void> deleteAll() async {
     await _sharedPreferences.remove(keyCounter);
   }
