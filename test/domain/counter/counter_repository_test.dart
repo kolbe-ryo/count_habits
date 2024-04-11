@@ -3,7 +3,7 @@ import 'package:count_habits/domain/counter/entity/counter.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
 import 'package:count_habits/inflastructure/local/local_counter_repository.dart';
-import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';
+// import 'package:count_habits/inflastructure/mock/mock_counter_repository.dart';
 import 'package:count_habits/util/constants/logger.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -107,7 +107,6 @@ void main() async {
     });
   });
 
-// TODO テストを通す
   group('deleteテスト', () {
     test('削除に成功した場合、指定したidのCounterが削除されていること', () async {
       // 作成したものを削除しておく
@@ -141,9 +140,7 @@ void main() async {
           await providerContainer.read(counterRepositoryProvider).deleteAll();
 
           await providerContainer.read(counterRepositoryProvider).create('delete');
-          await providerContainer.read(counterRepositoryProvider).delete(
-                'nothing',
-              );
+          await providerContainer.read(counterRepositoryProvider).delete('nothing');
         },
         throwsA(const AppException(AppExceptionEnum.counterDelete)),
       );
@@ -155,9 +152,7 @@ void main() async {
           await providerContainer.read(counterRepositoryProvider).deleteAll();
 
           await providerContainer.read(counterRepositoryProvider).create('delete');
-          await providerContainer.read(counterRepositoryProvider).delete(
-                'nothing',
-              );
+          await providerContainer.read(counterRepositoryProvider).delete('nothing');
         },
         throwsA(const AppException(AppExceptionEnum.counterDelete)),
       );
