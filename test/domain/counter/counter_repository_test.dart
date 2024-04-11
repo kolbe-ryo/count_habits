@@ -30,7 +30,6 @@ void main() async {
     );
   });
 
-// TODO テストを通す
   group('createテスト', () {
     test('作成に成功した場合、引数で与えた任意のnameが設定されたCounterが存在すること', () async {
       const name = 'create';
@@ -71,6 +70,7 @@ void main() async {
     });
   });
 
+// TODO テストを通す
   group('updateテスト', () {
     const name = 'update';
     test('更新に成功した場合、引数で与えた任意のnameが設定されていること', () async {
