@@ -34,7 +34,6 @@ class LocalCounterRepository implements CounterRepository {
     return fetchAll();
   }
 
-  // TODO: 修正する（これだとdleteAllと同じ挙動）
   @override
   Future<List<Counter>> delete(
     String id, {
@@ -120,21 +119,23 @@ class LocalCounterRepository implements CounterRepository {
   Future<Counter> checkIn(String id, {bool exception = false}) async {
     try {
       if (exception) {
-        throw const AppException(AppExceptionEnum.counterCreate);
+        throw const AppException(AppExceptionEnum.counterCheckIn);
       }
+      Counter? checkInCounter;
       final countersList = await fetchAll();
       // 永続化のためのCounterJsonのListを作成する
       final checkInCounterJsonList = countersList.map(
         (counter) {
           // checkin対象のidと一致したものだけcheckinしたcounterを返却する
           if (counter.id == id) {
-            return json.encode(counter.checkIn.toJson());
+            checkInCounter = counter.checkIn;
+            return json.encode(checkInCounter!.toJson());
           }
           return json.encode(counter.toJson());
         },
       ).toList();
       await _sharedPreferences.setStringList(keyCounter, checkInCounterJsonList);
-      return countersList.firstWhere((element) => element.id == id);
+      return checkInCounter!;
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterCheckIn);
     }

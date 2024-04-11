@@ -70,7 +70,6 @@ void main() async {
     });
   });
 
-// TODO テストを通す
   group('updateテスト', () {
     const name = 'update';
     test('更新に成功した場合、引数で与えた任意のnameが設定されていること', () async {
@@ -108,6 +107,7 @@ void main() async {
     });
   });
 
+// TODO テストを通す
   group('deleteテスト', () {
     test('削除に成功した場合、指定したidのCounterが削除されていること', () async {
       // 作成したものを削除しておく
@@ -165,28 +165,22 @@ void main() async {
   });
 
   group('checkInテスト', () {
-    final mockCounterRepository = MockCounterRepository();
-    final providerContainer = ProviderContainer(
-      overrides: [
-        counterRepositoryProvider.overrideWithValue(mockCounterRepository),
-      ],
-    );
-    const id = '0';
-
     test('カウントアップに成功した場合、CounterValueは+1、Contributionは+1要素されていること', () async {
-      final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
-      final counter = counters[int.parse(id)];
-      final counterCheckedIn = await providerContainer.read(counterRepositoryProvider).checkIn(
-            id,
-          );
+      await providerContainer.read(counterRepositoryProvider).deleteAll();
+      final counters = await providerContainer.read(counterRepositoryProvider).create('checkIn');
+      final counter = counters.first;
+      final counterCheckedIn = await providerContainer.read(counterRepositoryProvider).checkIn(counter.id);
       expect(counterCheckedIn.counterValue.count, counter.counterValue.count + 1);
       expect(counterCheckedIn.contribution.contributedAt.length, counter.contribution.contributedAt.length + 1);
     });
     test('更新に失敗した場合、AppExceptionがthrowされること', () {
       expect(
         () async {
+          await providerContainer.read(counterRepositoryProvider).deleteAll();
+          final counters = await providerContainer.read(counterRepositoryProvider).create('checkIn');
+          final counter = counters.first;
           await providerContainer.read(counterRepositoryProvider).checkIn(
-                id,
+                counter.id,
                 exception: true,
               );
         },
