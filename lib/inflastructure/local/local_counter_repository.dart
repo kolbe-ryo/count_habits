@@ -9,6 +9,7 @@ import 'package:count_habits/inflastructure/local/shared_preferences_client.dart
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// TODO refactor
 class LocalCounterRepository implements CounterRepository {
   LocalCounterRepository({
     required SharedPreferences sharedPreferences,
