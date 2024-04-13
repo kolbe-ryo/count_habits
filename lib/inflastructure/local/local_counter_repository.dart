@@ -18,6 +18,28 @@ class LocalCounterRepository implements CounterRepository {
   final SharedPreferences _sharedPreferences;
 
   @override
+  Future<List<Counter>> fetchAll({
+    bool exception = false,
+  }) async {
+    try {
+      if (exception) {
+        throw const AppException(AppExceptionEnum.counterCreate);
+      }
+      final currentJsonList = _sharedPreferences.getStringList(keyCounter) ?? [];
+      if (currentJsonList.isEmpty) {
+        return [];
+      }
+      return currentJsonList
+          .map(
+            (e) => Counter.fromJson(json.decode(e) as Map<String, dynamic>),
+          )
+          .toList();
+    } on Exception catch (_) {
+      throw const AppException(AppExceptionEnum.counterFetchAll);
+    }
+  }
+
+  @override
   Future<List<Counter>> create(
     String name, {
     bool exception = false,
@@ -57,28 +79,6 @@ class LocalCounterRepository implements CounterRepository {
       return fetchAll();
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterDelete);
-    }
-  }
-
-  @override
-  Future<List<Counter>> fetchAll({
-    bool exception = false,
-  }) async {
-    try {
-      if (exception) {
-        throw const AppException(AppExceptionEnum.counterCreate);
-      }
-      final currentJsonList = _sharedPreferences.getStringList(keyCounter) ?? [];
-      if (currentJsonList.isEmpty) {
-        return [];
-      }
-      return currentJsonList
-          .map(
-            (e) => Counter.fromJson(json.decode(e) as Map<String, dynamic>),
-          )
-          .toList();
-    } on Exception catch (_) {
-      throw const AppException(AppExceptionEnum.counterFetchAll);
     }
   }
 
