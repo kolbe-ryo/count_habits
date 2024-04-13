@@ -9,7 +9,6 @@ import 'package:count_habits/inflastructure/local/shared_preferences_client.dart
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// TODO refactor
 class LocalCounterRepository implements CounterRepository {
   LocalCounterRepository({
     required SharedPreferences sharedPreferences,
@@ -26,12 +25,9 @@ class LocalCounterRepository implements CounterRepository {
         throw const AppException(AppExceptionEnum.counterCreate);
       }
       final currentJsonList = _sharedPreferences.getStringList(keyCounter) ?? [];
-      if (currentJsonList.isEmpty) {
-        return [];
-      }
       return currentJsonList
           .map(
-            (e) => Counter.fromJson(json.decode(e) as Map<String, dynamic>),
+            (counterJson) => Counter.fromJson(json.decode(counterJson) as Map<String, dynamic>),
           )
           .toList();
     } on Exception catch (_) {
@@ -39,6 +35,7 @@ class LocalCounterRepository implements CounterRepository {
     }
   }
 
+// TODO refactor
   @override
   Future<List<Counter>> create(
     String name, {
@@ -103,8 +100,7 @@ class LocalCounterRepository implements CounterRepository {
         (counter) {
           // update対象のidと一致したものだけnameを変更したcounterを返却する
           if (counter.id == id) {
-            final updatedCounterValue = counter.counterValue.copyWith(name: name);
-            updatedCounter = counter.copyWith(counterValue: updatedCounterValue);
+            updatedCounter = counter.changeName(name);
             return json.encode(updatedCounter!.toJson());
           }
           return json.encode(counter.toJson());

@@ -50,10 +50,20 @@ void main() async {
   });
 
   group('fetchAllテスト', () {
+    test('取得に成功しデータが存在しない場合、空のCounterが返却されること', () async {
+      await providerContainer.read(counterRepositoryProvider).deleteAll();
+      final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
+      expect(counters, isA<List<Counter>>());
+      expect(counters.length, 0);
+
+      // 作成したものを削除しておく
+      await providerContainer.read(counterRepositoryProvider).deleteAll();
+    });
     test('取得に成功した場合、すべてのCounterが返却されること', () async {
       await providerContainer.read(counterRepositoryProvider).create('first');
       await providerContainer.read(counterRepositoryProvider).create('second');
-      final counters = await providerContainer.read(counterRepositoryProvider).create('third');
+      await providerContainer.read(counterRepositoryProvider).create('third');
+      final counters = await providerContainer.read(counterRepositoryProvider).fetchAll();
       expect(counters, isA<List<Counter>>());
       expect(counters.length, 3);
 
