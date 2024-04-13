@@ -41,7 +41,14 @@ class Counter with _$Counter {
     );
   }
 
-  // TODO: name変更のロジックを記載する
+  /// Changes the name of the Counter.
+  ///
+  /// Returns a new Counter with the updated name.
+  Counter changeName(String name) {
+    return copyWith(
+      counterValue: counterValue.copyWith(name: name),
+    );
+  }
 
   /// Checks if a check-in was made today.
   ///
