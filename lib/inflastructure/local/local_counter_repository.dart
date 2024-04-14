@@ -46,8 +46,8 @@ class LocalCounterRepository implements CounterRepository {
         throw const AppException(AppExceptionEnum.counterCreate);
       }
       final currentJsonList = _sharedPreferences.getStringList(keyCounter) ?? [];
-      final counterJson = json.encode(Counter.init(name: name).toJson());
-      await _sharedPreferences.setStringList(keyCounter, [...currentJsonList, counterJson]);
+      final craeteCounterJson = json.encode(Counter.init(name: name).toJson());
+      await _sharedPreferences.setStringList(keyCounter, [...currentJsonList, craeteCounterJson]);
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterCreate);
     }
