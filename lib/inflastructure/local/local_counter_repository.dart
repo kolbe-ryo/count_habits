@@ -35,7 +35,6 @@ class LocalCounterRepository implements CounterRepository {
     }
   }
 
-// TODO refactor
   @override
   Future<List<Counter>> create(
     String name, {
@@ -64,13 +63,12 @@ class LocalCounterRepository implements CounterRepository {
         throw const AppException(AppExceptionEnum.counterCreate);
       }
       final countersList = await fetchAll();
+      // idと一致するcounterを削除する
       final deletedCountersList = countersList.where((element) => element.id != id).toList();
-
-      // 削除に失敗した場合、長さが変わっていないはず
+      // idが存在しない場合、長さが変わっていないはず
       if (countersList.length == deletedCountersList.length) {
         throw const AppException(AppExceptionEnum.counterDelete);
       }
-
       final deletedJsonList = deletedCountersList.map((e) => json.encode(e.toJson())).toList();
       await _sharedPreferences.setStringList(keyCounter, deletedJsonList);
       return fetchAll();
@@ -79,6 +77,7 @@ class LocalCounterRepository implements CounterRepository {
     }
   }
 
+// TODO refactor
   @override
   Future<Counter> update({
     required String id,
