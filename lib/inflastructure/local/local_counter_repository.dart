@@ -113,15 +113,18 @@ class LocalCounterRepository implements CounterRepository {
     }
   }
 
-// TODO refactor
   @override
-  Future<Counter> checkIn(String id, {bool exception = false}) async {
+  Future<Counter> checkIn(
+    String id, {
+    bool exception = false,
+  }) async {
     try {
       if (exception) {
         throw const AppException(AppExceptionEnum.counterCheckIn);
       }
       Counter? checkInCounter;
       final countersList = await fetchAll();
+
       // 永続化のためのCounterJsonのListを作成する
       final checkInCounterJsonList = countersList.map(
         (counter) {
@@ -133,6 +136,12 @@ class LocalCounterRepository implements CounterRepository {
           return json.encode(counter.toJson());
         },
       ).toList();
+
+      // 確実に存在するはずだが、なければエラーを投げる
+      if (checkInCounter == null) {
+        throw const AppException(AppExceptionEnum.counterCheckIn);
+      }
+
       await _sharedPreferences.setStringList(keyCounter, checkInCounterJsonList);
       return checkInCounter!;
     } on Exception catch (_) {
