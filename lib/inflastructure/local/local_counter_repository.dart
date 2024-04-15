@@ -77,7 +77,6 @@ class LocalCounterRepository implements CounterRepository {
     }
   }
 
-// TODO refactor
   @override
   Future<Counter> update({
     required String id,
@@ -85,13 +84,8 @@ class LocalCounterRepository implements CounterRepository {
     bool exception = false,
   }) async {
     try {
-      // RepositoryからCounterのリストを取得する（Jsonをdecodeする）
+      // RepositoryからCounterのリストを取得する
       final countersList = await fetchAll();
-      // 目的のIDのCounterが存在することを確認する
-      final updateCounter = countersList.firstWhereOrNull((element) => element.id == id);
-      if (updateCounter == null || exception) {
-        throw const AppException(AppExceptionEnum.counterUpdate);
-      }
 
       // 永続化のためのCounterJsonのListを作成する
       Counter? updatedCounter;
@@ -106,17 +100,20 @@ class LocalCounterRepository implements CounterRepository {
         },
       ).toList();
 
-      // 永続化と更新後のカウンタ返却
-      await _sharedPreferences.setStringList(keyCounter, updateCounterJsonList);
+      // 確実に存在するはずだが、なければエラーを投げる
       if (updatedCounter == null) {
         throw const AppException(AppExceptionEnum.counterUpdate);
       }
+
+      // 永続化と更新後のカウンタ返却
+      await _sharedPreferences.setStringList(keyCounter, updateCounterJsonList);
       return updatedCounter!;
     } on Exception catch (_) {
       throw const AppException(AppExceptionEnum.counterUpdate);
     }
   }
 
+// TODO refactor
   @override
   Future<Counter> checkIn(String id, {bool exception = false}) async {
     try {
