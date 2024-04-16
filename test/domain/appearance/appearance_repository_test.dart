@@ -1,17 +1,31 @@
 import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
-import 'package:count_habits/inflastructure/mock/mock_appearance_repository.dart';
+import 'package:count_habits/inflastructure/local/local_appearance_repository.dart';
+// import 'package:count_habits/inflastructure/mock/mock_appearance_repository.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
-void main() {
-  final mockAppearanceRepository = MockAppearanceRepository();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // モックでテストを行う場合はこちらを利用する
+  // final mockAppearanceRepository = MockAppearanceRepository();
+  // final mockAppearanceRepository = MockAppearanceRepository();
+
+  // ローカルストレージをを用いる場合はこちらを利用する
+  SharedPreferences.setMockInitialValues({});
+  final sharedPreferences = await SharedPreferences.getInstance();
+  final localAppearanceRepository = LocalAppearanceRepository(sharedPreferences: sharedPreferences);
+
   final providerContainer = ProviderContainer(
     overrides: [
-      appearanceRepositoryProvider.overrideWithValue(mockAppearanceRepository),
+      appearanceRepositoryProvider.overrideWithValue(localAppearanceRepository),
     ],
   );
+
+  await providerContainer.read(appearanceRepositoryProvider).create();
 
   group('fetchテスト', () {
     test('取得に成功した場合、任意のAppearanceクラスを取得可能なこと', () async {
@@ -27,6 +41,7 @@ void main() {
       );
     });
   });
+
   group('updateテスト', () {
     test('任意のcolorId/ fontFamily更新に成功した場合、それぞれ変更された値のAppearanceクラスを取得可能なこと', () async {
       // 取得
@@ -57,7 +72,7 @@ void main() {
   group('resetテスト', () {
     test('リセットに成功した場合、任意のAppearanceクラスを取得可能なこと', () async {
       await providerContainer.read(appearanceRepositoryProvider).reset();
-      expect(mockAppearanceRepository.appearance, const Appearance());
+      expect(localAppearanceRepository.appearance, const Appearance());
     });
     test('リセットに失敗した場合、AppExceptionがthrowされること', () async {
       expect(

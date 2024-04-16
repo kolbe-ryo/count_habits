@@ -19,6 +19,18 @@ void main() {
     });
   });
 
+  group('changeNameメソッドのロジックテスト', () {
+    test('メソッドコールでnameが変更されること', () {
+      const name = 'counter';
+      final counter = Counter.init(name: name);
+      expect(counter.counterValue.name, name);
+
+      const changeName = 'change';
+      final changeNameCounter = counter.changeName(changeName);
+      expect(changeNameCounter.counterValue.name, changeName);
+    });
+  });
+
   group('didCheckInメソッドのロジックテスト', () {
     test('checkInメソッドによって、didCheckInがtrueになること', () {
       final contribution = Contribution(

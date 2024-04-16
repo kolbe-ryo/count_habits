@@ -41,6 +41,15 @@ class Counter with _$Counter {
     );
   }
 
+  /// Changes the name of the Counter.
+  ///
+  /// Returns a new Counter with the updated name.
+  Counter changeName(String name) {
+    return copyWith(
+      counterValue: counterValue.copyWith(name: name),
+    );
+  }
+
   /// Checks if a check-in was made today.
   ///
   /// Returns true if a check-in was made today, false otherwise.

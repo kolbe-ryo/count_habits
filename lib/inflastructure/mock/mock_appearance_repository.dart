@@ -9,6 +9,11 @@ class MockAppearanceRepository implements AppearanceRepository {
   Appearance get appearance => _appearance;
 
   @override
+  Future<void> create({bool exception = false}) {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<Appearance> fetch({bool exception = false}) async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (exception) {

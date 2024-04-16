@@ -9,6 +9,7 @@ enum AppExceptionEnum {
   counterDelete(message: 'カウンタの削除$defaultText'),
   counterInvalid(message: 'カウンタ名が空です'),
   counterCheckIn(message: 'カウントアップに失敗しました'),
+  appearanceCreate(message: 'テーマの作成$defaultText'),
   appearanceFetch(message: 'テーマの取得$defaultText'),
   appearanceUpdate(message: 'テーマの更新$defaultText'),
   appearanceReset(message: 'テーマのリセット$defaultText');

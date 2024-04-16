@@ -97,6 +97,11 @@ class MockCounterRepository implements CounterRepository {
 
     return checkedInCounter.checkIn;
   }
+
+  @override
+  Future<void> deleteAll() {
+    throw UnimplementedError();
+  }
 }
 
 final _initCounter = [
