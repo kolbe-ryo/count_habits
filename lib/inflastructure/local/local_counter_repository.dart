@@ -83,6 +83,9 @@ class LocalCounterRepository implements CounterRepository {
     bool exception = false,
   }) async {
     try {
+      if (exception) {
+        throw const AppException(AppExceptionEnum.counterUpdate);
+      }
       // RepositoryからCounterのリストを取得する
       final countersList = await fetchAll();
 
