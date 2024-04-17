@@ -88,7 +88,7 @@ class ThemeSettingPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverGrid.count(
               crossAxisCount: 1,
-              mainAxisSpacing: 16,
+              mainAxisSpacing: 24,
               crossAxisSpacing: 16,
               childAspectRatio: 5,
               children: textSchemes.entries.map((e) => TextStyleButton(index: e.key)).toList(),

@@ -19,18 +19,28 @@ class TextStyleButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
-    return CupertinoButton(
-      padding: EdgeInsets.zero,
-      child: Text(
-        _text,
-        style: TextStyle(
-          color: theme.primaryColor,
-          fontSize: 22,
-          fontFamily: textSchemes[index],
-          fontWeight: FontWeight.bold,
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: theme.primaryContrastingColor,
+            width: 2,
+          ),
         ),
       ),
-      onPressed: () => ref.read(appearanceStateProvider.notifier).setFontFamily(index),
+      child: CupertinoButton(
+        padding: EdgeInsets.zero,
+        child: Text(
+          _text,
+          style: TextStyle(
+            color: theme.primaryColor,
+            fontSize: 22,
+            fontFamily: textSchemes[index],
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        onPressed: () => ref.read(appearanceStateProvider.notifier).setFontFamily(index),
+      ),
     );
   }
 }
