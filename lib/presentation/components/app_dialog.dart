@@ -28,6 +28,7 @@ Future<bool?> showDeleteDialog(BuildContext context) async {
   );
 }
 
+// TODO なぜかTestFlight実機だとバグる
 Future<T?> showAddCounterDialog<T>(BuildContext context) async {
   final controller = TextEditingController();
   return showCupertinoDialog(
