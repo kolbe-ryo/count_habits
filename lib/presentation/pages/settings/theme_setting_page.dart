@@ -1,3 +1,4 @@
+import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/settings/components/color_style_button.dart';
 import 'package:count_habits/presentation/pages/settings/components/text_style_button.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
@@ -16,7 +17,6 @@ class ThemeSettingPage extends ConsumerWidget {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          // TODO デフォルトに戻すボタンを設置する
           CupertinoSliverNavigationBar(
             padding: const EdgeInsetsDirectional.only(start: 1),
             leading: IconButton(
@@ -28,14 +28,13 @@ class ThemeSettingPage extends ConsumerWidget {
               style: theme.textTheme.textStyle,
             ),
             trailing: TextButton(
-              onPressed: () {},
+              onPressed: ref.read(appearanceStateProvider.notifier).reset,
               child: Text(
                 'default',
                 style: TextStyle(
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                   fontSize: 16,
                   fontFamily: theme.textTheme.textStyle.fontFamily,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -48,7 +47,6 @@ class ThemeSettingPage extends ConsumerWidget {
                 style: TextStyle(
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                   fontSize: 26,
-                  // fontFamily: theme.textTheme.textStyle.fontFamily,
                   fontWeight: FontWeight.bold,
                 ),
               ),

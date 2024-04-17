@@ -14,4 +14,6 @@ class AppearanceState extends _$AppearanceState {
   void setColorPalette(int colorId) => state = state.copyWith(colorId: colorId);
 
   void setFontFamily(int fontFamilyId) => state = state.copyWith(fontFamilyId: fontFamilyId);
+
+  void reset() => state = const Appearance();
 }
