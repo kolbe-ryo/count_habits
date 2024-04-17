@@ -27,6 +27,18 @@ class ThemeSettingPage extends ConsumerWidget {
               'Theme',
               style: theme.textTheme.textStyle,
             ),
+            trailing: TextButton(
+              onPressed: () {},
+              child: Text(
+                'default',
+                style: TextStyle(
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  fontSize: 16,
+                  fontFamily: theme.textTheme.textStyle.fontFamily,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: Padding(
