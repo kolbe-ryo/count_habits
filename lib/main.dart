@@ -16,7 +16,6 @@ void main() async {
         // モックテストの時はこちらを利用する
         // appearanceRepositoryProvider.overrideWithValue(MockAppearanceRepository()),
         // counterRepositoryProvider.overrideWithValue(MockCounterRepository()),
-        // TODO どこかでAppreanceを最初に呼ぶ必要がある
         appearanceRepositoryProvider.overrideWith(
           (ref) => LocalAppearanceRepository(
             sharedPreferences: ref.watch(sharedPreferencesProvider),
