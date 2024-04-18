@@ -28,7 +28,6 @@ Future<bool?> showDeleteDialog(BuildContext context) async {
   );
 }
 
-// TODO なぜかTestFlight実機だとバグる
 Future<T?> showAddCounterDialog<T>(BuildContext context) async {
   final controller = TextEditingController();
   return showCupertinoDialog(
@@ -38,17 +37,15 @@ Future<T?> showAddCounterDialog<T>(BuildContext context) async {
         title: const Text('カウンタの追加'),
         content: Padding(
           padding: const EdgeInsets.only(top: 16),
-          child: Expanded(
-            child: CupertinoTextField(
-              controller: controller,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              placeholder: 'カウンタ名を入力',
-              focusNode: FocusNode(),
-              style: const TextStyle(color: Colors.black54),
+          child: CupertinoTextField(
+            controller: controller,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
             ),
+            placeholder: 'カウンタ名を入力',
+            focusNode: FocusNode(),
+            style: const TextStyle(color: Colors.black54),
           ),
         ),
         actions: [
