@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'appearance_state_provider.g.dart';
 
+// TODO こちらはfetchで全てを取得して保持するだけのProviderで常にデータを唯一の状態源にする（countersProviderみたいにすること）
 @riverpod
 class AppearanceState extends _$AppearanceState {
   @override

@@ -15,7 +15,7 @@ void main() {
       ],
     );
     test('取得したAppearanceがstateに格納されていること', () async {
-      await providerContariner.read(appearanceProvider).fetch();
+      await providerContariner.read(appearanceUsecaseProvider).fetch();
       final state = providerContariner.read(appearanceStateProvider);
       expect(state, const Appearance());
     });
@@ -33,7 +33,7 @@ void main() {
         colorId: 1,
         fontFamilyId: 1,
       );
-      await providerContariner.read(appearanceProvider).update(
+      await providerContariner.read(appearanceUsecaseProvider).update(
             colorId: matcherState.colorId,
             fontFamilyId: matcherState.fontFamilyId,
           );
@@ -54,14 +54,14 @@ void main() {
         colorId: 1,
         fontFamilyId: 1,
       );
-      await providerContariner.read(appearanceProvider).update(
+      await providerContariner.read(appearanceUsecaseProvider).update(
             colorId: matcherState.colorId,
             fontFamilyId: matcherState.fontFamilyId,
           );
       var state = providerContariner.read(appearanceStateProvider);
       expect(state, matcherState);
 
-      await providerContariner.read(appearanceProvider).reset();
+      await providerContariner.read(appearanceUsecaseProvider).reset();
       state = providerContariner.read(appearanceStateProvider);
       expect(state, const Appearance());
     });

@@ -4,16 +4,17 @@ import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final appearanceProvider = Provider<AppearanceUsecase>(AppearanceUsecase.new);
+final appearanceUsecaseProvider = Provider<AppearanceUsecase>(AppearanceUsecase.new);
 
 class AppearanceUsecase {
   const AppearanceUsecase(this._ref);
 
   final Ref _ref;
 
-  Future<void> fetch() async {
+  Future<Appearance> fetch() async {
     final currentAppearance = await _ref.read(appearanceRepositoryProvider).fetch();
     _ref.read(appearanceStateProvider.notifier).setAppearance = currentAppearance;
+    return currentAppearance;
   }
 
   Future<void> update({
