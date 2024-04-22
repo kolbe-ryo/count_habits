@@ -15,6 +15,7 @@ class Habits365 extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cupertinoTheme = ref.watch(cupertinoThemeProvider);
     final appearance = ref.watch(appearanceProvider);
+    // TODO ここの作りの再検討（when二段は変に見える）
     return appearance.when(
       data: (data) {
         return CupertinoApp(
