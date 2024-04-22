@@ -1,3 +1,4 @@
+import 'package:count_habits/application/usecase/appearance/appearance_usecase.dart';
 import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/theme/text_schemes.dart';
@@ -39,7 +40,10 @@ class TextStyleButton extends ConsumerWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        onPressed: () => ref.read(appearanceStateProvider.notifier).setFontFamily(index),
+        onPressed: () async {
+          final appearance = await ref.read(appearanceUsecaseProvider).update(fontFamilyId: index);
+          ref.read(appearanceStateProvider.notifier).setFontFamily(appearance.fontFamilyId);
+        },
       ),
     );
   }

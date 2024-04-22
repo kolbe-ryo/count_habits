@@ -3,7 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'appearance_state_provider.g.dart';
 
-// TODO こちらはfetchで全てを取得して保持するだけのProviderで常にデータを唯一の状態源にする（countersProviderみたいにすること）
+// Appreanceは本来であればAppearanceProviderだけで状態管理すれば良いが、依存箇所が多すぎるため、使用箇所で一々AsyncValueを取り扱わず、
+// appearanceの変更時に通信を待って、StateProviderとして取り扱う。
 @riverpod
 class AppearanceState extends _$AppearanceState {
   @override

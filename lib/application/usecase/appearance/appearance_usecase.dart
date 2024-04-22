@@ -16,22 +16,22 @@ class AppearanceUsecase with AsyncExecuteMixin {
     final appearance = await execute(
       action: () async => _ref.read(appearanceRepositoryProvider).fetch(),
     );
-    _ref.invalidate(appearanceProvider);
     return appearance;
   }
 
-  Future<void> update({
+  Future<Appearance> update({
     int? colorId,
     ThemeMode? themeMode,
     int? fontFamilyId,
   }) async {
-    await execute(
+    final appearance = await execute(
       action: () async => _ref.read(appearanceRepositoryProvider).update(
             colorId: colorId,
             fontFamilyId: fontFamilyId,
           ),
     );
     _ref.invalidate(appearanceProvider);
+    return appearance;
   }
 
   Future<void> reset() async {

@@ -10,13 +10,10 @@ String _$appearanceStateHash() => r'dbecf3a09a53bb818d499d4052dde1131e858cb6';
 
 /// See also [AppearanceState].
 @ProviderFor(AppearanceState)
-final appearanceStateProvider =
-    AutoDisposeNotifierProvider<AppearanceState, Appearance>.internal(
+final appearanceStateProvider = AutoDisposeNotifierProvider<AppearanceState, Appearance>.internal(
   AppearanceState.new,
   name: r'appearanceStateProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appearanceStateHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$appearanceStateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

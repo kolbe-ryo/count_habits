@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:count_habits/application/state/initial_data_provider.dart';
 import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/gen/assets.gen.dart';
 import 'package:count_habits/presentation/components/app_loading.dart';
@@ -23,8 +21,8 @@ class TopPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
-    final initialData = ref.watch(initialDataProvider);
-    return initialData.when(
+    final counters = ref.watch(countersProvider);
+    return counters.when(
       data: (data) {
         return GestureDetector(
           onTap: () {
@@ -58,7 +56,7 @@ class TopPage extends ConsumerWidget {
                   Expanded(
                     child: PageView.builder(
                       controller: PageController(viewportFraction: 0.9),
-                      itemCount: data.counters.length + 1,
+                      itemCount: data.length + 1,
                       onPageChanged: (index) {
                         // if (index == data.counters.length) {
                         //   // 最後のページ（新規カウント追加）の時は何もしない
@@ -67,7 +65,7 @@ class TopPage extends ConsumerWidget {
                         ref.read(_pageIndexProvider.notifier).state = index;
                       },
                       itemBuilder: (context, index) {
-                        if (index == data.counters.length) {
+                        if (index == data.length) {
                           return const Column(
                             children: [
                               Expanded(child: SizedBox()),
@@ -79,9 +77,9 @@ class TopPage extends ConsumerWidget {
                         return Column(
                           children: [
                             const SizedBox(height: 32),
-                            SummaryCard(counter: data.counters[index]),
+                            SummaryCard(counter: data[index]),
                             Expanded(
-                              child: AnimatedCounter(counter: data.counters[index]),
+                              child: AnimatedCounter(counter: data[index]),
                             ),
                           ],
                         );
@@ -89,7 +87,7 @@ class TopPage extends ConsumerWidget {
                     ),
                   ),
                   DotsIndicator(
-                    dotsCount: data.counters.length + 1,
+                    dotsCount: data.length + 1,
                     position: ref.watch(_pageIndexProvider),
                   ),
                 ],
@@ -129,6 +127,7 @@ class TopPage extends ConsumerWidget {
   }
 }
 
+// TODO 共通パーツ検討
 class _ReLoadingWidget extends ConsumerWidget {
   const _ReLoadingWidget();
 

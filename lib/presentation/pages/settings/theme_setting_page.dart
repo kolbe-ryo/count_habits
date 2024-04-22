@@ -1,4 +1,5 @@
 import 'package:count_habits/application/usecase/appearance/appearance_usecase.dart';
+import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/settings/components/color_style_button.dart';
 import 'package:count_habits/presentation/pages/settings/components/text_style_button.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
@@ -28,7 +29,10 @@ class ThemeSettingPage extends ConsumerWidget {
               style: theme.textTheme.textStyle,
             ),
             trailing: TextButton(
-              onPressed: ref.read(appearanceUsecaseProvider).reset,
+              onPressed: () async {
+                await ref.read(appearanceUsecaseProvider).reset();
+                ref.read(appearanceStateProvider.notifier).reset();
+              },
               child: Text(
                 'default',
                 style: TextStyle(
