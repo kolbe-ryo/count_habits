@@ -3,6 +3,7 @@ import 'package:count_habits/application/usecase/appearance/state/appearance_pro
 import 'package:count_habits/presentation/components/app_loading.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/top_page.dart';
+import 'package:count_habits/util/reloading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +16,6 @@ class Habits365 extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cupertinoTheme = ref.watch(cupertinoThemeProvider);
     final appearance = ref.watch(appearanceProvider);
-    // TODO ここの作りの再検討（when二段は変に見える）
     return appearance.when(
       data: (data) {
         return CupertinoApp(
@@ -51,37 +51,10 @@ class Habits365 extends ConsumerWidget {
           fontSize: 18,
           textColor: Colors.white,
         );
-        return const _ReLoadingWidget();
+        return ReLoadingWidget(() => ref.invalidate(appearanceProvider));
       },
       loading: () => const Center(
         child: AppLoading(),
-      ),
-    );
-  }
-}
-
-class _ReLoadingWidget extends ConsumerWidget {
-  const _ReLoadingWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(cupertinoThemeProvider);
-    return CupertinoPageScaffold(
-      child: Center(
-        child: CupertinoButton(
-          color: theme.barBackgroundColor,
-          onPressed: () => ref.invalidate(appearanceProvider),
-          borderRadius: BorderRadius.circular(10),
-          child: Text(
-            '再読み込み',
-            style: TextStyle(
-              color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              fontFamily: theme.textTheme.textStyle.fontFamily,
-            ),
-          ),
-        ),
       ),
     );
   }

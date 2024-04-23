@@ -6,7 +6,7 @@ part of 'appearance_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appearanceHash() => r'7b9a20be6b448e317338e15da1ad86a99b50c234';
+String _$appearanceHash() => r'd152a9edd32119f5ca87b6faf37afbb8f5b27eb9';
 
 /// See also [appearance].
 @ProviderFor(appearance)
