@@ -1,4 +1,5 @@
 import 'package:count_habits/application/usecase/appearance/appearance_usecase.dart';
+import 'package:count_habits/application/usecase/appearance/state/appearance_provider.dart';
 import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
@@ -17,7 +18,7 @@ void main() {
     );
     test('取得したAppearanceがstateに格納されていること', () async {
       await providerContariner.read(appearanceUsecaseProvider).fetch();
-      final state = providerContariner.read(appearanceStateProvider);
+      final state = providerContariner.read(appearanceProvider);
       expect(state, const Appearance());
     });
   });
@@ -38,7 +39,7 @@ void main() {
             colorId: matcherState.colorId,
             fontFamilyId: matcherState.fontFamilyId,
           );
-      final state = providerContariner.read(appearanceStateProvider);
+      final state = await providerContariner.read(appearanceProvider.future);
       expect(state, matcherState);
     });
   });
