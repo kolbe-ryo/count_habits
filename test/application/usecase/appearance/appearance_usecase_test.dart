@@ -16,7 +16,7 @@ void main() {
     );
     test('取得したAppearanceがstateに格納されていること', () async {
       await providerContariner.read(appearanceUsecaseProvider).fetch();
-      final state = providerContariner.read(appearanceProvider);
+      final state = await providerContariner.read(appearanceProvider.future);
       expect(state, const Appearance());
     });
   });
