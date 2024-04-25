@@ -1,13 +1,11 @@
 import 'package:count_habits/application/usecase/appearance/appearance_usecase.dart';
 import 'package:count_habits/application/usecase/appearance/state/appearance_provider.dart';
-import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/domain/apprearance/appearance_repository.dart';
 import 'package:count_habits/domain/apprearance/entity/appearance.dart';
 import 'package:count_habits/inflastructure/mock/mock_appearance_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
 
-// TODO テストを修正する
 void main() {
   group('fetchテスト', () {
     final mockAppearanceRepository = MockAppearanceRepository();
@@ -60,11 +58,11 @@ void main() {
             colorId: matcherState.colorId,
             fontFamilyId: matcherState.fontFamilyId,
           );
-      var state = providerContariner.read(appearanceStateProvider);
+      var state = await providerContariner.read(appearanceProvider.future);
       expect(state, matcherState);
 
       await providerContariner.read(appearanceUsecaseProvider).reset();
-      state = providerContariner.read(appearanceStateProvider);
+      state = await providerContariner.read(appearanceProvider.future);
       expect(state, const Appearance());
     });
   });
