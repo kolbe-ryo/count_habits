@@ -46,6 +46,7 @@ class AddNewOneCard extends ConsumerWidget {
               CupertinoButton(
                 color: theme.barBackgroundColor,
                 onPressed: () async {
+                  // TODO: 課金しないと追加できないよう制御する
                   // 追加するカウンタがnullまたは空の場合は何もしない
                   final counterName = await showAddCounterDialog<String?>(context);
                   if (counterName?.isEmpty ?? true) {

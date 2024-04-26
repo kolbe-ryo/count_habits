@@ -24,6 +24,7 @@ class ContentCard extends ConsumerWidget {
   }
 
   factory ContentCard.themeSetting() {
+    // TODO: Overlayして課金しないと解放しない形にする
     return const ContentCard._(
       iconData: Icons.palette_outlined,
       title: 'Theme',
