@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
+// TODO 1000くらいまで行った時に表示が問題ないか確認しておく
 class AnimatedCounter extends ConsumerStatefulWidget {
   const AnimatedCounter({
     required this.counter,
