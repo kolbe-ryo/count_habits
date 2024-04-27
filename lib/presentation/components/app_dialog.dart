@@ -63,3 +63,31 @@ Future<T?> showAddCounterDialog<T>(BuildContext context) async {
     },
   );
 }
+
+// TODO: 課金用のDialogに修正する
+Future<bool?> showBillingDialog(BuildContext context) async {
+  return showCupertinoDialog<bool?>(
+    context: context,
+    builder: (context) {
+      return CupertinoAlertDialog(
+        title: const Text('こちらは課金要素になります'),
+        content: const Padding(
+          padding: EdgeInsets.only(top: 16),
+          child: Text('この操作は元に戻せません'),
+        ),
+        actions: [
+          CupertinoDialogAction(
+            isDestructiveAction: true,
+            child: const Text('削除'),
+            onPressed: () => Navigator.pop(context, true),
+          ),
+          CupertinoDialogAction(
+            textStyle: const TextStyle(color: Colors.black54),
+            child: const Text('キャンセル'),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+        ],
+      );
+    },
+  );
+}
