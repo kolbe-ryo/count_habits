@@ -70,15 +70,14 @@ Future<bool?> showBillingDialog(BuildContext context) async {
     context: context,
     builder: (context) {
       return CupertinoAlertDialog(
-        title: const Text('こちらは課金要素になります'),
+        title: const Text('課金要素です'),
         content: const Padding(
           padding: EdgeInsets.only(top: 16),
-          child: Text('この操作は元に戻せません'),
+          child: Text('以下の機能が解放されます\n・無制限のカウンタ\n・テーマ変更'),
         ),
         actions: [
           CupertinoDialogAction(
-            isDestructiveAction: true,
-            child: const Text('削除'),
+            child: const Text('購入'),
             onPressed: () => Navigator.pop(context, true),
           ),
           CupertinoDialogAction(
