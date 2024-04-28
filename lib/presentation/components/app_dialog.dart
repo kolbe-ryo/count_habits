@@ -64,7 +64,7 @@ Future<T?> showAddCounterDialog<T>(BuildContext context) async {
   );
 }
 
-// TODO: 課金用のDialogに修正する
+// TODO: UIをチェックする
 Future<bool?> showBillingDialog(BuildContext context) async {
   return showCupertinoDialog<bool?>(
     context: context,
