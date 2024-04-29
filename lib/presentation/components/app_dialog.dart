@@ -64,7 +64,6 @@ Future<T?> showAddCounterDialog<T>(BuildContext context) async {
   );
 }
 
-// TODO: UIをチェックする
 Future<bool?> showBillingDialog(BuildContext context) async {
   return showCupertinoDialog<bool?>(
     context: context,
@@ -73,7 +72,10 @@ Future<bool?> showBillingDialog(BuildContext context) async {
         title: const Text('課金要素です'),
         content: const Padding(
           padding: EdgeInsets.only(top: 16),
-          child: Text('以下の機能が解放されます\n・無制限のカウンタ\n・テーマ変更'),
+          child: Text(
+            '以下の機能が解放されます\n\n・無制限のカウンタ追加\n・テーマ変更',
+            textAlign: TextAlign.left,
+          ),
         ),
         actions: [
           CupertinoDialogAction(

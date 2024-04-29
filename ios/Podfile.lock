@@ -5,6 +5,12 @@ PODS:
     - Toast
   - integration_test (0.0.1):
     - Flutter
+  - purchases_flutter (6.28.0):
+    - Flutter
+    - PurchasesHybridCommon (= 10.5.0)
+  - PurchasesHybridCommon (10.5.0):
+    - RevenueCat (= 4.41.0)
+  - RevenueCat (4.41.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -19,12 +25,15 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
+    - PurchasesHybridCommon
+    - RevenueCat
     - Toast
 
 EXTERNAL SOURCES:
@@ -34,6 +43,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
+  purchases_flutter:
+    :path: ".symlinks/plugins/purchases_flutter/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite:
@@ -45,6 +56,9 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   fluttertoast: fafc4fa4d01a6a9e4f772ecd190ffa525e9e2d9c
   integration_test: 13825b8a9334a850581300559b8839134b124670
+  purchases_flutter: 374d09772f892e73f19bec6fb91eecd4dd21b23d
+  PurchasesHybridCommon: 3ada52b4b1214b1bdcc499812d061580b85b1b10
+  RevenueCat: 1e864e3b26f3f22ca067dd8578da8123030e6774
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   Toast: ec33c32b8688982cecc6348adeae667c1b9938da
