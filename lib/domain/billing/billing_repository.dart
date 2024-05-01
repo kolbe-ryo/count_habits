@@ -13,5 +13,5 @@ abstract interface class BillingRepository {
 
   Future<Offerings> offering({bool exception = false});
 
-  Future<CustomerInfo> purchase({Offering offering, bool exception = false});
+  Future<CustomerInfo> purchase({required Offering offering, bool exception = false});
 }
