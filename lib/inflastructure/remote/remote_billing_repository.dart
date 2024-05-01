@@ -3,6 +3,9 @@ import 'package:purchases_flutter/models/customer_info_wrapper.dart';
 import 'package:purchases_flutter/models/offering_wrapper.dart';
 import 'package:purchases_flutter/models/offerings_wrapper.dart';
 
+// TODO: apikeyは環境変数などに変更すること（下記はダミー）
+const dummyKey = 'qwertyuiop@[ASDFGHJKL+*}zxcvbnm,./_]';
+
 class RemoteBillingRepository implements BillingRepository {
   @override
   Future<CustomerInfo> customerInfo({bool exception = false}) {
