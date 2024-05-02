@@ -7,7 +7,7 @@ final billingRepositoryProvider = Provider<BillingRepository>((ref) => throw Uni
 abstract interface class BillingRepository {
   Future<void> setUp({bool exception = false});
 
-  Future<CustomerInfo> customerInfo({bool exception = false});
+  Future<CustomerInfo?> customerInfo({bool exception = false});
 
   Future<CustomerInfo> restorePurchases({bool exception = false});
 
