@@ -20,9 +20,13 @@ class RemoteBillingRepository implements BillingRepository {
   }
 
   @override
-  Future<Offerings> offering({bool exception = false}) {
-    // TODO: implement offering
-    throw UnimplementedError();
+  Future<Offerings> offering({bool exception = false}) async {
+    try {
+      return await Purchases.getOfferings();
+    } on PlatformException catch (e) {
+      logger.i(e);
+      throw const AppException(AppExceptionEnum.billingOfferings);
+    }
   }
 
   @override

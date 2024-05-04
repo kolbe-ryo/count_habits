@@ -15,7 +15,8 @@ enum AppExceptionEnum {
   appearanceReset(message: 'テーマのリセット$defaultText'),
 
   // Billing Exception
-  billingCustomer(message: '課金情報の取得$defaultText');
+  billingCustomer(message: '課金情報の取得$defaultText'),
+  billingOfferings(message: '課金アイテムの取得$defaultText');
 
   const AppExceptionEnum({required this.message});
 
