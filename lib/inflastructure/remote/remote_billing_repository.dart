@@ -9,6 +9,8 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 const dummyKey = 'qwertyuiop@[ASDFGHJKL+*}zxcvbnm,./_]';
 
 class RemoteBillingRepository implements BillingRepository {
+  // Check subscriotion status (see below)
+  // https://www.revenuecat.com/docs/getting-started/quickstart#%EF%B8%8F-check-subscription-status
   @override
   Future<CustomerInfo> customerInfo({bool exception = false}) async {
     try {
@@ -19,6 +21,8 @@ class RemoteBillingRepository implements BillingRepository {
     }
   }
 
+  // Fetch available project for billing (see below)
+  // https://www.revenuecat.com/docs/getting-started/quickstart#%EF%B8%8F-fetch-and-display-available-products
   @override
   Future<Offerings> offering({bool exception = false}) async {
     try {
@@ -41,9 +45,15 @@ class RemoteBillingRepository implements BillingRepository {
     throw UnimplementedError();
   }
 
+  // Setting configratuon
+  // https://www.revenuecat.com/docs/getting-started/quickstart#%EF%B8%8F-initialize-and-configure-the-sdk
   @override
-  Future<void> setUp({bool exception = false}) {
-    // TODO: implement setUp
-    throw UnimplementedError();
+  Future<void> setUp({bool exception = false}) async {
+    await Purchases.setLogLevel(LogLevel.info);
+
+    // iOSの設置情報の取得
+    final configuration = PurchasesConfiguration(dummyKey);
+
+    await Purchases.configure(configuration);
   }
 }
