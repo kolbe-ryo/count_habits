@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 // TODO: apikeyは環境変数などに変更すること（下記はダミー）
-const dummyKey = 'qwertyuiop@[ASDFGHJKL+*}zxcvbnm,./_]';
+const _dummyKey = 'qwertyuiop@[ASDFGHJKL+*}zxcvbnm,./_]';
+
+const _entitlementID = 'notFree';
 
 class RemoteBillingRepository implements BillingRepository {
   // Check subscriotion status (see below)
@@ -17,6 +19,8 @@ class RemoteBillingRepository implements BillingRepository {
       return await Purchases.getCustomerInfo();
     } on PlatformException catch (e) {
       logger.i(e);
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      logger.i(errorCode);
       throw const AppException(AppExceptionEnum.billingCustomer);
     }
   }
@@ -29,6 +33,8 @@ class RemoteBillingRepository implements BillingRepository {
       return await Purchases.getOfferings();
     } on PlatformException catch (e) {
       logger.i(e);
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      logger.i(errorCode);
       throw const AppException(AppExceptionEnum.billingOfferings);
     }
   }
@@ -40,10 +46,11 @@ class RemoteBillingRepository implements BillingRepository {
     try {
       // 課金要素は1つしか存在しない
       final package = offering.availablePackages.first;
-      final customerInfo = await Purchases.purchasePackage(package);
-      if (customerInfo.entitlements.all["my_entitlement_identifier"].isActive) {
-        // Unlock that great "pro" content
-      }
+      return await Purchases.purchasePackage(package);
+      // TODO: 多分RevCat内で設定した課金ステータスの文字列を設定するはず。またここでは購入確認と解除は行わない。あくまで購入まで。
+      // if (customerInfo.entitlements.all[_entitlementID]?.isActive ?? false) {
+      //   // Unlock that great "pro" content
+      // }
     } on PlatformException catch (e) {
       logger.i(e);
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
@@ -66,7 +73,7 @@ class RemoteBillingRepository implements BillingRepository {
       await Purchases.setLogLevel(LogLevel.info);
 
       // iOSの設置情報の取得
-      final configuration = PurchasesConfiguration(dummyKey);
+      final configuration = PurchasesConfiguration(_dummyKey);
 
       await Purchases.configure(configuration);
     } on PlatformException catch (e) {
