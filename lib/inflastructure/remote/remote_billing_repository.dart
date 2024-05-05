@@ -33,10 +33,23 @@ class RemoteBillingRepository implements BillingRepository {
     }
   }
 
+  // Make purchace
+  // https://www.revenuecat.com/docs/getting-started/quickstart#%EF%B8%8F-make-a-purchase
   @override
-  Future<CustomerInfo> purchase({required Offering offering, bool exception = false}) {
-    // TODO: implement purchase
-    throw UnimplementedError();
+  Future<CustomerInfo> purchase({required Offering offering, bool exception = false}) async {
+    try {
+      // 課金要素は1つしか存在しない
+      final package = offering.availablePackages.first;
+      final customerInfo = await Purchases.purchasePackage(package);
+      if (customerInfo.entitlements.all["my_entitlement_identifier"].isActive) {
+        // Unlock that great "pro" content
+      }
+    } on PlatformException catch (e) {
+      logger.i(e);
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      logger.i(errorCode);
+      throw const AppException(AppExceptionEnum.billingOfferings);
+    }
   }
 
   @override
@@ -49,11 +62,16 @@ class RemoteBillingRepository implements BillingRepository {
   // https://www.revenuecat.com/docs/getting-started/quickstart#%EF%B8%8F-initialize-and-configure-the-sdk
   @override
   Future<void> setUp({bool exception = false}) async {
-    await Purchases.setLogLevel(LogLevel.info);
+    try {
+      await Purchases.setLogLevel(LogLevel.info);
 
-    // iOSの設置情報の取得
-    final configuration = PurchasesConfiguration(dummyKey);
+      // iOSの設置情報の取得
+      final configuration = PurchasesConfiguration(dummyKey);
 
-    await Purchases.configure(configuration);
+      await Purchases.configure(configuration);
+    } on PlatformException catch (e) {
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      logger.i(errorCode);
+    }
   }
 }
