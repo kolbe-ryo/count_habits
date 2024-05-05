@@ -55,14 +55,23 @@ class RemoteBillingRepository implements BillingRepository {
       logger.i(e);
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
       logger.i(errorCode);
-      throw const AppException(AppExceptionEnum.billingOfferings);
+      throw const AppException(AppExceptionEnum.billingPurchace);
     }
   }
 
+  // Restore purchace
+  // https://www.revenuecat.com/docs/getting-started/quickstart#%EF%B8%8F-restore-purchases
   @override
-  Future<CustomerInfo> restorePurchases({bool exception = false}) {
-    // TODO: implement restorePurchases
-    throw UnimplementedError();
+  Future<CustomerInfo> restorePurchases({bool exception = false}) async {
+    try {
+      // ... check restored purchaserInfo to see if entitlement is now active
+      return await Purchases.restorePurchases();
+    } on PlatformException catch (e) {
+      logger.i(e);
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      logger.i(errorCode);
+      throw const AppException(AppExceptionEnum.billingRestorePurchace);
+    }
   }
 
   // Setting configratuon
