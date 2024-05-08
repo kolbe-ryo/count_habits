@@ -28,6 +28,7 @@ class Counter with _$Counter {
   factory Counter.fromJson(Map<String, dynamic> json) => _$CounterFromJson(json);
 
   /// Add Counter and Contribution in the last
+  // TODO checkinではincrementではなく、contributeが連続しているかどうかで、incrementか1かを入力分岐させる必要あり
   Counter get checkIn {
     final now = DateTime.now();
     return copyWith(

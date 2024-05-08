@@ -58,6 +58,7 @@ class _AnimatedCounterState extends ConsumerState<AnimatedCounter> with SingleTi
         unawaited(ref.read(counterUsecaseProvider).countUp(widget.counter.id));
 
         // カウンタの更新処理
+        // TODO 初期値に戻す必要がある場合はvalue=1にする
         _value++;
         setState(() {});
 
