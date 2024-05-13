@@ -7,9 +7,22 @@ class BillingUsecase with AsyncExecuteMixin {
 
   final Ref _ref;
 
+  // サブスクの初期設定
   Future<void> setup() async {}
 
+  // 会員情報を取得
   Future<CustomerInfo> fetchCustomerInfo() async {
     return CustomerInfo();
   }
+
+  // 購入情報の再取得（端末変更時など）
+  Future<CustomerInfo> restorePurchases() {
+    
+  };
+
+  // サブスク商品の取得（1種類しか設定予定はないが取得は必須）
+  Future<Offerings> offering();
+
+  // サブスク購入
+  Future<CustomerInfo> purchase();
 }
