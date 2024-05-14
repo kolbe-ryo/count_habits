@@ -16,13 +16,17 @@ class BillingUsecase with AsyncExecuteMixin {
   }
 
   // 購入情報の再取得（端末変更時など）
-  Future<CustomerInfo> restorePurchases() {
+  Future<CustomerInfo> restorePurchases() async {
     
   };
 
   // サブスク商品の取得（1種類しか設定予定はないが取得は必須）
-  Future<Offerings> offering();
+  Future<Offerings> offering() async {
+
+  };
 
   // サブスク購入
-  Future<CustomerInfo> purchase();
+  Future<CustomerInfo> purchase() async {
+
+  };
 }
