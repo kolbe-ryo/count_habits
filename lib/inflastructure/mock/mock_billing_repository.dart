@@ -1,9 +1,6 @@
 import 'package:count_habits/domain/billing/billing_repository.dart';
 import 'package:count_habits/domain/exception/app_exception.dart';
 import 'package:count_habits/domain/exception/app_exception_enum.dart';
-import 'package:purchases_flutter/models/customer_info_wrapper.dart';
-import 'package:purchases_flutter/models/offering_wrapper.dart';
-import 'package:purchases_flutter/models/offerings_wrapper.dart';
 import 'package:purchases_flutter/object_wrappers.dart';
 
 const _customerInfo = CustomerInfo(
