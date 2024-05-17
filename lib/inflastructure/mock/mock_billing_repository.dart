@@ -1,13 +1,30 @@
 import 'package:count_habits/domain/billing/billing_repository.dart';
+import 'package:count_habits/domain/exception/app_exception.dart';
+import 'package:count_habits/domain/exception/app_exception_enum.dart';
 import 'package:purchases_flutter/models/customer_info_wrapper.dart';
 import 'package:purchases_flutter/models/offering_wrapper.dart';
 import 'package:purchases_flutter/models/offerings_wrapper.dart';
+import 'package:purchases_flutter/object_wrappers.dart';
+
+const _customerInfo = CustomerInfo(
+  EntitlementInfos({}, {}),
+  {},
+  [],
+  [],
+  [],
+  '',
+  '',
+  {},
+  '',
+);
 
 class MockBillingRepository implements BillingRepository {
   @override
-  Future<CustomerInfo> customerInfo({bool exception = false}) {
-    // TODO: implement customerInfo
-    throw UnimplementedError();
+  Future<CustomerInfo> customerInfo({bool exception = false}) async {
+    if (exception) {
+      throw const AppException(AppExceptionEnum.billingCustomer);
+    }
+    return _customerInfo;
   }
 
   @override
