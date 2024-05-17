@@ -18,6 +18,35 @@ const _customerInfo = CustomerInfo(
   '',
 );
 
+const _offerings = Offerings(
+  {
+    'test': Offering(
+      'test',
+      'mock',
+      {},
+      [
+        Package(
+          'test',
+          PackageType.lifetime,
+          StoreProduct(
+            'identifier',
+            'description',
+            'title',
+            10,
+            '10',
+            'JPY',
+          ),
+          PresentedOfferingContext(
+            'offeringIdentifier',
+            'placementIdentifier',
+            null,
+          ),
+        ),
+      ],
+    ),
+  },
+);
+
 class MockBillingRepository implements BillingRepository {
   @override
   Future<CustomerInfo> customerInfo({bool exception = false}) async {
@@ -28,9 +57,11 @@ class MockBillingRepository implements BillingRepository {
   }
 
   @override
-  Future<Offerings> offering({bool exception = false}) {
-    // TODO: implement offering
-    throw UnimplementedError();
+  Future<Offerings> offering({bool exception = false}) async {
+    if (exception) {
+      throw const AppException(AppExceptionEnum.billingOfferings);
+    }
+    return _offerings;
   }
 
   @override
