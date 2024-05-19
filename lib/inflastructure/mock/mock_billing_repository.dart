@@ -62,9 +62,11 @@ class MockBillingRepository implements BillingRepository {
   }
 
   @override
-  Future<CustomerInfo> purchase({required Offering offering, bool exception = false}) {
-    // TODO: implement purchase
-    throw UnimplementedError();
+  Future<CustomerInfo> purchase({required Offering offering, bool exception = false}) async {
+    if (exception) {
+      throw const AppException(AppExceptionEnum.billingPurchace);
+    }
+    return _customerInfo;
   }
 
   @override
