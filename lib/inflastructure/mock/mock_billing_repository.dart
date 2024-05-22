@@ -78,8 +78,9 @@ class MockBillingRepository implements BillingRepository {
   }
 
   @override
-  Future<void> setUp({bool exception = false}) {
-    // TODO: implement setUp
-    throw UnimplementedError();
+  Future<void> setUp({bool exception = false}) async {
+    if (exception) {
+      throw const AppException(AppExceptionEnum.billingSetup);
+    }
   }
 }
