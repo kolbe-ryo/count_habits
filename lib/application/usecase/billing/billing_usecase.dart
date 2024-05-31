@@ -11,22 +11,22 @@ class BillingUsecase with AsyncExecuteMixin {
   Future<void> setup() async {}
 
   // 会員情報を取得
-  Future<CustomerInfo> fetchCustomerInfo() async {
-    return CustomerInfo();
-  }
+  // Future<CustomerInfo> fetchCustomerInfo() async {
+  //   return CustomerInfo();
+  // }
 
   // 購入情報の再取得（端末変更時など）
-  Future<CustomerInfo> restorePurchases() async {
-    
-  };
+  // Future<CustomerInfo> restorePurchases() async {
+
+  // };
 
   // サブスク商品の取得（1種類しか設定予定はないが取得は必須）
-  Future<Offerings> offering() async {
+  // Future<Offerings> offering() async {
 
-  };
+  // };
 
   // サブスク購入
-  Future<CustomerInfo> purchase() async {
+  // Future<CustomerInfo> purchase() async {
 
-  };
+  // };
 }
