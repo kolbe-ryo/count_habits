@@ -12,7 +12,14 @@ enum AppExceptionEnum {
   appearanceCreate(message: 'テーマの作成$defaultText'),
   appearanceFetch(message: 'テーマの取得$defaultText'),
   appearanceUpdate(message: 'テーマの更新$defaultText'),
-  appearanceReset(message: 'テーマのリセット$defaultText');
+  appearanceReset(message: 'テーマのリセット$defaultText'),
+
+  // Billing Exception
+  billingCustomer(message: '課金情報の取得$defaultText'),
+  billingOfferings(message: '課金アイテムの取得$defaultText'),
+  billingPurchace(message: '支払い$defaultText'),
+  billingRestorePurchace(message: '支払いの復元$defaultText'),
+  billingSetup(message: 'セットアップN$defaultText');
 
   const AppExceptionEnum({required this.message});
 

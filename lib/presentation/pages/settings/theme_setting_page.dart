@@ -1,3 +1,5 @@
+import 'package:count_habits/application/usecase/appearance/appearance_usecase.dart';
+import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:count_habits/presentation/pages/settings/components/color_style_button.dart';
 import 'package:count_habits/presentation/pages/settings/components/text_style_button.dart';
 import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
@@ -16,7 +18,6 @@ class ThemeSettingPage extends ConsumerWidget {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          // TODO デフォルトに戻すボタンを設置する
           CupertinoSliverNavigationBar(
             padding: const EdgeInsetsDirectional.only(start: 1),
             leading: IconButton(
@@ -27,6 +28,20 @@ class ThemeSettingPage extends ConsumerWidget {
               'Theme',
               style: theme.textTheme.textStyle,
             ),
+            trailing: TextButton(
+              onPressed: () async {
+                await ref.read(appearanceUsecaseProvider).reset();
+                ref.read(appearanceStateProvider.notifier).reset();
+              },
+              child: Text(
+                'default',
+                style: TextStyle(
+                  color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                  fontSize: 16,
+                  fontFamily: theme.textTheme.textStyle.fontFamily,
+                ),
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -36,7 +51,6 @@ class ThemeSettingPage extends ConsumerWidget {
                 style: TextStyle(
                   color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
                   fontSize: 26,
-                  // fontFamily: theme.textTheme.textStyle.fontFamily,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -78,7 +92,7 @@ class ThemeSettingPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverGrid.count(
               crossAxisCount: 1,
-              mainAxisSpacing: 16,
+              mainAxisSpacing: 24,
               crossAxisSpacing: 16,
               childAspectRatio: 5,
               children: textSchemes.entries.map((e) => TextStyleButton(index: e.key)).toList(),

@@ -1,4 +1,4 @@
-package com.example.count_habits
+package com.kolbe.count_habits
 
 import io.flutter.embedding.android.FlutterActivity
 

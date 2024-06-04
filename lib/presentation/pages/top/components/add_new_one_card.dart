@@ -46,6 +46,16 @@ class AddNewOneCard extends ConsumerWidget {
               CupertinoButton(
                 color: theme.barBackgroundColor,
                 onPressed: () async {
+                  // TODO 課金が必要かどうかによってこちらを呼ぶか決める（FutureProviderとかで事前に取得しておくのが良さそう？）
+                  final isBillingCompleted = await showBillingDialog(context) ?? false;
+                  // TODO 課金が終了後に必要あれば戻り値を利用する
+                  if (isBillingCompleted) {
+                    return;
+                  }
+                  // BuildContextが失われている場合は処理を終了する
+                  if (!context.mounted) {
+                    return;
+                  }
                   // 追加するカウンタがnullまたは空の場合は何もしない
                   final counterName = await showAddCounterDialog<String?>(context);
                   if (counterName?.isEmpty ?? true) {

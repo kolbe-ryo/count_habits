@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:count_habits/application/usecase/counter/state/counters_provider.dart';
 import 'package:count_habits/gen/assets.gen.dart';
 import 'package:count_habits/presentation/components/app_loading.dart';
@@ -8,6 +7,7 @@ import 'package:count_habits/presentation/pages/theme/color_schemes.dart';
 import 'package:count_habits/presentation/pages/top/components/add_new_one_card.dart';
 import 'package:count_habits/presentation/pages/top/components/animated_counter.dart';
 import 'package:count_habits/presentation/pages/top/components/summary_card.dart';
+import 'package:count_habits/util/reloading_widget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class TopPage extends ConsumerWidget {
                       controller: PageController(viewportFraction: 0.9),
                       itemCount: data.length + 1,
                       onPageChanged: (index) {
-                        // if (index == data.length) {
+                        // if (index == data.counters.length) {
                         //   // 最後のページ（新規カウント追加）の時は何もしない
                         //   return;
                         // }
@@ -105,7 +105,7 @@ class TopPage extends ConsumerWidget {
           fontSize: 18,
           textColor: Colors.white,
         );
-        return const _ReLoadingWidget();
+        return ReLoadingWidget(() => ref.invalidate(countersProvider));
       },
       loading: () {
         final images = Assets.images.values;
@@ -124,33 +124,6 @@ class TopPage extends ConsumerWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _ReLoadingWidget extends ConsumerWidget {
-  const _ReLoadingWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(cupertinoThemeProvider);
-    return CupertinoPageScaffold(
-      child: Center(
-        child: CupertinoButton(
-          color: theme.barBackgroundColor,
-          onPressed: () => ref.invalidate(countersProvider),
-          borderRadius: BorderRadius.circular(10),
-          child: Text(
-            '再読み込み',
-            style: TextStyle(
-              color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              fontFamily: theme.textTheme.textStyle.fontFamily,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

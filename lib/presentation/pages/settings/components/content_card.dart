@@ -24,6 +24,7 @@ class ContentCard extends ConsumerWidget {
   }
 
   factory ContentCard.themeSetting() {
+    // TODO: Overlayして課金しないと解放しない形にする
     return const ContentCard._(
       iconData: Icons.palette_outlined,
       title: 'Theme',
@@ -58,6 +59,7 @@ class ContentCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(cupertinoThemeProvider);
+    // TODO タップ時に無課金時には課金ダイアログを出すようにする方法を検討する
     return CupertinoButton(
       onPressed: () {
         if (page == null) {

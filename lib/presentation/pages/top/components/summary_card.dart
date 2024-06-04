@@ -62,11 +62,20 @@ class SummaryCard extends ConsumerWidget {
                       if (isSameText(text)) {
                         return;
                       }
+                      // テキストが空の場合元に戻す
+                      if (text.isEmpty) {
+                        controller.text = counter.counterValue.name;
+                        return;
+                      }
                       // テキストを変更するだけでローディングは不自然なので、非同期的に更新する
                       ref.read(counterUsecaseProvider).update(id: counter.id, name: controller.text);
                     },
                     onTapOutside: (_) {
                       if (isSameText(controller.text)) {
+                        return;
+                      }
+                      if (controller.text.isEmpty) {
+                        controller.text = counter.counterValue.name;
                         return;
                       }
                       ref.read(counterUsecaseProvider).update(id: counter.id, name: controller.text);
