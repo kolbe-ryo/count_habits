@@ -42,11 +42,18 @@ class LocalAppearanceRepository implements AppearanceRepository {
   @override
   Future<Appearance> fetch({bool exception = false}) async {
     try {
-      final currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
-      if (currentAppearanceJson == null || exception) {
+      var currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
+      if (exception) {
         throw const AppException(AppExceptionEnum.appearanceFetch);
       }
-      return Appearance.fromJson(json.decode(currentAppearanceJson) as Map<String, dynamic>);
+
+      // Apperanceが存在しない場合作成する
+      if (currentAppearanceJson == null) {
+        await create();
+        currentAppearanceJson = _sharedPreferences.getString(keyAppearance);
+      }
+
+      return Appearance.fromJson(json.decode(currentAppearanceJson!) as Map<String, dynamic>);
     } on Exception catch (_) {
       rethrow;
     }

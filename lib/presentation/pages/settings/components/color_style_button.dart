@@ -1,3 +1,4 @@
+import 'package:count_habits/application/usecase/appearance/appearance_usecase.dart';
 import 'package:count_habits/application/usecase/appearance/state/appearance_state_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,10 @@ class ColorStyleButton extends ConsumerWidget {
         color: theme.primaryContrastingColor,
         size: _circleRadius,
       ),
-      onPressed: () => ref.read(appearanceStateProvider.notifier).setColorPalette(index),
+      onPressed: () async {
+        final appearance = await ref.read(appearanceUsecaseProvider).update(colorId: index);
+        ref.read(appearanceStateProvider.notifier).setColorPalette(appearance.colorId);
+      },
     );
   }
 }

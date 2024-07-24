@@ -33,10 +33,13 @@ class MockAppearanceRepository implements AppearanceRepository {
       throw const AppException(AppExceptionEnum.appearanceUpdate);
     }
     const initAppearance = Appearance();
-    return _appearance.copyWith(
+    // ローカルの_appearanceに代入する
+    // ignore: join_return_with_assignment
+    _appearance = _appearance.copyWith(
       colorId: colorId ?? initAppearance.colorId,
       fontFamilyId: fontFamilyId ?? initAppearance.fontFamilyId,
     );
+    return _appearance;
   }
 
   @override

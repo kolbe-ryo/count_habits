@@ -26,7 +26,9 @@ void main() async {
             sharedPreferences: ref.watch(sharedPreferencesProvider),
           ),
         ),
-        sharedPreferencesProvider.overrideWithValue(await SharedPreferences.getInstance()),
+        sharedPreferencesProvider.overrideWithValue(
+          await SharedPreferences.getInstance(),
+        ),
       ],
       child: const Habits365(),
     ),
